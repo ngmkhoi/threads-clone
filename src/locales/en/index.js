@@ -5,6 +5,7 @@ import FeedHeader from './FeedHeader.json'
 import PostCard from './PostCard.json'
 import NotFound from './NotFound.json'
 import Login from './Login.json'
+import DialogMessage from './DialogMessage.json'
 
 export default {
     LoginPanel,
@@ -13,5 +14,6 @@ export default {
     FeedHeader,
     PostCard,
     NotFound,
-    Login
+    Login,
+    DialogMessage
 }

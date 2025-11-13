@@ -21,7 +21,7 @@ const DefaultLayout = () => {
                 <Outlet />
             </div>
 
-            {/* Login Panel - Fixed Right */}
+             {/*Login Panel - Fixed Right */}
             <div className="fixed right-55 hidden xl:block w-[340px] top-10 h-[calc(100vh-73px)] overflow-y-auto">
                 <div className="p-3">
                     <LoginPanel />

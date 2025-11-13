@@ -33,15 +33,11 @@ const LoginPanel = () => {
         </Button>
       </div>
 
-        <HoverCard>
-            <HoverCardTrigger>
-                <a className="text-sm text-gray-500 cursor-pointer"
-                   onClick={() => navigate('/login')}
-                >
-                    {t('loginWithUsername')}
-                </a>
-            </HoverCardTrigger>
-        </HoverCard>
+        <a className="text-sm text-gray-500 cursor-pointer"
+           onClick={() => navigate('/login')}
+        >
+            {t('loginWithUsername')}
+        </a>
         
     </div>
   );

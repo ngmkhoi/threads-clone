@@ -1,0 +1,20 @@
+{
+  "dialogMessages": {
+    "Like": {
+      "title": "Do you like this content? You'll fall in love with Threads.",
+      "description": "Sign up to like, comment, and more."
+    },
+    "Comment": {
+      "title": "Sign up to comment",
+      "description": "Join Threads to comment"
+    },
+    "Repost": {
+      "title": "Sign up to repost",
+      "description": "Share this content with everyone"
+    },
+    "Share": {
+      "title": "Share more on Threads",
+      "description": "Join Threads to share your thoughts, stay up-to-date on what's happening, follow your loved ones, and more."
+    }
+  }
+}

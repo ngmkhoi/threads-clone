@@ -1,0 +1,20 @@
+{
+  "dialogMessages": {
+    "Like": {
+      "title": "Bạn thích nội dung này ư? Bạn sẽ thích mê Threads.",
+      "description": "Hãy đăng ký để thích, trả lời và hơn thế nữa."
+    },
+    "Comment": {
+      "title": "Đăng ký để trả lời",
+      "description": "Chỉ còn một bước nữa là bạn có thể tham gia cuộc trò chuyện rồi."
+    },
+    "Repost": {
+      "title": "Đăng ký để đăng lại",
+      "description": "Bạn đã tiến thêm được một bước trong hành trình khơi mào cuộc trò chuyện."
+    },
+    "Share": {
+      "title": "Bày tỏ nhiều hơn qua Threads",
+      "description": "Tham gia Threads để chia sẻ suy nghĩ, nắm bắt những gì đang diễn ra, theo dõi những người bạn yêu mến và hơn thế nữa."
+    }
+  }
+}

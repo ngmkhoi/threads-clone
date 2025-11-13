@@ -3,6 +3,14 @@ import InteractionBar from '@/components/post/InteractionBar';
 import {useTranslation} from "react-i18next";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.jsx";
 import {Card, CardContent} from "@/components/ui/card.jsx";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu.jsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faLink} from "@fortawesome/free-solid-svg-icons";
 
 const PostCard = ({ post }) => {
     const { t } = useTranslation('PostCard');
@@ -37,9 +45,19 @@ const PostCard = ({ post }) => {
                   {post?.timestamp || '2h'}
                 </span>
               </div>
-              <button className="text-gray-500 hover:text-gray-700 p-1">
-                <MoreHorizontal className="w-5 h-5" />
-              </button>
+              <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                      <button className="rounded-xl p-2 hover:bg-gray-200 transition-colors outline-none ring-0 focus:ring-0">
+                          <MoreHorizontal className="w-5 h-5 cursor-pointer"/>
+                      </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="rounded-xl">
+                      <DropdownMenuItem className="flex items-center hover:bg-gray-100 gap-2 cursor-pointer">
+                          <FontAwesomeIcon icon={faLink} className="text-xl"/>
+                          <span>{t('CopyLink')}</span>
+                      </DropdownMenuItem>
+                  </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             {/* Post Text */}

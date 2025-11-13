@@ -13,17 +13,19 @@ import {useTranslation} from "react-i18next";
 import {
     DropdownMenu,
     DropdownMenuContent,
+    DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
+    DropdownMenuPortal,
     DropdownMenuSeparator,
+    DropdownMenuShortcut,
     DropdownMenuSub,
     DropdownMenuSubContent,
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
-    DropdownMenuRadioGroup,
-    DropdownMenuRadioItem
 } from "@/components/ui/dropdown-menu.jsx";
 import {Switch} from "@/components/ui/switch.jsx";
+import {DropdownMenuRadioGroup, DropdownMenuRadioItem} from "@radix-ui/react-dropdown-menu";
 
 const Sidebar = () => {
     const navigate = useNavigate();
