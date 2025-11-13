@@ -1,0 +1,15 @@
+{
+  "menu": {
+    "home": "Home",
+    "search": "Search",
+    "create": "Create",
+    "activity": "Activity",
+    "profile": "Profile",
+    "more": "More"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "darkMode": "Dark mode"
+  }
+}

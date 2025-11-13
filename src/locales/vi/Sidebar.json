@@ -1,0 +1,15 @@
+{
+  "menu": {
+    "home": "Trang chủ",
+    "search": "Tìm kiếm",
+    "create": "Tạo mới",
+    "activity": "Hoạt động",
+    "profile": "Hồ sơ",
+    "more": "Thêm"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "language": "Ngôn ngữ",
+    "darkMode": "Chế độ tối"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "appName": "Threads",
+  "form": {
+    "usernamePlaceholder": "Username, phone or email",
+    "passwordPlaceholder": "Password",
+    "submitButton": "Log in",
+    "forgotPassword": "Forgot password?"
+  },
+  "signup": {
+    "text": "Don't have an account?",
+    "button": "Sign up"
+  },
+  "footer": "© 2024 Threads Clone"
+}

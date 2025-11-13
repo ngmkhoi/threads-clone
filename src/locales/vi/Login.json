@@ -1,0 +1,14 @@
+{
+  "appName": "Threads",
+  "form": {
+    "usernamePlaceholder": "Tên người dùng, số điện thoại hoặc email",
+    "passwordPlaceholder": "Mật khẩu",
+    "submitButton": "Đăng nhập",
+    "forgotPassword": "Quên mật khẩu?"
+  },
+  "signup": {
+    "text": "Bạn chưa có tài khoản?",
+    "button": "Đăng ký"
+  },
+  "footer": "© 2024 Threads Clone"
+}
