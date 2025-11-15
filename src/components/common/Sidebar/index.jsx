@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {Home, Search, Heart, User, Menu, Plus, Languages, Moon} from 'lucide-react';
+import {Home, Search, Heart, User, Menu, Plus, Languages, Moon, Sun} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {
     Tooltip,
@@ -13,24 +13,24 @@ import {useTranslation} from "react-i18next";
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuPortal,
+    DropdownMenuRadioItem,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
+    DropdownMenuRadioGroup,
     DropdownMenuSub,
     DropdownMenuSubContent,
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu.jsx";
 import {Switch} from "@/components/ui/switch.jsx";
-import {DropdownMenuRadioGroup, DropdownMenuRadioItem} from "@radix-ui/react-dropdown-menu";
+import {useTheme} from "@/contexts/ThemeContext.jsx";
 
 const Sidebar = () => {
     const navigate = useNavigate();
     const {t, i18n} = useTranslation('Sidebar');
     const [activeItem, setActiveItem] = useState('home');
+    const { isDarkMode, toggleTheme } = useTheme();
 
     const menuItems = [
         { id: 'home', icon: Home, label: t('menu.home'), path: '/' },
@@ -51,7 +51,7 @@ const Sidebar = () => {
 
     return (
         <TooltipProvider>
-            <div className="fixed left-0 top-0 h-screen w-[72px] border-gray-200 bg-gray-50 flex flex-col items-center py-6 z-50">
+            <div className="fixed left-0 top-0 h-screen w-[72px] border-gray-200 bg-background flex flex-col items-center py-6 z-50">
                 {/* Logo */}
                 <a className="mb-8" onClick={() => navigate('/')}>
                     <FontAwesomeIcon
@@ -129,9 +129,9 @@ const Sidebar = () => {
                         </DropdownMenuSub>
 
                         <DropdownMenuItem className="cursor-pointer" onSelect={(e) => e.preventDefault()}>
-                            <Moon className="mr-2 h-4 w-4" />
+                            {isDarkMode ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4 rotate-180" />}
                             <span className="flex-1">{t('settings.darkMode')}</span>
-                            <Switch id="dark-mode-toggle" />
+                            <Switch checked={isDarkMode} onCheckedChange={toggleTheme} id="dark-mode-toggle" />
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

@@ -1,10 +1,9 @@
-import {Heart, Instagram, MessageCircle, Repeat, Send} from 'lucide-react'
+import {Heart, MessageCircle, Repeat, Send} from 'lucide-react'
 import {
     Dialog,
-    DialogTrigger,
     DialogContent,
     DialogHeader,
-    DialogTitle, DialogDescription, DialogFooter, DialogClose
+    DialogTitle, DialogDescription, DialogFooter
 } from "@/components/ui/dialog"
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
@@ -34,6 +33,8 @@ export default function InteractionBar({likes, comments, repost ,shares}) {
     const [selectedInteraction, setSelectedInteraction] = useState(null)
 
     const SelectedIcon = selectedInteraction ? interactionIcons[selectedInteraction] : null
+
+
 
     return (
         <Dialog open={isOpen}

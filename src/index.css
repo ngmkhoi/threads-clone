@@ -1,7 +1,10 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
     --color-background: oklch(98% 0 0);
+    --color-postcard-background: oklch(98% 0 0);
+    --color-loginpanel-background: oklch(96.1% 0 0);
     --color-foreground: oklch(3.9% 0 0);
     --color-card: oklch(100% 0 0);
     --color-card-foreground: oklch(3.9% 0 0);
@@ -25,6 +28,8 @@
 
 .dark {
     --color-background: oklch(3.9% 0 0);
+    --color-loginpanel-background: oklch(23% 0 0);
+    --color-postcard-background: oklch(23% 0 0);
     --color-foreground: oklch(98% 0 0);
     --color-card: oklch(3.9% 0 0);
     --color-card-foreground: oklch(98% 0 0);
@@ -45,6 +50,21 @@
     --color-ring: oklch(83.1% 0 0);
 }
 
+@keyframes zoom-fade {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
+
+.animate-zoom-fade {
+    animation: zoom-fade 0.4s ease-out forwards;
+}
+
 * {
     border-color: var(--color-border);
 }
@@ -56,8 +76,4 @@ body {
 
 [data-scroll-locked][data-scroll-locked] {
     overflow-y: scroll !important;
-}
-
-[data-state="open"] {
-    animation-duration: 1s !important; /* Test với 1 giây */
 }

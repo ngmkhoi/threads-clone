@@ -16,7 +16,7 @@ const PostCard = ({ post }) => {
     const { t } = useTranslation('PostCard');
 
   return (
-      <Card className="px-4 py-4 border-0 border-b border-l border-r border-gray-200 hover:bg-gray-50/50 transition-colors shadow-none rounded-none cursor-pointer">
+      <Card className="bg-postcard-background px-4 py-4 border-0 border-b border-l border-r border-border transition-colors shadow-none rounded-none cursor-pointer">
           <CardContent className="p-0">
               <div className="flex gap-3">
               {/* Avatar */}
@@ -27,7 +27,7 @@ const PostCard = ({ post }) => {
                     alt={t('altText.userAvatar')}
                     className="cursor-pointer"
                   />
-                  <AvatarFallback className="bg-gray-200 text-gray-600 font-semibold">
+                  <AvatarFallback className="bg-gray-200 text-muted-foreground font-semibold">
                     {post?.username?.[0]?.toUpperCase() || 'U'}
                   </AvatarFallback>
                 </Avatar>
@@ -38,7 +38,7 @@ const PostCard = ({ post }) => {
             {/* Header */}
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center gap-2">
-                <span className="font-semibold text-[15px] text-gray-900">
+                <span className="font-semibold text-[15px]  text-foreground">
                   {post?.username || 'username'}
                 </span>
                 <span className="text-gray-500 text-[15px]">
@@ -61,7 +61,7 @@ const PostCard = ({ post }) => {
             </div>
 
             {/* Post Text */}
-            <p className="text-[15px] text-gray-900 mb-3 leading-5">
+            <p className="text-[15px]  text-foreground mb-3 leading-5">
               {post?.content}
             </p>
 
@@ -91,4 +91,3 @@ const PostCard = ({ post }) => {
 };
 
 export default PostCard;
-

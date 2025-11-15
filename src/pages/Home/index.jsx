@@ -2,9 +2,6 @@ import { useState } from 'react';
 import PostCard from '../../components/post/PostCard';
 
 const Home = () => {
-  // Check if user is logged in (you can replace this with actual auth logic)
-  const [isLoggedIn] = useState(false); // Set to false to show "Home" only
-
   // Sample data for posts
   const [posts] = useState([
     {
@@ -89,4 +86,3 @@ const Home = () => {
 };
 
 export default Home;
-

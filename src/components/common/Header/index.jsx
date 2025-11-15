@@ -6,7 +6,7 @@ const Header = () => {
     const {t} = useTranslation('FeedHeader');
 
     return (
-        <div className="flex justify-center items-center h-7">
+        <div className="flex justify-center items-center h-full">
             <a
                 onClick={() => navigate('/')}
                 className="font-semibold bg-transparent border-none p-0 cursor-pointer"

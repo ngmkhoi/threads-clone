@@ -1,19 +1,22 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
-// https://vitejs.dev/config/
-export default defineConfig(({ command }) => ({
-    plugins: [react({
-        babel: {
-            plugins: [['babel-plugin-react-compiler', { runtime: 'automatic' }]]
-        }
-    })],
-    base: command === 'serve' ? '/' : '/threads-clone/',
+// https://vite.dev/config/
+export default defineConfig({
+    plugins: [
+        react(
+        ),
+        tailwindcss(),
+    ],
+    base:'/threads-clone/',
     resolve: {
         alias: {
             //eslint-disable-next-line no-undef
             "@": path.resolve(__dirname, "./src"),
         },
-    }
-}));
+    },
+})
+
+

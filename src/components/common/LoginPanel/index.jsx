@@ -1,24 +1,20 @@
 import { useNavigate } from 'react-router-dom';
 import {Button} from "@/components/ui/button.jsx";
-import {
-    HoverCard,
-    HoverCardContent,
-    HoverCardTrigger,
-} from "@/components/ui/hover-card"
-import {Instagram} from "lucide-react";
 import {useTranslation} from "react-i18next";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faInstagram} from "@fortawesome/free-brands-svg-icons";
 
 const LoginPanel = () => {
   const navigate = useNavigate();
   const {t} = useTranslation('LoginPanel');
 
   return (
-    <div className="bg-gray-50 rounded-2xl border text-center border-gray-50 p-6 shadow-stone-600">
+    <div  className="bg-loginpanel-background rounded-2xl border w-full border-border text-center p-4 shadow">
       <div className="mb-4">
-        <h2 className="text-xl font-bold text-gray-900 mb-2">
+        <h2 className="text-xl font-bold text-foreground mb-2">
             {t('title')}
         </h2>
-        <p className="text-sm text-gray-600">
+        <p   className="text-sm text-muted-foreground">
             {t('subtitle')}
         </p>
       </div>
@@ -26,14 +22,14 @@ const LoginPanel = () => {
       <div className="space-y-3 mb-3">
         <Button
           onClick={() => navigate('/login')}
-          className="w-full bg-gray-900hover:bg-gray-800 text-white font-semibold py-3 px-4 rounded-xl cursor-pointer transition-colors"
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-colors"
         >
-            <Instagram className="w-5 h-5"/>
+           <FontAwesomeIcon icon={faInstagram} className="text-xl mr-2" />
             {t('continueWithInstagram')}
         </Button>
       </div>
 
-        <a className="text-sm text-gray-500 cursor-pointer"
+        <a className="text-sm text-muted-foreground cursor-pointer hover:text-foreground"
            onClick={() => navigate('/login')}
         >
             {t('loginWithUsername')}
