@@ -77,7 +77,11 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Posts Feed */}
-      <div className="shadow-md">
+      <div
+          style={{
+              boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06)'
+          }}
+      >
         {posts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}

@@ -19,11 +19,11 @@ const LoginPanel = () => {
 
       <div className="space-y-4 mb-5">
         <Button
-            size="xl"
+            size="lg2"
             onClick={() => navigate('/login')}
             className="w-full bg-background hover:bg-background cursor-pointer text-loginpanel-foreground rounded-3xl"
         >
-            <InstagramIcon className="!w-8 !h-8 mr-2" />
+            <InstagramIcon className="!w-8 !h-8 mr-1" />
            <p>{t('continueWithInstagram')}</p>
         </Button>
       </div>

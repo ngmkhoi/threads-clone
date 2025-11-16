@@ -132,6 +132,11 @@
     animation: zoom-fade 0.4s ease-out forwards;
 }
 
+html {
+    background-color: var(--color-background);
+    overscroll-behavior-y: none;
+}
+
 * {
     border-color: var(--color-border);
 }
@@ -139,6 +144,7 @@
 body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    overscroll-behavior-y: none
 }
 
 [data-scroll-locked][data-scroll-locked] {
