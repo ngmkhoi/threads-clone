@@ -20,7 +20,13 @@ const Home = () => {
       avatar: 'https://i.pravatar.cc/150?img=2',
       timestamp: '4h',
       content: 'Beautiful day for coding! ☀️ Working on something amazing.',
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop',
+        image: [
+            'https://picsum.photos/400/400?random=1',
+            'https://picsum.photos/400/400?random=2',
+            'https://picsum.photos/400/400?random=3',
+            'https://picsum.photos/400/400?random=4',
+            'https://picsum.photos/400/400?random=5'
+        ],
       likes: 128,
       comments: 15,
       reposts: 12,
@@ -78,9 +84,6 @@ const Home = () => {
       </div>
 
       {/* Load More Indicator */}
-      <div className="p-8 text-center">
-        <div className="inline-block w-6 h-6 border-2 border-gray-300 border-t-gray-900 rounded-full animate-spin"></div>
-      </div>
     </div>
   );
 };

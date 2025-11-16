@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLink} from "@fortawesome/free-solid-svg-icons";
+import PostImage from "@/components/post/PostCard/components/PostImage/index.jsx";
 
 const PostCard = ({ post }) => {
     const { t } = useTranslation('PostCard');
@@ -33,56 +34,47 @@ const PostCard = ({ post }) => {
                 </Avatar>
               </div>
 
-          {/* Content */}
-          <div className="flex-1 min-w-0">
-            {/* Header */}
-            <div className="flex items-start justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-[15px]  text-foreground">
-                  {post?.username || 'username'}
-                </span>
-                <span className="text-gray-500 text-[15px]">
-                  {post?.timestamp || '2h'}
-                </span>
-              </div>
-              <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                      <button className="rounded-xl p-2 hover:bg-gray-200 transition-colors outline-none ring-0 focus:ring-0">
-                          <MoreHorizontal className="w-5 h-5 cursor-pointer"/>
-                      </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="rounded-xl">
-                      <DropdownMenuItem className="flex items-center hover:bg-gray-100 gap-2 cursor-pointer">
-                          <FontAwesomeIcon icon={faLink} className="text-xl"/>
-                          <span>{t('CopyLink')}</span>
-                      </DropdownMenuItem>
-                  </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                {/* Header */}
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-[15px]  text-foreground">
+                      {post?.username || 'username'}
+                    </span>
+                    <span className="text-gray-500 text-[15px]">
+                      {post?.timestamp || '2h'}
+                    </span>
+                  </div>
+                  <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                          <button className="rounded-xl p-2 hover:bg-gray-200 transition-colors outline-none ring-0 focus:ring-0">
+                              <MoreHorizontal className="w-5 h-5 cursor-pointer"/>
+                          </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="rounded-xl">
+                          <DropdownMenuItem className="flex items-center hover:bg-gray-100 gap-2 cursor-pointer">
+                              <FontAwesomeIcon icon={faLink} className="text-xl"/>
+                              <span>{t('CopyLink')}</span>
+                          </DropdownMenuItem>
+                      </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
 
-            {/* Post Text */}
-            <p className="text-[15px]  text-foreground mb-3 leading-5">
-              {post?.content}
-            </p>
+                {/* Post Text */}
+                <p className="text-[15px]  text-foreground mb-3 leading-5">
+                  {post?.content}
+                </p>
 
-            {/* Post Image (if exists) */}
-            {post?.image && (
-              <div className="mb-3 overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={t('altText.postContent')}
-                  className="w-3/4 rounded-2xl h-auto object-cover"
+                <PostImage post={post} />
+
+                 {/* Interaction Bar */}
+                <InteractionBar
+                  likes={post?.likes || 0}
+                  comments={post?.comments || 0}
+                  repost={post?.reposts || 0}
+                  shares={post?.shares || 0}
                 />
-              </div>
-            )}
-
-            {/* Interaction Bar */}
-            <InteractionBar
-              likes={post?.likes || 0}
-              comments={post?.comments || 0}
-              repost={post?.reposts || 0}
-              shares={post?.shares || 0}
-            />
           </div>
         </div>
       </CardContent>

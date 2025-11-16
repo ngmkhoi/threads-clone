@@ -2,14 +2,32 @@
 @import "tw-animate-css";
 
 @theme {
+    /* ============================================ */
+    /* 1. NHÓM MÀU NỀN (Background Colors)        */
+    /* ============================================ */
     --color-background: oklch(98% 0 0);
+    --color-background-active: oklch(96% 0 0);
     --color-postcard-background: oklch(98% 0 0);
-    --color-loginpanel-background: oklch(96.1% 0 0);
+    --color-loginpanel-background: oklch(95% 0 0);
+    --color-dialog-background: oklch(95% 0 0);
+
+    /* ============================================ */
+    /* 2. NHÓM MÀU CHỮ (Foreground Colors)        */
+    /* ============================================ */
     --color-foreground: oklch(3.9% 0 0);
+    --color-loginpanel-foreground: oklch(60% 0 0);
+
+    /* ============================================ */
+    /* 3. NHÓM CARD & POPOVER                      */
+    /* ============================================ */
     --color-card: oklch(100% 0 0);
     --color-card-foreground: oklch(3.9% 0 0);
     --color-popover: oklch(100% 0 0);
     --color-popover-foreground: oklch(3.9% 0 0);
+
+    /* ============================================ */
+    /* 4. NHÓM MÀU TRẠNG THÁI (State Colors)      */
+    /* ============================================ */
     --color-primary: oklch(9% 0 0);
     --color-primary-foreground: oklch(98% 0 0);
     --color-secondary: oklch(96.1% 0 0);
@@ -20,21 +38,48 @@
     --color-accent-foreground: oklch(9% 0 0);
     --color-destructive: oklch(60.2% 0.1579 29.233);
     --color-destructive-foreground: oklch(98% 0 0);
+
+    /* ============================================ */
+    /* 5. NHÓM VIỀN & INPUT (Border & Input)       */
+    /* ============================================ */
     --color-border: oklch(89.8% 0 0);
+    --color-border-btn-dialog: oklch(80% 0 0);
     --color-input: oklch(89.8% 0 0);
     --color-ring: oklch(3.9% 0 0);
+
+    /* ============================================ */
+    /* 6. KHÁC (Other)                             */
+    /* ============================================ */
     --radius: 0.5rem;
 }
 
 .dark {
+    /* ============================================ */
+    /* 1. NHÓM MÀU NỀN (Background Colors)        */
+    /* ============================================ */
     --color-background: oklch(3.9% 0 0);
-    --color-loginpanel-background: oklch(23% 0 0);
+    --color-background-active: oklch(25% 0 0);
     --color-postcard-background: oklch(23% 0 0);
+    --color-loginpanel-background: oklch(23% 0 0);
+    --color-dialog-background: oklch(15% 0 0);
+
+    /* ============================================ */
+    /* 2. NHÓM MÀU CHỮ (Foreground Colors)        */
+    /* ============================================ */
     --color-foreground: oklch(98% 0 0);
+    --color-loginpanel-foreground: oklch(60% 0 0);
+
+    /* ============================================ */
+    /* 3. NHÓM CARD & POPOVER                      */
+    /* ============================================ */
     --color-card: oklch(3.9% 0 0);
     --color-card-foreground: oklch(98% 0 0);
     --color-popover: oklch(3.9% 0 0);
     --color-popover-foreground: oklch(98% 0 0);
+
+    /* ============================================ */
+    /* 4. NHÓM MÀU TRẠNG THÁI (State Colors)      */
+    /* ============================================ */
     --color-primary: oklch(98% 0 0);
     --color-primary-foreground: oklch(9% 0 0);
     --color-secondary: oklch(14.9% 0 0);
@@ -45,9 +90,31 @@
     --color-accent-foreground: oklch(98% 0 0);
     --color-destructive: oklch(30.6% 0.1373 29.233);
     --color-destructive-foreground: oklch(98% 0 0);
+
+    /* ============================================ */
+    /* 5. NHÓM VIỀN & INPUT (Border & Input)       */
+    /* ============================================ */
     --color-border: oklch(14.9% 0 0);
+    --color-border-btn-dialog: oklch(28% 0 0);
     --color-input: oklch(14.9% 0 0);
     --color-ring: oklch(83.1% 0 0);
+}
+
+/* Trong file index.css hoặc một file CSS custom */
+/* Áp dụng cho icon Font Awesome */
+/* Trong file CSS gốc (nơi bạn @import tailwind) */
+.fa-instagram-gradient {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d) !important;
+
+    /* Đảm bảo nền được cắt */
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+
+    /* Đảm bảo màu icon là trong suốt */
+    color: transparent !important;
+
+    /* Tùy chọn, để đảm bảo hiển thị đúng */
+    display: inline-block !important;
 }
 
 @keyframes zoom-fade {

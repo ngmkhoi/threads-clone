@@ -24,13 +24,19 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu.jsx";
 import {Switch} from "@/components/ui/switch.jsx";
-import {useTheme} from "@/contexts/ThemeContext.jsx";
+import { useDispatch, useSelector } from 'react-redux';
+import ThemeSlice from '@/features/theme/themeSlice.js';
 
 const Sidebar = () => {
     const navigate = useNavigate();
     const {t, i18n} = useTranslation('Sidebar');
     const [activeItem, setActiveItem] = useState('home');
-    const { isDarkMode, toggleTheme } = useTheme();
+    const dispatch = useDispatch();
+    const isDarkMode = useSelector(state => state.theme.isDarkMode);
+
+    const handleToggleTheme = () => {
+        dispatch(ThemeSlice.actions.toggleTheme());
+    }
 
     const menuItems = [
         { id: 'home', icon: Home, label: t('menu.home'), path: '/' },
@@ -72,14 +78,14 @@ const Sidebar = () => {
                                     <a
                                         onClick={() => handleItemClick(item)}
                                         className={`
-                      w-full h-12 flex items-center cursor-pointer justify-center rounded-lg transition-colors
+                      w-12 h-12 flex items-center cursor-pointer justify-center rounded-lg transition-colors
                       ${isActive
-                                            ? 'bg-gray-900 text-white'
-                                            : 'text-gray-700 hover:bg-gray-100'
+                                            ? 'bg-background-active text-foreground'
+                                            : 'text-foreground hover:bg-background-active'
                                         }
                     `}
                                     >
-                                        <Icon className="w-6 h-6" />
+                                        <Icon className="w-6 h-6"/>
                                     </a>
                                 </TooltipTrigger>
                                 <TooltipContent side="right">
@@ -96,7 +102,9 @@ const Sidebar = () => {
                         <TooltipTrigger asChild>
                             <DropdownMenuTrigger asChild>
                                 <button
-                                    className="mt-auto w-10 h-10 flex items-center cursor-pointer justify-center rounded-lg hover:bg-gray-100 transition-colors text-gray-700"
+                                    className="w-12 h-12
+                                    flex items-center cursor-pointer justify-center rounded-lg transition-colors
+                                    text-foreground hover:bg-background-active"
                                 >
                                     <Menu className="w-5 h-5" />
                                 </button>
@@ -107,7 +115,7 @@ const Sidebar = () => {
                         </TooltipContent>
                     </Tooltip>
 
-                    <DropdownMenuContent side="right" align="end" className="w-56">
+                    <DropdownMenuContent side="right" align="end" className="w-55 bg-loginpanel-background rounded-xl">
                         <DropdownMenuLabel className="font-semibold">{t('settings.title')}</DropdownMenuLabel>
                         <DropdownMenuSeparator />
 
@@ -117,7 +125,7 @@ const Sidebar = () => {
                                 <span>{t('settings.language')}</span>
                             </DropdownMenuSubTrigger>
                             <DropdownMenuSubContent>
-                                <DropdownMenuRadioGroup value={i18n.language} onValueChange={handleLanguageChange}>
+                                <DropdownMenuRadioGroup className="bg-loginpanel-background rounded-lg" value={i18n.language} onValueChange={handleLanguageChange}>
                                     <DropdownMenuRadioItem value="vi" className="cursor-pointer">
                                         Vietnamese
                                     </DropdownMenuRadioItem>
@@ -131,7 +139,7 @@ const Sidebar = () => {
                         <DropdownMenuItem className="cursor-pointer" onSelect={(e) => e.preventDefault()}>
                             {isDarkMode ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4 rotate-180" />}
                             <span className="flex-1">{t('settings.darkMode')}</span>
-                            <Switch checked={isDarkMode} onCheckedChange={toggleTheme} id="dark-mode-toggle" />
+                            <Switch checked={isDarkMode} onCheckedChange={handleToggleTheme} id="dark-mode-toggle" />
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

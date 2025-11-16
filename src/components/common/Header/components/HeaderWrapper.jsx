@@ -24,7 +24,7 @@ const HeaderWrapper = ({children}) => {
                 aria-hidden="true"
             >
                 <div
-                    className="w-[50px] h-[50px] border border-border shadow-border rounded-full relative right-[25px] top-[25px]"
+                    className="w-[50px] h-[50px] border border-border rounded-full relative right-[25px] top-[25px]"
                     style={{
                         outline: '100px solid var(--color-background)',
                         boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06)'

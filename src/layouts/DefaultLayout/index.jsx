@@ -10,7 +10,7 @@ const DefaultLayout = () => {
         {/* Header - Fixed Top */}
         <div className="fixed top-0 z-20 w-full bg-background">
             <div className="flex justify-center ml-[30px]">
-                <div className="w-full max-w-[640px] h-[60px] md:h-[74px] flex items-center justify-center">
+                <div className="w-full max-w-[640px] h-[60px] md:h-[74px] z-20 flex items-center justify-center">
                     <HeaderWrapper>
                         <FeedHeader/>
                     </HeaderWrapper>
@@ -22,14 +22,14 @@ const DefaultLayout = () => {
         <Sidebar />
 
         {/* Main Container */}
-        <div className="flex justify-center ml-[30px]">
+        <div className="flex justify-center ml-[30px] z-10">
             {/* Content Area - Fixed Width */}
             <div className="w-full max-w-[640px] pt-[60px] md:pt-[74px]">
                 <Outlet />
             </div>
 
              {/*Login Panel - Fixed Right */}
-            <div className=" fixed left-[calc(50%+320px+10px)] hidden xl:block w-[340px] top-22 h-[calc(100vh-73px)] overflow-y-auto">
+            <div className=" fixed left-[calc(50%+320px+15px)] hidden xl:block w-[350px] z-30 h-[calc(100vh-73px)] pt-[60px] md:pt-[60px] overflow-y-auto">
                 <div className="p-3">
                     <LoginPanel />
                 </div>

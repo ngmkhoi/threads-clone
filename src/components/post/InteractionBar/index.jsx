@@ -9,8 +9,8 @@ import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Button} from "@/components/ui/button.jsx";
 import {useNavigate} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faInstagram} from "@fortawesome/free-brands-svg-icons";
+import InstagramIcon from "@/components/common/Icons/InstagramIcon.tsx";
+import { InstagramGradientIcon } from '@/components/common/Icons/InstagramStyledIcon';
 
 export default function InteractionBar({likes, comments, repost ,shares}) {
     const interactions = [
@@ -31,10 +31,7 @@ export default function InteractionBar({likes, comments, repost ,shares}) {
     const { t } = useTranslation(['DialogMessage', 'LoginPanel'])
     const [isOpen, setIsOpen] = useState(false)
     const [selectedInteraction, setSelectedInteraction] = useState(null)
-
     const SelectedIcon = selectedInteraction ? interactionIcons[selectedInteraction] : null
-
-
 
     return (
         <Dialog open={isOpen}
@@ -64,13 +61,14 @@ export default function InteractionBar({likes, comments, repost ,shares}) {
                 })}
             </div>
 
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-lg min-h-[375px] bg-dialog-background !rounded-2xl">
                 {/*icon*/}
-                <div className="flex justify-center mb-2">
-                    <div className="rounded-full p-4">
-                        {SelectedIcon && <SelectedIcon className="w-12 h-12" />}
-                    </div>
-                </div>
+                {SelectedIcon && (
+                    <InstagramGradientIcon
+                        Icon={SelectedIcon}
+                        className="!w-15 !h-15 mx-auto mt-2 mb-4"
+                    />
+                )}
                 <DialogHeader>
                     <DialogTitle className="text-center text-3xl font-bold">
                         {selectedInteraction && t(`DialogMessage:dialogMessages.${selectedInteraction}.title`)}
@@ -81,11 +79,12 @@ export default function InteractionBar({likes, comments, repost ,shares}) {
                 </DialogHeader>
                 <DialogFooter className="flex flex-col gap-3">
                     <Button
+                        size="xl"
                         onClick={() => navigate('/login')}
-                        className="w-full flex items-center justify-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-4 rounded-xl transition-colors"
+                        className="w-full bg-background-dialog hover:bg-background-dialog cursor-pointer border-1 !border-border-btn-dialog text-loginpanel-foreground rounded-3xl"
                     >
-                        <FontAwesomeIcon icon={faInstagram} className="text-2xl w-5 h-5" />
-                        {t(`LoginPanel:continueWithInstagram`)}
+                        <InstagramIcon className="!w-13 !h-13 mr-2" />
+                        <p>{t(`LoginPanel:continueWithInstagram`)}</p>
                     </Button>
                 </DialogFooter>
             </DialogContent>
