@@ -9,6 +9,7 @@ import aotrang from "@/assets/aotrang/index.js";
 import babykewt from "@/assets/babykewt/index.js";
 import baonhi from "@/assets/aodo/index.js";
 import aoden from "@/assets/aoden/index.js";
+import hnljnh_04 from "@/assets/hnljnh_04/index.js";
 
 const Home = () => {
   // Sample data for posts
@@ -52,7 +53,7 @@ const Home = () => {
       username: '_2thang9',
       avatar: makeup_isme[0],
       timestamp: '8h',
-      content: '',
+      content: 'Cho em 1 bát phở lòng tái',
         image: _2thang9,
       likes: 156,
       comments: 12,
@@ -83,13 +84,24 @@ const Home = () => {
       {
           id: 7,
           username: 'baonhi',
-          avatar: aotrang[0],
-          timestamp: '12h',
+          avatar: aotrang[1],
+          timestamp: '8h',
           content: '💅💅',
           image: baonhi,
           likes: 790,
           comments: 32,
           reposts: 21,
+      },
+      {
+          id: 8,
+          username: 'hnglinh_04',
+          avatar: hnljnh_04[0],
+          timestamp: '5h',
+          content: 'your girlfriend just posted a photo ✨',
+          image: hnljnh_04,
+          likes: 890,
+          comments: 35,
+          reposts: 22,
       },
   ]);
 
@@ -100,6 +112,7 @@ const Home = () => {
           style={{
               boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06)'
           }}
+          className="pt-2"
       >
         {posts.map((post) => (
           <PostCard key={post.id} post={post} />

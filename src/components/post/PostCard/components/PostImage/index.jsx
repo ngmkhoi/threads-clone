@@ -44,7 +44,7 @@ function PostImage({ post }) {
                                     onMouseUp={handleMouseUp}
                                     src={img}
                                     alt={`Post Image ${index + 1}`}
-                                    className={cn("w-full h-auto object-cover rounded-xl transition-transform duration-200 cursor-grab",
+                                    className={cn("w-full h-[450px] object-cover rounded-xl transition-transform duration-200 cursor-grab",
                                         index === selectedImageIndex ? "scale-95" : "scale-100")}
                                 />
                             </div>
@@ -54,7 +54,7 @@ function PostImage({ post }) {
             </Carousel>
         )
     } else if (typeof image === 'string') {
-        imageSrc = <img src={image} alt="Post Image" className="w-full flex rounded-xl cursor-pointer object-cover max-h-[500px] border border-border"/>;
+        imageSrc = <img src={image} alt="Post Image" className="no-drag w-full h-auto flex rounded-xl cursor-pointer object-cover border border-border"/>;
     }
 
     return imageSrc;
