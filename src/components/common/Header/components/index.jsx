@@ -1,4 +1,4 @@
-const HeaderWrapper = ({children}) => {
+const Index = ({children}) => {
     return (
         <div className="relative w-full h-full flex items-center justify-center">
             {/* Children - FeedHeader */}
@@ -34,12 +34,12 @@ const HeaderWrapper = ({children}) => {
 
             {/* Bottom Border Line */}
             <div
-                className="absolute w-[calc(100%-50px)] border-b border-border left-[25px] bottom-[-1px] pointer-events-none"
-                style={{ boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06)' }}
+                className="absolute w-[calc(100%-50px)] bg-background p-1 border-b border-border left-[25px] bottom-[-1px] pointer-events-none"
+                // style={{ boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06)' }}
                 aria-hidden="true"
             />
         </div>
     )
 }
 
-export default HeaderWrapper
+export default Index

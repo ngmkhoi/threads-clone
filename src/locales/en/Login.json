@@ -1,14 +1,16 @@
 {
-  "appName": "Threads",
+  "title": "Log in with your Instagram account",
   "form": {
     "usernamePlaceholder": "Username, phone or email",
     "passwordPlaceholder": "Password",
     "submitButton": "Log in",
+    "Or": "or",
+    "optional": "Continue with Instagram account",
     "forgotPassword": "Forgot password?"
   },
   "signup": {
     "text": "Don't have an account?",
     "button": "Sign up"
   },
-  "footer": "© 2024 Threads Clone"
+  "footer": "© 2025 Threads Clone"
 }

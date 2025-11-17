@@ -9,8 +9,9 @@ import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Button} from "@/components/ui/button.jsx";
 import {useNavigate} from "react-router-dom";
-import InstagramIcon from "@/components/common/Icons/InstagramIcon.tsx";
 import { InstagramGradientIcon } from '@/components/common/Icons/InstagramStyledIcon';
+import instagramLogo from "@/assets/instagram.png";
+
 
 export default function InteractionBar({likes, comments, repost ,shares}) {
     const interactions = [
@@ -83,7 +84,11 @@ export default function InteractionBar({likes, comments, repost ,shares}) {
                         onClick={() => navigate('/login')}
                         className="w-full bg-background-dialog hover:bg-background-dialog cursor-pointer border-1 !border-border-btn-dialog text-loginpanel-foreground rounded-3xl"
                     >
-                        <InstagramIcon className="!w-13 !h-13 mr-2" />
+                        <img
+                            src={instagramLogo}
+                            alt="Instagram"
+                            className="!w-13 !h-13 mr-2"
+                        />
                         <p>{t(`LoginPanel:continueWithInstagram`)}</p>
                     </Button>
                 </DialogFooter>

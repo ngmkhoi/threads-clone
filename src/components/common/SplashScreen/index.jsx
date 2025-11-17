@@ -19,7 +19,7 @@ const SplashScreen = ({ isFading }) => {
             </div>
 
             {/* Bottom - Signature */}
-            <div className="mb-8 font-semibold text-xl text-muted-foreground transition-all duration-300">
+            <div className="mb-8 font-semibold text-xl text-foreground transition-all duration-300">
                 Made by Nguyen Minh Khoi with ❤️
             </div>
 

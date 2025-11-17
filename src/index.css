@@ -10,12 +10,16 @@
     --color-postcard-background: oklch(98% 0 0);
     --color-loginpanel-background: oklch(95% 0 0);
     --color-dialog-background: oklch(95% 0 0);
+    --color-input-background: oklch(95% 0 0);
+    --color-button-background: oklch(3.9% 0 0);
 
     /* ============================================ */
     /* 2. NHÓM MÀU CHỮ (Foreground Colors)        */
     /* ============================================ */
     --color-foreground: oklch(3.9% 0 0);
     --color-loginpanel-foreground: oklch(60% 0 0);
+    --color-input-foreground: oklch(70% 0 0);
+    --color-button-foreground: oklch(45% 0 0);
 
     /* ============================================ */
     /* 3. NHÓM CARD & POPOVER                      */
@@ -45,6 +49,7 @@
     --color-border: oklch(89.8% 0 0);
     --color-border-btn-dialog: oklch(80% 0 0);
     --color-input: oklch(89.8% 0 0);
+    --color-border-input: oklch(80% 0 0);
     --color-ring: oklch(3.9% 0 0);
 
     /* ============================================ */
@@ -62,12 +67,16 @@
     --color-postcard-background: oklch(23% 0 0);
     --color-loginpanel-background: oklch(23% 0 0);
     --color-dialog-background: oklch(15% 0 0);
+    --color-input-background: oklch(23% 0 0);
+    --color-button-background: oklch(90% 0 0);
 
     /* ============================================ */
     /* 2. NHÓM MÀU CHỮ (Foreground Colors)        */
     /* ============================================ */
     --color-foreground: oklch(98% 0 0);
     --color-loginpanel-foreground: oklch(60% 0 0);
+    --color-input-foreground: oklch(45% 0 0);
+    --color-button-foreground: oklch(65% 0 0);
 
     /* ============================================ */
     /* 3. NHÓM CARD & POPOVER                      */
@@ -97,6 +106,7 @@
     --color-border: oklch(14.9% 0 0);
     --color-border-btn-dialog: oklch(28% 0 0);
     --color-input: oklch(14.9% 0 0);
+    --color-border-input: oklch(40% 0 0);
     --color-ring: oklch(83.1% 0 0);
 }
 
@@ -149,4 +159,29 @@ body {
 
 [data-scroll-locked][data-scroll-locked] {
     overflow-y: scroll !important;
+}
+
+.input-focus-subtle {
+    @apply focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-border-input;
+}
+
+.custom-input-style {
+    @apply w-md h-15 rounded-xl border border-border px-4 py-2 text-foreground placeholder:text-input-foreground bg-input-background z-20 ;
+}
+
+.custom-button-style {
+    @apply w-md rounded-xl text-base text-button-foreground bg-button-background h-17
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 01000px var(--color-background) inset !important; /* Use input background color */
+    box-shadow: 0 0 0 1000px var(--color-background) inset !important; /* Use input background color */
+    -webkit-text-fill-color: var(--color-foreground) !important;
+    transition: background-color 5000s ease-in-out 0s; /* Smooth transition */
+    --tw-ring-color: transparent !important;
+    --tw-ring-offset-color: transparent !important;
 }

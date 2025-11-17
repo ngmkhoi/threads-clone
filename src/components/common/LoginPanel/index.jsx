@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import {Button} from "@/components/ui/button.jsx";
 import {useTranslation} from "react-i18next";
 import InstagramIcon from "@/components/common/Icons/InstagramIcon.tsx";
+
 const LoginPanel = () => {
   const navigate = useNavigate();
   const {t} = useTranslation('LoginPanel');

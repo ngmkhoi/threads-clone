@@ -1,8 +1,10 @@
 {
-  "appName": "Threads",
+  "title": "Đăng nhập bằng tài khoản Instagram",
   "form": {
     "usernamePlaceholder": "Tên người dùng, số điện thoại hoặc email",
     "passwordPlaceholder": "Mật khẩu",
+    "Or": "hoặc",
+    "optional": "Tiếp tục bằng instagram",
     "submitButton": "Đăng nhập",
     "forgotPassword": "Quên mật khẩu?"
   },
@@ -10,5 +12,5 @@
     "text": "Bạn chưa có tài khoản?",
     "button": "Đăng ký"
   },
-  "footer": "© 2024 Threads Clone"
+  "footer": "© 2025 Threads Clone"
 }

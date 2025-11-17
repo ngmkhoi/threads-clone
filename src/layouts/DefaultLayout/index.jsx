@@ -2,7 +2,7 @@ import Sidebar from '../../components/common/Sidebar';
 import LoginPanel from '../../components/common/LoginPanel';
 import {Outlet} from "react-router-dom";
 import FeedHeader from "@/components/common/Header/index.jsx";
-import HeaderWrapper from "@/components/common/Header/components/HeaderWrapper.jsx";
+import Index from "@/components/common/Header/components/index.jsx";
 
 const DefaultLayout = () => {
   return (
@@ -11,9 +11,9 @@ const DefaultLayout = () => {
         <div className="fixed top-0 z-20 w-full bg-background">
             <div className="flex justify-center ml-[30px]">
                 <div className="w-full max-w-[640px] h-[60px] md:h-[74px] z-20 flex items-center justify-center">
-                    <HeaderWrapper>
+                    <Index>
                         <FeedHeader/>
-                    </HeaderWrapper>
+                    </Index>
                 </div>
             </div>
         </div>
