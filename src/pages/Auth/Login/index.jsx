@@ -17,7 +17,7 @@ const Login = () => {
     return (
         <div className="min-h-screen flex flex-col items-center bg-background">
 
-            <img src={logoImage} alt="Logo" className="w-full z-10 h-full overflow-hidden mx-auto"/>
+            <img src={logoImage} alt="Logo" className="w-full z-10 h-full overflow-hidden mx-auto no-drag"/>
 
             <h1 className="relative font-semibold z-20 text-xl mx-auto text-foreground -mt-50">{t('title')}</h1>
 

@@ -185,3 +185,17 @@ input:-webkit-autofill:active {
     --tw-ring-color: transparent !important;
     --tw-ring-offset-color: transparent !important;
 }
+
+/* Disable image dragging and selection */
+.no-drag {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
