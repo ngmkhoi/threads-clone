@@ -1,5 +1,4 @@
 import InteractionBar from '@/components/post/InteractionBar';
-import {useTranslation} from "react-i18next";
 import {Card, CardContent} from "@/components/ui/card.jsx";
 import PostImage from "@/components/post/PostCard/components/PostImage/index.jsx";
 import DropdownMenuComponent from "@/components/post/PostCard/components/DropdownMenu/index.jsx";
@@ -8,8 +7,8 @@ import AvatarComponent from "@/components/post/PostCard/components/Avatar/index.
 const PostCard = ({ post }) => {
 
   return (
-      <Card className="bg-postcard-background px-4 py-4 border-0 border-b border-l border-r border-border transition-colors shadow-none rounded-none cursor-pointer">
-          <CardContent className="p-0">
+      <Card className="bg-postcard-background py-6 transition-colors shadow-none rounded-none cursor-pointer">
+          <CardContent className="p-2">
               <div className="flex gap-3">
                   {/* Avatar */}
                  <AvatarComponent post={post}/>

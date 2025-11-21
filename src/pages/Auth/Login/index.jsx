@@ -1,45 +1,110 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useMemo, useState} from 'react';
 import { useTranslation } from "react-i18next";
-import logoImage from '@/assets/JlaY6JCPfe-.png';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {Input} from "@/components/ui/input.jsx";
 import {Button} from "@/components/ui/button.jsx";
+import {Spinner} from "@/components/ui/spinner.jsx";
 import instagramLogo from "@/assets/instagram.png";
+import {toast} from "sonner";
+import createLoginSchema from "@/utils/Validate/auth/loginSchema.js";
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import authService from "@/services/auth/authService.js";
+import {setUser} from "@/features/auth/authSlice.js";
 
 const Login = () => {
-    // const navigate = useNavigate();
     const { t } = useTranslation('Login');
-    const [formData, setFormData] = useState({
-        username: '',
-        password: '',
-    });
+    const schema = useMemo(() => createLoginSchema(t), [t])
+    const {
+        register,
+        handleSubmit,
+        watch} = useForm({
+        resolver: yupResolver(schema),
+        defaultValues: {
+            identifier: '',
+            password: ''
+        }
+    })
+
+    const { identifier, password } = watch();
+    const isFormValid = identifier && password;
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+
+    const onSubmit = async (data) => {
+        setLoading(true);
+
+        try {
+            const response = await authService.login(data);
+            const {access_token, refresh_token} = response;
+
+            localStorage.setItem('accessToken', access_token);
+            localStorage.setItem('refreshToken', refresh_token);
+
+            const userResponse = await authService.getCurrentUser();
+            dispatch(setUser(userResponse))
+
+            navigate('/');
+        } catch (error) {
+            const errorMessage = error.message || 'Login failed. Please try again.';
+            toast.error(errorMessage);
+
+            // Clear tokens nếu có lỗi
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const onError = (errors) => {
+        const firstError = errors.identifier?.message || errors.password?.message;
+
+        if(firstError){
+            toast(firstError);
+        }
+    }
 
     return (
-        <div className="min-h-screen flex flex-col items-center bg-background">
-
-            <img src={logoImage} alt="Logo" className="w-full z-10 h-full overflow-hidden mx-auto no-drag"/>
-
-            <h1 className="relative font-semibold z-20 text-xl mx-auto text-foreground -mt-50">{t('title')}</h1>
+        <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col items-center w-auto">
 
             <Input
                 type={'text'}
-                placeholder={t('form.usernamePlaceholder')}
-                value={formData.username}
+                placeholder={t('form.identifierPlaceholder')}
+                {...register('identifier')}
                 className="mt-5 custom-input-style input-focus-subtle"
-                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                autoFocus
             />
 
             <Input
                 type={'password'}
                 placeholder={t('form.passwordPlaceholder')}
-                value={formData.password}
+                {...register('password')}
                 className="mt-3 custom-input-style input-focus-subtle"
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             />
 
             {/*Submit Button*/}
-            <Button className="mt-3 !font-semibold !text-lg custom-button-style">
-                {t('form.submitButton')}
+            <Button
+                className={`mt-3 !font-semibold !text-lg custom-button-style ${
+                    isFormValid
+                        ? ' !text-button-foreground-active cursor-pointer'
+                        : ' cursor-not-allowed'
+                }`}
+                type="submit"
+                disabled={loading}
+            >
+                {loading ? (
+                    <>
+                        <Spinner className="mr-2" />
+                        {t('form.loading')}
+                    </>
+                ) : (
+                    t('form.submitButton')
+                )}
             </Button>
 
             <a className="mt-5 text-muted-foreground text-sm cursor-pointer">
@@ -53,6 +118,7 @@ const Login = () => {
             <Button
                 size="xl"
                 className="w-md bg-background-dialog hover:bg-background-dialog cursor-pointer !border-border-btn-dialog border-1 rounded-3xl"
+                type="button"
             >
                 <img
                     src={instagramLogo}
@@ -61,9 +127,7 @@ const Login = () => {
                 />
                 <p className="font-bold text-lg text-foreground">{t(`form.optional`)}</p>
             </Button>
-
-            <footer className="mt-auto mb-5 text-center text-sm text-muted-foreground">{t('footer')}</footer>
-        </div>
+        </form>
     );
 };
 

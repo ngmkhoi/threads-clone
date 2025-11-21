@@ -1,16 +1,17 @@
 {
   "title": "Log in with your Instagram account",
   "form": {
-    "usernamePlaceholder": "Username, phone or email",
+    "identifierPlaceholder": "Username, phone or email",
     "passwordPlaceholder": "Password",
     "submitButton": "Log in",
     "Or": "or",
-    "optional": "Continue with Instagram account",
-    "forgotPassword": "Forgot password?"
+    "optional": "Register with your Instagram account.",
+    "forgotPassword": "Forgot password?",
+    "loading": "Logging in..."
   },
-  "signup": {
-    "text": "Don't have an account?",
-    "button": "Sign up"
+  "validation": {
+    "identifierRequired": "Username or email is required.",
+    "passwordRequired": "Password is required."
   },
   "footer": "© 2025 Threads Clone"
 }

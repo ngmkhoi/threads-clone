@@ -7,17 +7,22 @@ import NotFound from "@/pages/NotFound";
 import Profile from "@/pages/Profile";
 import Search from "@/pages/Search";
 import Activity from "@/pages/Activity";
+import AuthLayout from "@/layouts/AuthLayout/";
 
 export default function AppRoute() {
     return (
         <Routes>
-            <Route path="/login" element={<Login />} />
+
 
             <Route path="/" element={<DefaultLayout />}>
                 <Route index element={<Home />} />
                 <Route path="/activity" element={<Activity />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/search" element={<Search />} />
+            </Route>
+
+            <Route path="/auth" element={<AuthLayout />}>
+                <Route path="login" element={<Login />} />
             </Route>
 
             {/*NotFound*/}

@@ -13,6 +13,7 @@ function PostImage({ post }) {
 
     function handleMouseUp() {
         setSelectedImageIndex(null);
+        document.body.style.cursor = '';
     }
 
     useEffect(() => {
@@ -34,7 +35,7 @@ function PostImage({ post }) {
 
     if (Array.isArray(image)) {
         imageSrc = (
-            <Carousel className="w-full max-w-xl">
+            <Carousel className="w-auto h-auto max-w-xl">
                 <CarouselContent className="-ml-2">
                     {image.map((img, index) => (
                         <CarouselItem key={index}  className="pl-0.25 lg:basis-xs">
@@ -54,7 +55,7 @@ function PostImage({ post }) {
             </Carousel>
         )
     } else if (typeof image === 'string') {
-        imageSrc = <img src={image} alt="Post Image" className="no-drag w-full h-auto flex rounded-xl cursor-pointer object-cover border border-border"/>;
+        imageSrc = <img src={image} alt="Post Image" className="no-drag w-auto h-auto flex rounded-xl cursor-pointer object-cover border border-border"/>;
     }
 
     return imageSrc;

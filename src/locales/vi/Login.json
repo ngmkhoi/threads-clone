@@ -1,16 +1,17 @@
 {
   "title": "Đăng nhập bằng tài khoản Instagram",
   "form": {
-    "usernamePlaceholder": "Tên người dùng, số điện thoại hoặc email",
+    "identifierPlaceholder": "Tên người dùng, số điện thoại hoặc email",
     "passwordPlaceholder": "Mật khẩu",
     "Or": "hoặc",
-    "optional": "Tiếp tục bằng instagram",
+    "optional": "Đăng ký với tài khoản Instagram",
     "submitButton": "Đăng nhập",
-    "forgotPassword": "Quên mật khẩu?"
+    "forgotPassword": "Quên mật khẩu?",
+    "loading": "Đang đăng nhập..."
   },
-  "signup": {
-    "text": "Bạn chưa có tài khoản?",
-    "button": "Đăng ký"
+  "validation": {
+    "identifierRequired": "Vui lòng nhập tên người dùng hoặc email",
+    "passwordRequired": "Vui lòng nhập mật khẩu"
   },
   "footer": "© 2025 Threads Clone"
 }

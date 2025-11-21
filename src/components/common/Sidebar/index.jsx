@@ -1,64 +1,26 @@
 import { useState } from 'react';
-import {Home, Search, Heart, User, Menu, Plus, Languages, Moon, Sun} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Tooltip,
-    TooltipContent,
     TooltipProvider,
-    TooltipTrigger,
 } from "@/components/ui/tooltip"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faThreads} from "@fortawesome/free-brands-svg-icons";
-import {useTranslation} from "react-i18next";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuRadioItem,
-    DropdownMenuSeparator,
-    DropdownMenuRadioGroup,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu.jsx";
-import {Switch} from "@/components/ui/switch.jsx";
-import { useDispatch, useSelector } from 'react-redux';
-import ThemeSlice from '@/features/theme/themeSlice.js';
+import MenuItems from "@/components/common/Sidebar/components/MenuItems/index.jsx";
+import SettingsMenu from "@/components/common/Sidebar/components/SettingsMenu/index.jsx";
 
 const Sidebar = () => {
     const navigate = useNavigate();
-    const {t, i18n} = useTranslation('Sidebar');
     const [activeItem, setActiveItem] = useState('home');
-    const dispatch = useDispatch();
-    const isDarkMode = useSelector(state => state.theme.isDarkMode);
-
-    const handleToggleTheme = () => {
-        dispatch(ThemeSlice.actions.toggleTheme());
-    }
-
-    const menuItems = [
-        { id: 'home', icon: Home, label: t('menu.home'), path: '/' },
-        { id: 'search', icon: Search, label: t('menu.search'), path: '/search' },
-        { id: 'create', icon: Plus, label: t('menu.create'), path: '/create' },
-        { id: 'activity', icon: Heart, label: t('menu.activity'), path: '/activity' },
-        { id: 'profile', icon: User, label: t('menu.profile'), path: '/profile' },
-    ];
 
     const handleItemClick = (item) => {
         setActiveItem(item.id);
         navigate(item.path);
     };
 
-    const handleLanguageChange = (language) => {
-        i18n.changeLanguage(language);
-    };
-
     return (
         <TooltipProvider>
             <div className="fixed left-0 top-0 h-screen w-[72px] border-gray-200 bg-background flex flex-col items-center py-6 z-50">
-                {/* Logo */}
+                {/* Logo header */}
                 <a className="mb-8" onClick={() => navigate('/')}>
                     <FontAwesomeIcon
                         className="text-4xl transition-transform duration-200 hover:scale-110 cursor-pointer"
@@ -66,83 +28,11 @@ const Sidebar = () => {
                     />
                 </a>
 
-                {/* Menu Items */}
-                <nav className="flex-1 flex flex-col justify-center gap-2 w-full px-3">
-                    {menuItems.map((item) => {
-                        const Icon = item.icon;
-                        const isActive = activeItem === item.id;
-
-                        return (
-                            <Tooltip key={item.id}>          
-                                <TooltipTrigger asChild>
-                                    <a
-                                        onClick={() => handleItemClick(item)}
-                                        className={`
-                      w-12 h-12 flex items-center cursor-pointer justify-center rounded-lg transition-colors
-                      ${isActive
-                                            ? 'bg-background-active text-foreground'
-                                            : 'text-foreground hover:bg-background-active'
-                                        }
-                    `}
-                                    >
-                                        <Icon className="w-6 h-6"/>
-                                    </a>
-                                </TooltipTrigger>
-                                <TooltipContent side="right">
-                                    <p>{item.label}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        );
-                    })}
-                </nav>
+                {/* Menu Items body */}
+                <MenuItems activeItem={activeItem} handleItemClick={handleItemClick} />
 
                 {/* Settings at bottom */}
-                <DropdownMenu>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <DropdownMenuTrigger asChild>
-                                <button
-                                    className="w-12 h-12
-                                    flex items-center cursor-pointer justify-center rounded-lg transition-colors
-                                    text-foreground hover:bg-background-active"
-                                >
-                                    <Menu className="w-5 h-5" />
-                                </button>
-                            </DropdownMenuTrigger>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">
-                            <p>{t('menu.more')}</p>
-                        </TooltipContent>
-                    </Tooltip>
-
-                    <DropdownMenuContent side="right" align="end" className="w-55 bg-loginpanel-background rounded-xl">
-                        <DropdownMenuLabel className="font-semibold">{t('settings.title')}</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-
-                        <DropdownMenuSub>
-                            <DropdownMenuSubTrigger className="cursor-pointer">
-                                <Languages className="mr-2 h-4 w-4" />
-                                <span>{t('settings.language')}</span>
-                            </DropdownMenuSubTrigger>
-                            <DropdownMenuSubContent>
-                                <DropdownMenuRadioGroup className="bg-loginpanel-background rounded-lg" value={i18n.language} onValueChange={handleLanguageChange}>
-                                    <DropdownMenuRadioItem value="vi" className="cursor-pointer">
-                                        Vietnamese
-                                    </DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="en" className="cursor-pointer">
-                                        English
-                                    </DropdownMenuRadioItem>
-                                </DropdownMenuRadioGroup>
-                            </DropdownMenuSubContent>
-                        </DropdownMenuSub>
-
-                        <DropdownMenuItem className="cursor-pointer" onSelect={(e) => e.preventDefault()}>
-                            {isDarkMode ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4 rotate-180" />}
-                            <span className="flex-1">{t('settings.darkMode')}</span>
-                            <Switch checked={isDarkMode} onCheckedChange={handleToggleTheme} id="dark-mode-toggle" />
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <SettingsMenu />
             </div>
         </TooltipProvider>
     );

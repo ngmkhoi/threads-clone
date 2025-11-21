@@ -2,6 +2,7 @@ import { HashRouter } from 'react-router-dom';
 import AppRoute from "@/components/AppRoute/index.jsx";
 import SplashScreen from "@/components/common/SplashScreen/index.jsx";
 import {useEffect, useState} from "react";
+import {Toaster} from "@/components/ui/sonner.jsx";
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -11,12 +12,12 @@ function App() {
         // Sau 200ms → bắt đầu zoom-fade
         const fadeTimer = setTimeout(() => {
             setIsFading(true);
-        }, 200);
+        }, 400);
 
         // Sau 600ms → ẩn hoàn toàn (200ms + 400ms animation)
         const hideTimer = setTimeout(() => {
             setIsLoading(false);
-        }, 600);
+        }, 800);
 
         return () => {
             clearTimeout(fadeTimer);
@@ -29,6 +30,7 @@ function App() {
         {isLoading && <SplashScreen isFading={isFading} />}
         <HashRouter>
             <AppRoute />
+            <Toaster position="bottom-center" closeButton={false}/>
         </HashRouter>
     </>
   );

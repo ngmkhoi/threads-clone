@@ -9,9 +9,11 @@
     --color-background-active: oklch(96% 0 0);
     --color-postcard-background: oklch(98% 0 0);
     --color-loginpanel-background: oklch(95% 0 0);
+    --color-auth-background: oklch(98% 0 0);
     --color-dialog-background: oklch(95% 0 0);
     --color-input-background: oklch(95% 0 0);
     --color-button-background: oklch(3.9% 0 0);
+    --color-toast-background: oklch(98% 0 0);
 
     /* ============================================ */
     /* 2. NHÓM MÀU CHỮ (Foreground Colors)        */
@@ -20,6 +22,7 @@
     --color-loginpanel-foreground: oklch(60% 0 0);
     --color-input-foreground: oklch(70% 0 0);
     --color-button-foreground: oklch(45% 0 0);
+    --color-button-foreground-active: oklch(98% 0 0);
 
     /* ============================================ */
     /* 3. NHÓM CARD & POPOVER                      */
@@ -66,6 +69,7 @@
     --color-background-active: oklch(25% 0 0);
     --color-postcard-background: oklch(23% 0 0);
     --color-loginpanel-background: oklch(23% 0 0);
+    --color-auth-background: oklch(18% 0 0);
     --color-dialog-background: oklch(15% 0 0);
     --color-input-background: oklch(23% 0 0);
     --color-button-background: oklch(90% 0 0);
@@ -77,6 +81,7 @@
     --color-loginpanel-foreground: oklch(60% 0 0);
     --color-input-foreground: oklch(45% 0 0);
     --color-button-foreground: oklch(65% 0 0);
+    --color-button-foreground-active: oklch(3.9% 0 0);
 
     /* ============================================ */
     /* 3. NHÓM CARD & POPOVER                      */
@@ -145,6 +150,7 @@
 html {
     background-color: var(--color-background);
     overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
 }
 
 * {
@@ -154,7 +160,8 @@ html {
 body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    overscroll-behavior-y: none
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
 }
 
 [data-scroll-locked][data-scroll-locked] {
