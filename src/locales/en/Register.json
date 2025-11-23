@@ -1,0 +1,28 @@
+{
+    "title": "Register account",
+    "form": {
+        "usernamePlaceholder": "Username",
+        "emailPlaceholder": "Email",
+        "passwordPlaceholder": "Password",
+        "confirmPasswordPlaceholder": "Confirm Password",
+        "submitButton": "Register",
+        "loading": "Registering...",
+        "alreadyHaveAccount": "Already have an account?",
+        "login": "Login now with your Instagram account",
+        "Or": "or"
+    },
+    "validation": {
+        "usernameRequired": "Username is required.",
+        "emailRequired": "Email is required.",
+        "passwordRequired": "Password is required.",
+        "confirmPasswordRequired": "Confirm Password is required.",
+        "usernameMin": "Username must be at least 3 characters long.",
+        "passwordMin": "Password must be at least 8 characters long.",
+        "usernameDuplicate": "Username is already in use.",
+        "emailDuplicate": "Email is already in use.",
+        "usernameInvalid": "Username is invalid, username must only contain letters, numbers, dashes, and underscores.",
+        "emailInvalid": "Email is invalid.",
+        "confirmPasswordMatch": "Confirm Password must match Password.",
+        "registerFailed": "Register failed, please check your information."
+    }
+}

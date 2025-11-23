@@ -1,0 +1,28 @@
+{
+    "title": "Đăng ký tài khoản",
+    "form": {
+        "usernamePlaceholder": "Tên người dùng",
+        "emailPlaceholder": "Email",
+        "passwordPlaceholder": "Mật khẩu",
+        "confirmPasswordPlaceholder": "Xác nhận mật khẩu",
+        "submitButton": "Đăng ký",
+        "loading": "Đang đăng ký...",
+        "alreadyHaveAccount": "Đã có tài khoản?",
+        "login": "Đăng nhập ngay với tài khoản Instagram của bạn",
+        "Or": "hoặc"
+    },
+    "validation": {
+        "usernameRequired": "Tên người dùng là bắt buộc.",
+        "emailRequired": "Email là bắt buộc.",
+        "passwordRequired": "Mật khẩu là bắt buộc.",
+        "confirmPasswordRequired": "Xác nhận mật khẩu là bắt buộc.",
+        "usernameMin": "Tên người dùng phải có ít nhất 3 ký tự.",
+        "passwordMin": "Mật khẩu phải có ít nhất 8 ký tự.",
+        "usernameDuplicate": "Tên người dùng đã tồn tại.",
+        "emailDuplicate": "Email đã tồn tại.",
+        "usernameInvalid": "Tên người dùng không hợp lệ, tên người dùng chỉ được chứa chữ cái, số, dấu gạch ngang và dấu gạch dưới.",
+        "emailInvalid": "Email không hợp lệ.",
+        "confirmPasswordMatch": "Xác nhận mật khẩu phải khớp với mật khẩu.",
+        "registerFailed": "Đăng ký thất bại, vui lòng kiểm tra lại thông tin."
+    }
+}

@@ -11,7 +11,10 @@
   },
   "validation": {
     "identifierRequired": "Username or email is required.",
-    "passwordRequired": "Password is required."
+    "passwordRequired": "Password is required.",
+    "identifierMin": "Username or email must be at least 3 characters long.",
+    "passwordMin": "Password must be at least 8 characters long.",
+    "loginFailed": "Login failed, please check your account or password."
   },
   "footer": "© 2025 Threads Clone"
 }

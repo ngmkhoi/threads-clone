@@ -5,65 +5,69 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from "@/components/ui/input.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import { Spinner } from "@/components/ui/spinner.jsx";
-import instagramLogo from "@/assets/instagram.png";
 import { toast } from "sonner";
-import createLoginSchema from "@/utils/Validate/auth/loginSchema.js";
+import createRegisterSchema from "@/utils/Validate/auth/registerSchema.js";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import authService from "@/services/auth/authService.js";
-import { setUser } from "@/features/auth/authSlice.js";
 
-const Login = () => {
-    const { t } = useTranslation('Login');
-    const schema = useMemo(() => createLoginSchema(t), [t])
+import useDebounce from "@/hooks/useDebounce.js";
+import { useEffect } from "react";
+
+import instagramLogo from "@/assets/instagram.png";
+
+const Register = () => {
+    const { t } = useTranslation('Register');
+    const schema = useMemo(() => createRegisterSchema(t), [t])
     const {
         register,
         handleSubmit,
-        watch } = useForm({
-            resolver: yupResolver(schema),
-            defaultValues: {
-                identifier: '',
-                password: ''
-            }
-        })
+        watch,
+        formState: { errors }
+    } = useForm({
+        resolver: yupResolver(schema),
+        mode: 'onChange',
+        delayError: 500, // Debounce validation error display
+        defaultValues: {
+            username: '',
+            email: '',
+            password: '',
+            password_confirmation: ''
+        }
+    })
 
-    const { identifier, password } = watch();
-    const isFormValid = identifier && password;
+    const { username, email, password, password_confirmation } = watch();
+    const isFormValid = username && email && password && password_confirmation;
+
+    // Example of using useDebounce for future async validation (e.g. checking username availability)
+    const debouncedUsername = useDebounce(username, 500);
+
+    useEffect(() => {
+        if (debouncedUsername) {
+            // Here you can trigger async validation
+            // console.log('Checking availability for:', debouncedUsername);
+        }
+    }, [debouncedUsername]);
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
     const onSubmit = async (data) => {
         setLoading(true);
         try {
-            const response = await authService.login(data);
-            const { access_token, refresh_token } = response;
-
-            localStorage.setItem('accessToken', access_token);
-            localStorage.setItem('refreshToken', refresh_token);
-
-            const userResponse = await authService.getCurrentUser();
-            dispatch(setUser(userResponse))
-
-            navigate('/');
+            // Logic đăng ký sẽ được implement sau
+            console.log('Register data:', data);
+            toast.success('Register logic not implemented yet');
         } catch (error) {
-            const errorMessage = error.response?.status === 401
-                ? t('validation.loginFailed')
-                : (error.message || 'Login failed. Please try again.');
-            toast.error(errorMessage);
-
-            // Clear tokens nếu có lỗi
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
-
+            toast.error('Register failed');
         } finally {
             setLoading(false);
         }
     }
 
     const onError = (errors) => {
-        const firstError = errors.identifier?.message || errors.password?.message;
+        const firstError = errors.username?.message ||
+            errors.email?.message ||
+            errors.password?.message ||
+            errors.password_confirmation?.message;
 
         if (firstError) {
             toast.error(firstError);
@@ -74,16 +78,30 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col items-center w-auto">
             <Input
                 type={'text'}
-                placeholder={t('form.identifierPlaceholder')}
-                {...register('identifier')}
+                placeholder={t('form.usernamePlaceholder')}
+                {...register('username')}
                 className="mt-5 custom-input-style input-focus-subtle"
                 autoFocus
+            />
+
+            <Input
+                type={'email'}
+                placeholder={t('form.emailPlaceholder')}
+                {...register('email')}
+                className="mt-3 custom-input-style input-focus-subtle"
             />
 
             <Input
                 type={'password'}
                 placeholder={t('form.passwordPlaceholder')}
                 {...register('password')}
+                className="mt-3 custom-input-style input-focus-subtle"
+            />
+
+            <Input
+                type={'password'}
+                placeholder={t('form.confirmPasswordPlaceholder')}
+                {...register('password_confirmation')}
                 className="mt-3 custom-input-style input-focus-subtle"
             />
 
@@ -106,29 +124,25 @@ const Login = () => {
                 )}
             </Button>
 
-            <a className="mt-5 text-muted-foreground text-sm cursor-pointer">
-                {t('form.forgotPassword')}
-            </a>
-
             <p className="mt-5 mb-5 text-muted-foreground text-sm" >
-                {t('form.Or')}
+                {t('form.Or') || "or"}
             </p>
 
             <Button
                 size="xl"
                 className="w-md bg-background-dialog hover:bg-background-dialog cursor-pointer !border-border-btn-dialog border-1 rounded-3xl"
                 type="button"
-                onClick={() => navigate('/auth/register')}
+                onClick={() => navigate('/auth/login')}
             >
                 <img
                     src={instagramLogo}
                     alt="Instagram"
                     className="!w-13 !h-13 mr-3"
                 />
-                <p className="font-bold text-lg text-foreground">{t(`form.optional`)}</p>
+                <p className="font-bold text-lg text-foreground">{t('form.login')}</p>
             </Button>
         </form>
     );
 };
 
-export default Login;
+export default Register;

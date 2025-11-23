@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Login from "@/pages/Auth/Login";
 import DefaultLayout from "@/layouts/DefaultLayout";
@@ -8,7 +8,7 @@ import Profile from "@/pages/Profile";
 import Search from "@/pages/Search";
 import Activity from "@/pages/Activity";
 import AuthLayout from "@/layouts/AuthLayout/";
-
+import Register from "@/pages/Auth/Register";
 export default function AppRoute() {
     return (
         <Routes>
@@ -23,6 +23,7 @@ export default function AppRoute() {
 
             <Route path="/auth" element={<AuthLayout />}>
                 <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
             </Route>
 
             {/*NotFound*/}

@@ -3,7 +3,7 @@ import axios from "axios";
 // Create axios instance
 const httpClient = axios.create({
     baseURL: import.meta.env.VITE_BASE_API,
-    headers:{
+    headers: {
         'Content-Type': 'application/json'
     }
 })
@@ -12,7 +12,7 @@ const httpClient = axios.create({
 httpClient.interceptors.request.use(
     (config) => {
         const accessToken = localStorage.getItem('accessToken');
-        if(accessToken) {
+        if (accessToken) {
             config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         return config;
@@ -45,7 +45,7 @@ httpClient.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
 
-        if(error.response?.status === 401 && !originalRequest._retry) {
+        if (error.response?.status === 401 && !originalRequest._retry && !originalRequest.url.includes('/auth/login')) {
             if (isRefreshing) {
                 // Chờ request refresh đang chạy hoàn tất
                 return new Promise((resolve, reject) => {
@@ -62,7 +62,7 @@ httpClient.interceptors.response.use(
             try {
                 const refreshToken = localStorage.getItem('refreshToken');
 
-                if(!refreshToken) {
+                if (!refreshToken) {
                     throw new Error('No refresh token');
                 }
 
@@ -86,10 +86,10 @@ httpClient.interceptors.response.use(
                 originalRequest.headers['Authorization'] = `Bearer ${access_token}`;
 
                 return httpClient(originalRequest);
-            } catch (refreshError){
+            } catch (refreshError) {
                 processQueue(refreshError, null);
                 localStorage.clear();
-                window.location.href = '/auth/login';
+                window.location.href = '#/auth/login';
                 return Promise.reject(refreshError);
             } finally {
                 isRefreshing = false;

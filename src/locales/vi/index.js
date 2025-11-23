@@ -5,6 +5,7 @@ import FeedHeader from './FeedHeader.json'
 import PostCard from './PostCard.json'
 import NotFound from './NotFound.json'
 import Login from './Login.json'
+import Register from './Register.json'
 import DialogMessage from './DialogMessage.json'
 
 export default {
@@ -15,5 +16,6 @@ export default {
     PostCard,
     NotFound,
     Login,
+    Register,
     DialogMessage
 }
