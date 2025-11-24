@@ -1,4 +1,4 @@
-import { http } from "@/utils/http.js";
+import {http} from "@/utils/http.js";
 
 const authService = {
     login: async (credentials) => {
@@ -8,6 +8,12 @@ const authService = {
         }
         const response = await http.post('/auth/login', payload)
         return response.data
+    },
+    register: async (credentials) => {
+        return await http.post('/auth/register', credentials)
+    },
+    verifyEmail: async (token) => {
+        return await http.post(`/auth/verify-email`, {token})
     },
     getCurrentUser: async () => {
         const response = await http.get('/auth/user')
@@ -20,11 +26,3 @@ const authService = {
 };
 export default authService;
 
-// register: async (credentials) => {
-//     const response = await http.post('/auth/register', credentials)
-//     return response.data
-// },
-//     validateEmail: async (email) => {
-//     const response = await http.post(`auth/validate/email`, {email} )
-//     return response.data
-// }

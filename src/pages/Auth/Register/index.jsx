@@ -8,11 +8,8 @@ import { Spinner } from "@/components/ui/spinner.jsx";
 import { toast } from "sonner";
 import createRegisterSchema from "@/utils/Validate/auth/registerSchema.js";
 import { useNavigate } from "react-router-dom";
-
-import useDebounce from "@/hooks/useDebounce.js";
-import { useEffect } from "react";
-
 import instagramLogo from "@/assets/instagram.png";
+import authService from "@/services/auth/authService.js";
 
 const Register = () => {
     const { t } = useTranslation('Register');
@@ -21,7 +18,6 @@ const Register = () => {
         register,
         handleSubmit,
         watch,
-        formState: { errors }
     } = useForm({
         resolver: yupResolver(schema),
         mode: 'onChange',
@@ -37,27 +33,24 @@ const Register = () => {
     const { username, email, password, password_confirmation } = watch();
     const isFormValid = username && email && password && password_confirmation;
 
-    // Example of using useDebounce for future async validation (e.g. checking username availability)
-    const debouncedUsername = useDebounce(username, 500);
-
-    useEffect(() => {
-        if (debouncedUsername) {
-            // Here you can trigger async validation
-            // console.log('Checking availability for:', debouncedUsername);
-        }
-    }, [debouncedUsername]);
-
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
     const onSubmit = async (data) => {
         setLoading(true);
         try {
-            // Logic đăng ký sẽ được implement sau
-            console.log('Register data:', data);
-            toast.success('Register logic not implemented yet');
+            const response = await authService.register(data);
+            const { access_token, refresh_token } = response.data;
+
+            localStorage.setItem('accessToken', access_token);
+            localStorage.setItem('refreshToken', refresh_token);
+
+            toast(t('validation.registerSuccess'))
         } catch (error) {
-            toast.error('Register failed');
+            const errorMessage = error.response?.status === 422
+                ? t('validation.duplicateData')
+                : (error.message || t('validation.registerFailed'));
+            toast.error(errorMessage);
         } finally {
             setLoading(false);
         }

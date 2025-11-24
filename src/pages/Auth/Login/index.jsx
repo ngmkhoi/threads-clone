@@ -38,6 +38,7 @@ const Login = () => {
         setLoading(true);
         try {
             const response = await authService.login(data);
+            console.log(response);
             const { access_token, refresh_token } = response;
 
             localStorage.setItem('accessToken', access_token);
@@ -50,13 +51,11 @@ const Login = () => {
         } catch (error) {
             const errorMessage = error.response?.status === 401
                 ? t('validation.loginFailed')
-                : (error.message || 'Login failed. Please try again.');
+                : (error.message || t('validation.apiError'));
             toast.error(errorMessage);
 
-            // Clear tokens nếu có lỗi
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
-
         } finally {
             setLoading(false);
         }

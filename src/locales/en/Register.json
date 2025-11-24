@@ -8,7 +8,7 @@
         "submitButton": "Register",
         "loading": "Registering...",
         "alreadyHaveAccount": "Already have an account?",
-        "login": "Login now with your Instagram account",
+        "login": "Login now with Instagram account",
         "Or": "or"
     },
     "validation": {
@@ -23,6 +23,8 @@
         "usernameInvalid": "Username is invalid, username must only contain letters, numbers, dashes, and underscores.",
         "emailInvalid": "Email is invalid.",
         "confirmPasswordMatch": "Confirm Password must match Password.",
-        "registerFailed": "Register failed, please check your information."
+        "duplicateData": "Email or Username has already been taken, please try again.",
+        "registerFailed": "Register failed, please try again.",
+        "registerSuccess": "Register success, please check your email to verify your account!"
     }
 }

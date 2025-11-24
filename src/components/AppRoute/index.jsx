@@ -9,6 +9,7 @@ import Search from "@/pages/Search";
 import Activity from "@/pages/Activity";
 import AuthLayout from "@/layouts/AuthLayout/";
 import Register from "@/pages/Auth/Register";
+import VerifyEmail from "@/pages/Auth/VerifyEmail/index.jsx";
 export default function AppRoute() {
     return (
         <Routes>
@@ -24,7 +25,17 @@ export default function AppRoute() {
             <Route path="/auth" element={<AuthLayout />}>
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
+                <Route path="verify-email" element={<VerifyEmail />} />
             </Route>
+
+            {/*<Route*/}
+            {/*    path="/verify-email"*/}
+            {/*    element={*/}
+            {/*        <AuthLayout>*/}
+            {/*            <VerifyEmail />*/}
+            {/*        </AuthLayout>*/}
+            {/*    }*/}
+            {/*/>*/}
 
             {/*NotFound*/}
             <Route path="*" element={<NotFound />} />

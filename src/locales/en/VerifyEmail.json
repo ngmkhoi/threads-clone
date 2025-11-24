@@ -1,0 +1,17 @@
+{
+  "title": "Verify Email",
+  "verifying": "Verifying email...",
+  "success": {
+    "title": "Verification Successful!",
+    "message": "Your email has been verified. Welcome to Threads!",
+    "redirecting": "Redirecting to home..."
+  },
+  "error": {
+    "title": "Verification Failed",
+    "invalidToken": "Invalid or expired token.",
+    "verifyFailed": "Unable to verify email. Please try again.",
+    "sessionExpired": "Session expired. Please login again.",
+    "pleaseLoginAgain": "Please login again.",
+    "backToLogin": "Back to Login"
+  }
+}

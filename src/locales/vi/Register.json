@@ -8,7 +8,7 @@
         "submitButton": "Đăng ký",
         "loading": "Đang đăng ký...",
         "alreadyHaveAccount": "Đã có tài khoản?",
-        "login": "Đăng nhập ngay với tài khoản Instagram của bạn",
+        "login": "Đăng nhập ngay với tài khoản Instagram",
         "Or": "hoặc"
     },
     "validation": {
@@ -23,6 +23,8 @@
         "usernameInvalid": "Tên người dùng không hợp lệ, tên người dùng chỉ được chứa chữ cái, số, dấu gạch ngang và dấu gạch dưới.",
         "emailInvalid": "Email không hợp lệ.",
         "confirmPasswordMatch": "Xác nhận mật khẩu phải khớp với mật khẩu.",
-        "registerFailed": "Đăng ký thất bại, vui lòng kiểm tra lại thông tin."
+        "duplicateData": "Email hoặc tên người đùng đã được sử dụng, vui lòng thử lại.",
+        "registerFailed": "Đăng ký thất bại, vui lòng thử lại sau.",
+        "registerSuccess": "Đăng ký thành công, vui lòng kiểm tra email để xác thực tài khoản!"
     }
 }

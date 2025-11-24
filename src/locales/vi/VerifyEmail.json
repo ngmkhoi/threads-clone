@@ -1,0 +1,17 @@
+{
+  "title": "Xác thực email",
+  "verifying": "Đang xác thực email...",
+  "success": {
+    "title": "Xác thực thành công!",
+    "message": "Email của bạn đã được xác thực. Chào mừng bạn đến với Threads!",
+    "redirecting": "Đang chuyển về trang chủ..."
+  },
+  "error": {
+    "title": "Xác thực thất bại",
+    "invalidToken": "Token không hợp lệ hoặc đã hết hạn.",
+    "verifyFailed": "Không thể xác thực email. Vui lòng thử lại.",
+    "sessionExpired": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+    "pleaseLoginAgain": "Vui lòng đăng nhập lại.",
+    "backToLogin": "Quay về đăng nhập"
+  }
+}

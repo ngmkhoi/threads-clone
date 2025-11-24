@@ -7,6 +7,7 @@ import NotFound from './NotFound.json'
 import Login from './Login.json'
 import Register from './Register.json'
 import DialogMessage from './DialogMessage.json'
+import VerifyEmail from './VerifyEmail.json'
 
 export default {
     LoginPanel,
@@ -17,5 +18,6 @@ export default {
     NotFound,
     Login,
     Register,
+    VerifyEmail,
     DialogMessage
 }
