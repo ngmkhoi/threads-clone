@@ -15,9 +15,8 @@ const VerifyEmail = () => {
     const [ searchParams ] = useSearchParams();
     const token = searchParams.get('token');
 
-    console.log(token)
-
-    const [ setLoading ] = useState(true);
+    const [ loading, setLoading ] = useState(true);
+    const [isResending, setIsResending] = useState(false);
     const [ status, setStatus ] = useState('verifying');
     const [ message, setMessage ] = useState('');
 
@@ -26,73 +25,139 @@ const VerifyEmail = () => {
             setStatus('error');
             setMessage(t('error.invalidToken'));
             setLoading(false);
-            toast.error(message);
             return;
         }
 
         const handleVerifyEmail = async () => {
             try {
+                // verifyEmail succeeds if token is valid; no auth required
                 const response = await authService.verifyEmail(token);
-                const { user } = response.data;
+                const { user } = response || {};
 
-                const accessToken = localStorage.getItem('accessToken');
-                const refreshToken = localStorage.getItem('refreshToken');
-
-                if(!accessToken && !refreshToken) {
-                    toast(t('error.pleaseLoginAgain'));
-                    navigate('/auth/login');
-                    return;
+                if (user) {
+                    dispatch(setUser(user));
                 }
 
-                dispatch(setUser(user));
-
-                setStatus('success')
-                setMessage(t('success.message'))
-                toast(t('success.title'));
-                navigate('/');
+                setStatus('success');
+                setMessage(t('success.message'));
+                toast.success(t('success.title'));
+                setTimeout(() => {
+                    window.close();
+                }, 5000);
             } catch (error) {
-                const errorMessage = error.response?.data?.message;
-
-                if (error.response?.status === 401) {
-                    localStorage.removeItem('accessToken');
-                    localStorage.removeItem('refreshToken');
-                    setMessage(t('error.sessionExpired'));
-                    toast(t('error.sessionExpired'));
-                    navigate('/auth/login');
-                    return;
+                // Invalid/expired token → offer resend (auth required)
+                const statusCode = error.response?.status;
+                if (statusCode === 400 || statusCode === 404 || statusCode === 422) {
+                    const hasAuth = localStorage.getItem('refreshToken');
+                    if (hasAuth) {
+                        setStatus('not-verified');
+                        setMessage(t('notVerified.message'));
+                        toast.message?.(t('notVerified.message')) || toast(t('notVerified.message'));
+                    } else {
+                        setStatus('not-verified-no-auth');
+                        setMessage(t('notVerified.needLoginMessage'));
+                        toast.message?.(t('notVerified.needLoginMessage')) || toast(t('notVerified.needLoginMessage'));
+                    }
+                } else {
+                    setStatus('error');
+                    setMessage(t('error.verifyFailed'));
+                    toast.error(error.response?.data?.message || t('error.verifyFailed'));
                 }
-
-                setStatus('error');
-                setMessage(t('error.verifyFailed'));
-                toast(errorMessage || t('error.verifyFailed'));
+            } finally {
+                setLoading(false);
             }
+        };
+
+        handleVerifyEmail();
+    }, [dispatch, navigate, t, token]);
+
+    const handleResendEmail = async () => {
+        const hasAuth = localStorage.getItem('refreshToken');
+        if (!hasAuth) {
+            toast.error(t('notVerified.needLogin'));
+            navigate('/auth/login');
+            return;
         }
 
-        handleVerifyEmail()
-    }, [dispatch, message, navigate, t, token]);
+        setIsResending(true);
+        try {
+            await authService.resendVerificationEmail();
+            toast.success(t('notVerified.emailSent'));
+            setMessage(t('notVerified.checkInbox'));
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || t('notVerified.resendFailed');
+            toast.error(errorMessage);
+        } finally {
+            setIsResending(false);
+        }
+    };
 
     return (
         <>
-            {status === 'verifying' && (
-            <div className="flex flex-col items-center">
-                <Spinner className="w-12 h-12" />
-                <p className="mt-4 text-lg text-foreground">
-                    {t('verifying')}
-                </p>
-            </div>
+            {(status === 'verifying' || loading) && (
+                <div className="flex flex-col items-center">
+                    <Spinner className="w-12 h-12" />
+                    <p className="mt-4 text-lg text-foreground">
+                        {t('verifying')}
+                    </p>
+                </div>
+            )}
+
+            {status === 'not-verified' && (
+                <div className="flex flex-col items-center">
+                    <div className="text-6xl mb-4">📧</div>
+                    <h1 className="text-2xl font-bold text-foreground mb-2">
+                        {t('notVerified.title')}
+                    </h1>
+                    <p className="text-muted-foreground mb-6 text-center">
+                        {message}
+                    </p>
+                    <Button
+                        onClick={handleResendEmail}
+                        disabled={isResending}
+                        className="custom-button-style"
+                    >
+                        {isResending ? (
+                            <>
+                                <Spinner className="mr-2" />
+                                {t('notVerified.sending')}
+                            </>
+                        ) : (
+                            t('notVerified.resendButton')
+                        )}
+                    </Button>
+                </div>
+            )}
+
+            {status === 'not-verified-no-auth' && (
+                <div className="flex flex-col items-center">
+                    <div className="text-6xl mb-4">🔒</div>
+                    <h1 className="text-2xl font-bold text-foreground mb-2">
+                        {t('notVerified.title')}
+                    </h1>
+                    <p className="text-muted-foreground mb-6 text-center">
+                        {message}
+                    </p>
+                    <Button
+                        onClick={() => navigate('/auth/login')}
+                        className="custom-button-style"
+                    >
+                        {t('notVerified.loginButton')}
+                    </Button>
+                </div>
             )}
 
             {status === 'success' && (
                 <div className="flex flex-col items-center">
                     <div className="text-6xl mb-4">✓</div>
                     <h1 className="text-2xl font-bold text-foreground mb-2">
-                        {t('success.title')}  {/* ← i18n */}
+                        {t('success.title')}
                     </h1>
                     <p className="text-muted-foreground mb-4">
-                        {message}  {/* ← Từ state, đã set bằng i18n */}
+                        {message}
                     </p>
                     <p className="text-sm text-muted-foreground">
-                        {t('success.redirecting')}  {/* ← i18n */}
+                        {t('success.pleaseLogin')}
                     </p>
                 </div>
             )}
@@ -101,16 +166,24 @@ const VerifyEmail = () => {
                 <div className="flex flex-col items-center">
                     <div className="text-6xl mb-4 text-red-500">✕</div>
                     <h1 className="text-2xl font-bold text-foreground mb-2">
-                        {t('error.title')}  {/* ← i18n */}
+                        {t('error.title')}  
                     </h1>
                     <p className="text-muted-foreground mb-6">
-                        {message}  {/* ← Từ state, đã set bằng i18n */}
+                        {message}   
                     </p>
                     <Button
-                        onClick={() => navigate('/auth/login')}
+                        onClick={handleResendEmail}
+                        disabled={isResending}
                         className="custom-button-style"
                     >
-                        {t('error.backToLogin')}  {/* ← i18n */}
+                        {isResending ? (
+                            <>
+                                <Spinner className="mr-2" />
+                                {t('notVerified.sending')}
+                            </>
+                        ) : (
+                            t('notVerified.resendButton')
+                        )}
                     </Button>
                 </div>
             )}

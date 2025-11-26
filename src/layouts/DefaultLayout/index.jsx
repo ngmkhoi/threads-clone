@@ -26,15 +26,15 @@ const DefaultLayout = () => {
             <Sidebar />
 
             {/* Main Container */}
-            <div className="flex justify-center ml-[30px] z-10">
+            <div className="flex justify-center ml-[30px]">
                 {/* Content Area - Fixed Width */}
-                <div className="w-full max-w-[640px] pt-[auto] md:pt-[65px] bg-background">
+                <div className="w-full max-w-[640px] pt-[65px] md:pt-[74px] min-h-screen">
                     <Outlet />
                 </div>
 
                 {/*Login Panel - Fixed Right */}
                 {!isAuthenticated && (
-                    <div className=" fixed left-[calc(50%+320px+15px)] hidden xl:block w-[350px] z-30 h-[calc(100vh-73px)] pt-[63px] overflow-y-auto">
+                    <div className="fixed left-[calc(50%+320px+15px)] hidden xl:block w-[350px] z-30 h-[calc(100vh-73px)] pt-[63px] overflow-y-auto">
                         <div className="p-3">
                             <LoginPanel />
                         </div>

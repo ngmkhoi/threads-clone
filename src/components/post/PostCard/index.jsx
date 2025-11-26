@@ -7,7 +7,7 @@ import AvatarComponent from "@/components/post/PostCard/components/Avatar/index.
 const PostCard = ({ post }) => {
 
   return (
-    <Card className="bg-postcard-background py-6 transition-colors shadow-none rounded-none cursor-pointer">
+    <Card className="bg-postcard-background py-2 transition-colors shadow-none rounded-none cursor-pointer border-0 border-b border-border">
       <CardContent className="p-2">
         <div className="flex gap-3">
           {/* Avatar */}

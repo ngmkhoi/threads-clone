@@ -12,8 +12,6 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { themeSlice } from '@/features/theme/themeSlice.js';
 import authSlice from "@/features/auth/authSlice.js";
 
-console.log(themeSlice.name)
-
 const persistConfig = {
     key: 'root',
     storage,
@@ -21,8 +19,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-    [themeSlice.reducerPath]: themeSlice.reducer,
-    [authSlice.reducerPath]: authSlice.reducer,
+    [themeSlice.name]: themeSlice.reducer,
+    [authSlice.name]: authSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

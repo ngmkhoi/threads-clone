@@ -1,23 +1,50 @@
 import {createSlice} from "@reduxjs/toolkit";
+import authService from "@/services/auth/authService.js";
 
 const initialState = {
     currentUser: null,
-    isAuthenticated: false
+    fetching: false
 }
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setUser: (state, action) => {
-            state.currentUser = action.payload
-            state.isAuthenticated = true
+        logout: (state) => {
+            state.currentUser = null;
+            state.fetching = false;
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
         },
-        clearUser: (state) => {
-            state.currentUser = null
-            state.isAuthenticated = false
+        setUser: (state, action) => {
+            state.currentUser = action.payload;
         }
+    },
+    extraReducers: (builder) => {
+        // get current user
+        builder.addCase(authService.getCurrentUser.pending, (state) => {
+            state.fetching = true;
+        })
+        builder.addCase(authService.getCurrentUser.fulfilled, (state, action) => {
+            state.currentUser = action.payload;
+            state.fetching = false;
+        })
+        builder.addCase(authService.getCurrentUser.rejected, (state) => {
+            state.currentUser = null;
+            state.fetching = false;
+        })
+
+        //login
+        builder.addCase(authService.login.pending, (state) => {
+            state.fetching = true;
+        })
+        builder.addCase(authService.login.fulfilled, (state) => {
+            state.fetching = false;
+        })
+        builder.addCase(authService.login.rejected, (state) => {
+            state.fetching = false;
+        })
     }
 })
-export const {setUser, clearUser} = authSlice.actions
+export const { logout, setUser } = authSlice.actions
 export default authSlice

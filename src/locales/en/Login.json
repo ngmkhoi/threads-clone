@@ -15,6 +15,7 @@
     "identifierMin": "Username or email must be at least 3 characters long.",
     "passwordMin": "Password must be at least 8 characters long.",
     "loginFailed": "Login failed, please check your account or password.",
+    "emailNotVerified": "Email is not verified. Please check your email to verify your account.",
     "apiError": "Something went wrong. Please try again later."
   },
   "footer": "© 2025 Threads Clone"

@@ -4,7 +4,8 @@
   "success": {
     "title": "Verification Successful!",
     "message": "Your email has been verified. Welcome to Threads!",
-    "redirecting": "Redirecting to home..."
+    "redirecting": "Redirecting to home...",
+    "pleaseLogin": "Login now and explore Threads."
   },
   "error": {
     "title": "Verification Failed",
@@ -13,5 +14,17 @@
     "sessionExpired": "Session expired. Please login again.",
     "pleaseLoginAgain": "Please login again.",
     "backToLogin": "Back to Login"
+  },
+  "notVerified": {
+    "title": "Not Verified",
+    "message": "Your email has not been verified. Please check your inbox or request a resend.",
+    "needLoginMessage": "Please login to resend the verification email.",
+    "resendButton": "Resend Email",
+    "loginButton": "Login",
+    "sending": "Sending...",
+    "emailSent": "Verification email has been sent!",
+    "checkInbox": "Please check your inbox.",
+    "needLogin": "You need to login to perform this action",
+    "resendFailed": "Unable to send email. Please try again later."
   }
 }

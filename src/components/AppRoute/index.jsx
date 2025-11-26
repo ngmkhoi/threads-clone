@@ -10,6 +10,7 @@ import Activity from "@/pages/Activity";
 import AuthLayout from "@/layouts/AuthLayout/";
 import Register from "@/pages/Auth/Register";
 import VerifyEmail from "@/pages/Auth/VerifyEmail/index.jsx";
+import ForgotPassword from "@/pages/Auth/ForgotPassword";
 export default function AppRoute() {
     return (
         <Routes>
@@ -26,16 +27,8 @@ export default function AppRoute() {
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="verify-email" element={<VerifyEmail />} />
+                <Route path="forgot-password" element={<ForgotPassword />} />
             </Route>
-
-            {/*<Route*/}
-            {/*    path="/verify-email"*/}
-            {/*    element={*/}
-            {/*        <AuthLayout>*/}
-            {/*            <VerifyEmail />*/}
-            {/*        </AuthLayout>*/}
-            {/*    }*/}
-            {/*/>*/}
 
             {/*NotFound*/}
             <Route path="*" element={<NotFound />} />

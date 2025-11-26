@@ -81,7 +81,7 @@ export default function InteractionBar({likes, comments, repost ,shares}) {
                 <DialogFooter className="flex flex-col gap-3">
                     <Button
                         size="xl"
-                        onClick={() => navigate('/login')}
+                        onClick={() => navigate('/auth/login')}
                         className="w-full bg-background-dialog hover:bg-background-dialog cursor-pointer border-1 !border-border-btn-dialog text-loginpanel-foreground rounded-3xl"
                     >
                         <img

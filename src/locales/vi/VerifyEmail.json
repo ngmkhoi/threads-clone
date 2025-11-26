@@ -4,7 +4,8 @@
   "success": {
     "title": "Xác thực thành công!",
     "message": "Email của bạn đã được xác thực. Chào mừng bạn đến với Threads!",
-    "redirecting": "Đang chuyển về trang chủ..."
+    "redirecting": "Đang chuyển về trang chủ...",
+    "pleaseLogin": "Đăng nhập ngay và khám phá Threads."
   },
   "error": {
     "title": "Xác thực thất bại",
@@ -13,5 +14,17 @@
     "sessionExpired": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
     "pleaseLoginAgain": "Vui lòng đăng nhập lại.",
     "backToLogin": "Quay về đăng nhập"
+  },
+  "notVerified": {
+    "title": "Chưa xác thực",
+    "message": "Email của bạn chưa được xác thực. Vui lòng kiểm tra hộp thư hoặc yêu cầu gửi lại.",
+    "needLoginMessage": "Vui lòng đăng nhập để gửi lại email xác thực.",
+    "resendButton": "Gửi lại email",
+    "loginButton": "Đăng nhập",
+    "sending": "Đang gửi...",
+    "emailSent": "Email xác thực đã được gửi!",
+    "checkInbox": "Vui lòng kiểm tra hộp thư của bạn.",
+    "needLogin": "Bạn cần đăng nhập để thực hiện thao tác này",
+    "resendFailed": "Không thể gửi email. Vui lòng thử lại sau."
   }
 }

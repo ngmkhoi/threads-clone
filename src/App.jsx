@@ -3,6 +3,7 @@ import AppRoute from "@/components/AppRoute/index.jsx";
 import SplashScreen from "@/components/common/SplashScreen/index.jsx";
 import {useEffect, useState} from "react";
 import {Toaster} from "@/components/ui/sonner.jsx";
+import AuthProvider from "@/components/AuthProvider/index.js";
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -29,8 +30,10 @@ function App() {
     <>
         {isLoading && <SplashScreen isFading={isFading} />}
         <HashRouter>
-            <AppRoute />
-            <Toaster position="bottom-center" closeButton={false}/>
+            <AuthProvider>
+                <AppRoute />
+                <Toaster position="bottom-center" closeButton={false}/>
+            </AuthProvider>
         </HashRouter>
     </>
   );

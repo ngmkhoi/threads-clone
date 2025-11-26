@@ -10,6 +10,11 @@ import createRegisterSchema from "@/utils/Validate/auth/registerSchema.js";
 import { useNavigate } from "react-router-dom";
 import instagramLogo from "@/assets/instagram.png";
 import authService from "@/services/auth/authService.js";
+import useAsyncValidation from '@/hooks/useAsyncValidation.js';
+
+const validateUsernameFormat = (val) => val.length >= 3 && /^[a-zA-Z0-9_-]+$/.test(val);
+
+const validateEmailFormat = (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
 
 const Register = () => {
     const { t } = useTranslation('Register');
@@ -31,10 +36,24 @@ const Register = () => {
     })
 
     const { username, email, password, password_confirmation } = watch();
-    const isFormValid = username && email && password && password_confirmation;
-
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+
+    const usernameError = useAsyncValidation({
+        value: username,
+        validateFn: authService.validateUsername,
+        errorMessage: t('validation.usernameDuplicate'),
+        options: { formatValidator: validateUsernameFormat }
+    });
+
+    const emailError = useAsyncValidation({
+        value: email,
+        validateFn: authService.validateEmail,
+        errorMessage: t('validation.emailDuplicate'),
+        options: { formatValidator: validateEmailFormat }
+    });
+
+    const isFormValid = username && email && password && password_confirmation && !usernameError && !emailError;
 
     const onSubmit = async (data) => {
         setLoading(true);
@@ -69,20 +88,34 @@ const Register = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col items-center w-auto">
-            <Input
+            <div className="w-full">
+                <Input
                 type={'text'}
                 placeholder={t('form.usernamePlaceholder')}
                 {...register('username')}
                 className="mt-5 custom-input-style input-focus-subtle"
                 autoFocus
             />
+            {usernameError && (
+                <p className="text-destructive text-sm mt-1 h-5">
+                    {usernameError}
+                </p>
+            )}
+            </div>
 
-            <Input
+            <div className='w-full'>
+                <Input
                 type={'email'}
                 placeholder={t('form.emailPlaceholder')}
                 {...register('email')}
                 className="mt-3 custom-input-style input-focus-subtle"
             />
+            {emailError && (
+                <p className="text-destructive text-sm mt-1 h-5">
+                    {emailError}
+                </p>
+            )}
+            </div>
 
             <Input
                 type={'password'}

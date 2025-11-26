@@ -4,7 +4,8 @@ import axios from "axios";
 const httpClient = axios.create({
     baseURL: import.meta.env.VITE_BASE_API,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Origin': window.location.origin + '/threads-clone/#/auth'
     }
 })
 
