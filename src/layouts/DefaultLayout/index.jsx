@@ -1,8 +1,8 @@
-import Sidebar from '../../components/common/Sidebar';
-import LoginPanel from '../../components/common/LoginPanel';
+import Sidebar from '@/components/Common/Sidebar';
+import LoginPanel from '@/components/Common/LoginPanel';
 import { Outlet } from "react-router-dom";
-import FeedHeader from "@/components/common/Header/index.jsx";
-import WrapperHeader from "@/components/common/Header/components/index.jsx";
+import FeedHeader from "@/components/Common/Header/index.jsx";
+import WrapperHeader from "@/components/Common/Header/components/index.jsx";
 import { useSelector } from 'react-redux';
 import { selectIsAuthenticated } from '@/features/auth/authSelector.js';
 
@@ -11,8 +11,8 @@ const DefaultLayout = () => {
 
     return (
         <div className="min-h-screen">
-            {/* Header - Fixed Top */}
-            <div className="fixed top-0 z-20 w-full bg-background">
+            {/* Header */}
+            <div className="sticky top-0 z-20 w-full bg-background">
                 <div className="flex justify-center ml-[30px]">
                     <div className="w-full max-w-[640px] h-[60px] md:h-[74px] z-20 flex items-center justify-center">
                         <WrapperHeader>
@@ -22,19 +22,18 @@ const DefaultLayout = () => {
                 </div>
             </div>
 
-            {/* Sidebar - Fixed Left */}
+            {/* Sidebar */}
             <Sidebar />
 
             {/* Main Container */}
-            <div className="flex justify-center ml-[30px]">
-                {/* Content Area - Fixed Width */}
-                <div className="w-full max-w-[640px] pt-[65px] md:pt-[74px] min-h-screen">
-                    <Outlet />
+            <div className=" flex justify-center ml-[30px]">
+                <div className="w-full max-w-[640px]  min-h-screen">
+                    <Outlet  />
                 </div>
 
-                {/*Login Panel - Fixed Right */}
+                {/* Login Panel */}
                 {!isAuthenticated && (
-                    <div className="fixed left-[calc(50%+320px+15px)] hidden xl:block w-[350px] z-30 h-[calc(100vh-73px)] pt-[63px] overflow-y-auto">
+                    <div className="fixed left-[calc(50%+320px+15px)] hidden xl:block w-[350px] z-30 top-[62px] h-[calc(100vh-62px)] overflow-y-auto">
                         <div className="p-3">
                             <LoginPanel />
                         </div>

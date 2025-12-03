@@ -16,6 +16,8 @@ const AuthLayout = () => {
         pageTitle = t('ForgotPassword:title')
     } else if (location.pathname === '/auth/verify-email') {
         pageTitle = t('VerifyEmail:title')
+    } else if (location.pathname === '/auth/reset-password') {
+        pageTitle = t('ResetPassword:title')
     }
 
     return (

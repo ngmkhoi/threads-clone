@@ -11,6 +11,7 @@ import AuthLayout from "@/layouts/AuthLayout/";
 import Register from "@/pages/Auth/Register";
 import VerifyEmail from "@/pages/Auth/VerifyEmail/index.jsx";
 import ForgotPassword from "@/pages/Auth/ForgotPassword";
+import ResetPassword from "@/pages/Auth/ResetPassword";
 export default function AppRoute() {
     return (
         <Routes>
@@ -28,6 +29,7 @@ export default function AppRoute() {
                 <Route path="register" element={<Register />} />
                 <Route path="verify-email" element={<VerifyEmail />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
+                <Route path="reset-password" element={<ResetPassword />} />
             </Route>
 
             {/*NotFound*/}

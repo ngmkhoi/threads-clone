@@ -1,127 +1,59 @@
-import { useState } from 'react';
-import PostCard from '../../components/post/PostCard';
-import nguoidepnoigian from "@/assets/nguoidepnoigian/index.js";
-import makeup_isme from "@/assets/makeup_isme/index.js";
-import heokonngokngeck from "@/assets/heokonngokngeck/index.js";
-import _2thang9 from "@/assets/_2thang9/index.js";
-import chambi from "@/assets/chambi/index.js";
-import aotrang from "@/assets/aotrang/index.js";
-import babykewt from "@/assets/babykewt/index.js";
-import baonhi from "@/assets/aodo/index.js";
-import aoden from "@/assets/aoden/index.js";
-import hnljnh_04 from "@/assets/hnljnh_04/index.js";
+import PostCard from '@/components/Post/PostCard';
+import ContentContainer from "@/components/Common/ContentContainer/index.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import postServices from "@/services/posts/Feed/postServices.js";
+import PostCardSkeleton from "@/components/Post/PostCard/components/PostCardSkeleton/index.jsx";
+import {useTranslation} from "react-i18next";
+import InfiniteScrollLoader from "@/components/Common/InfiniteScrollLoader/index.jsx";
 
 const Home = () => {
-  // Sample data for posts
-  const [posts] = useState([
-    {
-      id: 1,
-      username: '_4thang11',
-      avatar: makeup_isme[0],
-      timestamp: '2h',
-      content: 'Muốn có người yêu thì phải tìm ai ????',
-        image: chambi,
-      likes: 42,
-      comments: 8,
-      reposts: 3,
-    },
-    {
-      id: 2,
-      username: 'nguoidep_noigian',
-      avatar: nguoidepnoigian[0],
-      timestamp: '4h',
-      content: 'Hêy Siri, mai đi làm dùm tao.',
-        image: nguoidepnoigian,
-      likes: 128,
-      comments: 15,
-      reposts: 12,
-    },
-    {
-      id: 3,
-      username: 'vosieutu',
-      avatar: heokonngokngeck[0],
-      timestamp: '6h',
-      content: 'Ăn gì và mặc gì để cuộc sống trở nên zui zẻ\n' +
-          '" Ăn ảnh và mặc kệ " hihi',
-        image: heokonngokngeck,
-      likes: 89,
-      comments: 23,
-      reposts: 45,
-    },
-    {
-      id: 4,
-      username: '_2thang9',
-      avatar: makeup_isme[0],
-      timestamp: '8h',
-      content: 'Cho em 1 bát phở lòng tái',
-        image: _2thang9,
-      likes: 156,
-      comments: 12,
-      reposts: 8,
-    },
-    {
-      id: 5,
-      username: 'anthittraidep',
-      avatar: makeup_isme[0],
-      timestamp: '10h',
-      content: '7 chủ nhật nữa là 2026',
-        image: aotrang,
-      likes: 234,
-      comments: 45,
-      reposts: 67,
-    },
-    {
-      id: 6,
-      username: 'anhthy_nguyen',
-      avatar: aoden[0],
-      timestamp: '12h',
-      content: 'mọi thứ hôm nay hoá điên với ck',
-      image: babykewt,
-      likes: 445,
-      comments: 32,
-      reposts: 21,
-    },
-      {
-          id: 7,
-          username: 'baonhi',
-          avatar: aotrang[1],
-          timestamp: '8h',
-          content: '💅💅',
-          image: baonhi,
-          likes: 790,
-          comments: 32,
-          reposts: 21,
-      },
-      {
-          id: 8,
-          username: 'hnglinh_04',
-          avatar: hnljnh_04[0],
-          timestamp: '5h',
-          content: 'your girlfriend just posted a photo ✨',
-          image: hnljnh_04,
-          likes: 890,
-          comments: 35,
-          reposts: 22,
-      },
-  ]);
+    const dispatch = useDispatch();
+    const { t } = useTranslation('utils');
+    const { posts, loading, pagination } = useSelector((state) => state.posts);
+    const hasMore = pagination.current_page < pagination.last_page;
 
-  return (
-    <div className="min-h-screen">
-      {/* Posts Feed */}
-      <div
-          style={{
-              boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06)'
-          }}
-          className="pt-[auto] bg-background border-l border-r border-border overflow-hidden"
-      >
-        {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
-        ))}
-      </div>
+    const handleLoadMore = () => {
+        if(!loading && hasMore) {
+            const nextPage = pagination.current_page + 1;
+            dispatch(postServices.getFeed({ page: nextPage }))
+        }
+    }
 
-      {/* Load More Indicator */}
-    </div>
-  );
+    useEffect(() => {
+        if(posts.length === 0) {
+            dispatch(postServices.getFeed({}))
+        }
+    }, [dispatch, posts.length])
+
+    return (
+        <div>
+            <ContentContainer>
+                {/* Initial loading - skeleton toàn bộ */}
+                {loading && posts.length === 0 ? (
+                    Array.from({ length: 10 }).map((_, index) => (
+                        <PostCardSkeleton key={`skeleton-${index}`} />
+                    ))
+                ) : (
+                    /* Infinite scroll wrapper */
+                    <InfiniteScrollLoader
+                        onLoadMore={handleLoadMore}
+                        hasMore={hasMore}
+                        loading={loading && posts.length > 0}
+                        LoadingComponent={PostCardSkeleton}
+                        loadingCount={3}
+                        endMessage={t('Home.outofposts')}
+                        triggerMargin="100px"
+                    >
+                        {posts.map((post) => (
+                            <PostCard key={post.id} post={post} />
+                        ))}
+                    </InfiniteScrollLoader>
+                )}
+            </ContentContainer>
+        </div>
+    );
+
 };
 
 export default Home;

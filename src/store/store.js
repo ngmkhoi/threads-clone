@@ -11,16 +11,19 @@ import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import { themeSlice } from '@/features/theme/themeSlice.js';
 import authSlice from "@/features/auth/authSlice.js";
+import postsSlice from "@/features/posts/postsSlice.js";
 
 const persistConfig = {
     key: 'root',
     storage,
     whitelist: [themeSlice.name, authSlice.name],
+    blacklist: [postsSlice.name]
 };
 
 const rootReducer = combineReducers({
     [themeSlice.name]: themeSlice.reducer,
     [authSlice.name]: authSlice.reducer,
+    [postsSlice.name]: postsSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

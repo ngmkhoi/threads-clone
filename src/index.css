@@ -7,13 +7,15 @@
     /* ============================================ */
     --color-background: oklch(98% 0 0);
     --color-background-active: oklch(96% 0 0);
-    --color-postcard-background: oklch(98% 0 0);
+    --color-content-background: oklch(98% 0 0);
+    --color-menu-background: oklch(98% 0 0);
     --color-loginpanel-background: oklch(95% 0 0);
     --color-auth-background: oklch(98% 0 0);
     --color-dialog-background: oklch(95% 0 0);
     --color-input-background: oklch(95% 0 0);
     --color-button-background: oklch(3.9% 0 0);
-    --color-toast-background: oklch(98% 0 0);
+    --color-hover-background: oklch(95% 0 0);
+    --color-dropdown-background: oklch(98% 0 0);
 
     /* ============================================ */
     /* 2. NHÓM MÀU CHỮ (Foreground Colors)        */
@@ -67,12 +69,15 @@
     /* ============================================ */
     --color-background: oklch(3.9% 0 0);
     --color-background-active: oklch(25% 0 0);
-    --color-postcard-background: oklch(23% 0 0);
+    --color-content-background: oklch(23% 0 0);
+    --color-menu-background: oklch(23% 0 0);
     --color-loginpanel-background: oklch(23% 0 0);
     --color-auth-background: oklch(18% 0 0);
     --color-dialog-background: oklch(15% 0 0);
     --color-input-background: oklch(23% 0 0);
     --color-button-background: oklch(90% 0 0);
+    --color-hover-background: oklch(15% 0 0);
+    --color-dropdown-background: oklch(23% 0 0);
 
     /* ============================================ */
     /* 2. NHÓM MÀU CHỮ (Foreground Colors)        */
@@ -145,6 +150,36 @@
 
 .animate-zoom-fade {
     animation: zoom-fade 0.4s ease-out forwards;
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-up {
+    animation: slide-up 0.3s ease-out forwards;
+}
+
+@keyframes slide-down {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-down {
+    animation: slide-down 0.3s ease-out forwards;
 }
 
 html {

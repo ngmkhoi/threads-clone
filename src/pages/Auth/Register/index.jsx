@@ -65,6 +65,9 @@ const Register = () => {
             localStorage.setItem('refreshToken', refresh_token);
 
             toast(t('validation.registerSuccess'))
+            setTimeout(() => {
+                navigate('/auth/login')
+            }, 4000);
         } catch (error) {
             const errorMessage = error.response?.status === 422
                 ? t('validation.duplicateData')

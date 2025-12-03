@@ -10,6 +10,10 @@
   "settings": {
     "title": "Cài đặt",
     "language": "Ngôn ngữ",
-    "darkMode": "Chế độ tối"
+    "darkMode": "Chế độ tối",
+    "logout": "Đăng xuất"
+  },
+  "confirm": {
+    "logoutSuccess": "Bạn đã đăng xuất thành công."
   }
 }

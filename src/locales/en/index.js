@@ -9,6 +9,8 @@ import Register from './Register.json'
 import DialogMessage from './DialogMessage.json'
 import VerifyEmail from './VerifyEmail.json'
 import ForgotPassword from './ForgotPassword.json'
+import ResetPassword from './ResetPassword.json'
+import utils from './utils.json'
 
 export default {
     LoginPanel,
@@ -21,5 +23,7 @@ export default {
     Register,
     VerifyEmail,
     ForgotPassword,
-    DialogMessage
+    ResetPassword,
+    DialogMessage,
+    utils
 }

@@ -14,7 +14,6 @@ const VerifyEmail = () => {
     const dispatch = useDispatch();
     const [ searchParams ] = useSearchParams();
     const token = searchParams.get('token');
-
     const [ loading, setLoading ] = useState(true);
     const [isResending, setIsResending] = useState(false);
     const [ status, setStatus ] = useState('verifying');
@@ -30,7 +29,6 @@ const VerifyEmail = () => {
 
         const handleVerifyEmail = async () => {
             try {
-                // verifyEmail succeeds if token is valid; no auth required
                 const response = await authService.verifyEmail(token);
                 const { user } = response || {};
 
@@ -40,12 +38,11 @@ const VerifyEmail = () => {
 
                 setStatus('success');
                 setMessage(t('success.message'));
-                toast.success(t('success.title'));
+                toast(t('success.title'));
                 setTimeout(() => {
                     window.close();
-                }, 5000);
+                }, 4000);
             } catch (error) {
-                // Invalid/expired token → offer resend (auth required)
                 const statusCode = error.response?.status;
                 if (statusCode === 400 || statusCode === 404 || statusCode === 422) {
                     const hasAuth = localStorage.getItem('refreshToken');
@@ -72,13 +69,6 @@ const VerifyEmail = () => {
     }, [dispatch, navigate, t, token]);
 
     const handleResendEmail = async () => {
-        const hasAuth = localStorage.getItem('refreshToken');
-        if (!hasAuth) {
-            toast.error(t('notVerified.needLogin'));
-            navigate('/auth/login');
-            return;
-        }
-
         setIsResending(true);
         try {
             await authService.resendVerificationEmail();
@@ -125,24 +115,6 @@ const VerifyEmail = () => {
                         ) : (
                             t('notVerified.resendButton')
                         )}
-                    </Button>
-                </div>
-            )}
-
-            {status === 'not-verified-no-auth' && (
-                <div className="flex flex-col items-center">
-                    <div className="text-6xl mb-4">🔒</div>
-                    <h1 className="text-2xl font-bold text-foreground mb-2">
-                        {t('notVerified.title')}
-                    </h1>
-                    <p className="text-muted-foreground mb-6 text-center">
-                        {message}
-                    </p>
-                    <Button
-                        onClick={() => navigate('/auth/login')}
-                        className="custom-button-style"
-                    >
-                        {t('notVerified.loginButton')}
                     </Button>
                 </div>
             )}

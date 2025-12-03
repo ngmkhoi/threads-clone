@@ -10,6 +10,10 @@
   "settings": {
     "title": "Settings",
     "language": "Language",
-    "darkMode": "Dark mode"
+    "darkMode": "Dark mode",
+    "logout": "Logout"
+  },
+  "confirm": {
+    "logoutSuccess": "You have successfully logged out."
   }
 }

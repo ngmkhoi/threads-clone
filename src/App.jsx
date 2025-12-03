@@ -1,6 +1,6 @@
 import { HashRouter } from 'react-router-dom';
 import AppRoute from "@/components/AppRoute/index.jsx";
-import SplashScreen from "@/components/common/SplashScreen/index.jsx";
+import SplashScreen from "@/components/Common/SplashScreen/index.jsx";
 import {useEffect, useState} from "react";
 import {Toaster} from "@/components/ui/sonner.jsx";
 import AuthProvider from "@/components/AuthProvider/index.js";

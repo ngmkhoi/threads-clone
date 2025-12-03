@@ -40,7 +40,7 @@ const authService = {
         return await http.post('/auth/forgot-password', {email})
     },
     validateResetToken: async (token) => {
-        const response = await http.get(`/auth/validate/reset-token/`, {params: {token}})
+        const response = await http.get(`/auth/reset-password/validate`, {params: {token}})
         return response.data
     },
     resetPassword: async (token, email, password, password_confirmation) => {
@@ -55,7 +55,6 @@ const authService = {
     getCurrentUser,
     logout: async () => {
         await http.post('/auth/logout')
-        localStorage.clear()
     },
 };
 export default authService;

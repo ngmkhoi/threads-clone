@@ -25,6 +25,7 @@ const ForgotPassword = () => {
         })
 
     const { email } = watch();
+
     const isFormValid = email;
 
     const navigate = useNavigate();
@@ -34,7 +35,11 @@ const ForgotPassword = () => {
         setLoading(true);
         try {
             await authService.forgotPassword(data.email);
+            localStorage.setItem('resetPasswordEmail', data.email);
             toast(t('validation.success'));
+            setTimeout(() => {
+                window.close();
+            }, 5000);
         } catch (error) {
             const errorMessage = error.response?.status === 422
                 ? t('validation.emailNotFound')
