@@ -1,0 +1,66 @@
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+    DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu.jsx"
+import { Repeat, Quote, Repeat1 } from 'lucide-react'
+import AnimatedCounter from "@/components/Common/AnimatedCounter/index.jsx";
+import {useTranslation} from "react-i18next";
+import {cn} from "@/lib/utils.js";
+import { useState } from "react";
+
+export function RepostDropdown({ post, count, isAuthenticated, onRepost, onQuote, onShowLoginDialog }) {
+    const [dropdownOpen, setDropdownOpen] = useState(false)
+    const { t } = useTranslation('PostCard');
+    const handleOpenChange = (open) => {
+        if(open) {
+            if(!isAuthenticated) {
+                onShowLoginDialog()
+                return;
+            }
+            setDropdownOpen(!dropdownOpen)
+        } else {
+            setDropdownOpen(!dropdownOpen)
+        }
+    }
+
+    return (
+        <DropdownMenu onOpenChange={handleOpenChange}>
+            <DropdownMenuTrigger asChild className="p-0">
+                <button
+                    className={cn(
+                        "flex items-center gap-1 p-1.5 w-[50px] justify-start transition-colors cursor-pointer",
+                        post.is_reposted_by_auth
+                            ? "text-blue-500 hover:text-blue-400"
+                            : "text-muted-foreground hover:text-foreground"
+                    )}
+                >
+                    <Repeat className="w-5 h-5" />
+                    <AnimatedCounter value={count} className="text-sm" />
+                </button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent align="start" className="min-w-[180px] rounded-xl bg-content-background py-2">
+                <DropdownMenuItem
+                    className="flex items-center justify-between cursor-pointer px-3 py-2.5 rounded-lg hover:bg-secondary transition-colors duration-150"
+                    onClick={onRepost}
+                >
+                    <span className="font-medium">{t("repost")}</span>
+                    <Repeat className="w-5 h-5" />
+                </DropdownMenuItem>
+
+                <DropdownMenuSeparator className="my-1" />
+
+                <DropdownMenuItem
+                    className="flex items-center justify-between cursor-pointer px-3 py-2.5 rounded-lg hover:bg-secondary transition-colors duration-150"
+                    onClick={onQuote}
+                >
+                    <span className="font-medium">{t("quote")}</span>
+                    <Quote className="w-5 h-5" />
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    )
+}

@@ -1,17 +1,21 @@
-import PostCard from '@/components/Post/PostCard';
+import PostCard from '@/components/Post/index.jsx';
 import ContentContainer from "@/components/Common/ContentContainer/index.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import postServices from "@/services/posts/Feed/postServices.js";
-import PostCardSkeleton from "@/components/Post/PostCard/components/PostCardSkeleton/index.jsx";
+import PostCardSkeleton from "@/components/Post/components/PostCardSkeleton/index.jsx";
 import {useTranslation} from "react-i18next";
 import InfiniteScrollLoader from "@/components/Common/InfiniteScrollLoader/index.jsx";
+import CreatePostCard from "@/pages/Home/components/CreatePostCard/index.jsx";
+import {selectIsAuthenticated} from "@/features/auth/authSelector.js";
 
 const Home = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation('utils');
     const { posts, loading, pagination } = useSelector((state) => state.posts);
     const hasMore = pagination.current_page < pagination.last_page;
+    const isAuthenticated = useSelector(selectIsAuthenticated)
+
 
     const handleLoadMore = () => {
         if(!loading && hasMore) {
@@ -21,9 +25,9 @@ const Home = () => {
     }
 
     useEffect(() => {
-        if(posts.length === 0) {
-            dispatch(postServices.getFeed({}))
-        }
+      if(posts.length === 0) {
+          dispatch(postServices.getFeed({}))
+      }
     }, [dispatch, posts.length])
 
     return (
@@ -45,6 +49,7 @@ const Home = () => {
                         endMessage={t('Home.outofposts')}
                         triggerMargin="100px"
                     >
+                        {isAuthenticated && <CreatePostCard />}
                         {posts.map((post) => (
                             <PostCard key={post.id} post={post} />
                         ))}

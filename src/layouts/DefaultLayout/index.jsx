@@ -1,8 +1,8 @@
-import Sidebar from '@/components/Common/Sidebar';
-import LoginPanel from '@/components/Common/LoginPanel';
+import Sidebar from '@/layouts/DefaultLayout/components/Sidebar';
+import LoginPanel from '@/layouts/DefaultLayout/components/LoginPanel';
 import { Outlet } from "react-router-dom";
-import FeedHeader from "@/components/Common/Header/index.jsx";
-import WrapperHeader from "@/components/Common/Header/components/index.jsx";
+import FeedHeader from "@/layouts/DefaultLayout/components/Header/index.jsx";
+import WrapperHeader from "@/layouts/DefaultLayout/components/Header/components/index.jsx";
 import { useSelector } from 'react-redux';
 import { selectIsAuthenticated } from '@/features/auth/authSelector.js';
 

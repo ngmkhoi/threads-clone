@@ -3,5 +3,19 @@
     "postContent": "Nội dung bài viết",
     "userAvatar": "Ảnh đại diện"
   },
-  "CopyLink": "Sao chép liên kết"
+  "CopyLink": "Sao chép liên kết",
+  "validation": {
+    "contentRequired": "Nội dung không được để trống.",
+    "contentMin": "Nội dung phải có ít nhất 1 ký tự.",
+    "contentMax": "Nội dung không được vượt quá 500 ký tự."
+  },
+  "reply": {
+    "placeholder": "Trả lời {{name}}...",
+    "button": "Trả lời",
+    "success": "Đã gửi!",
+    "error": "Không thể trả lời, vui lòng thử lại sau!",
+    "loading": "Đang gửi"
+  },
+  "repost": "Đăng lại",
+  "quote": "Trích dẫn"
 }

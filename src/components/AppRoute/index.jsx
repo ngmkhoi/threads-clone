@@ -12,6 +12,8 @@ import Register from "@/pages/Auth/Register";
 import VerifyEmail from "@/pages/Auth/VerifyEmail/index.jsx";
 import ForgotPassword from "@/pages/Auth/ForgotPassword";
 import ResetPassword from "@/pages/Auth/ResetPassword";
+import PrivateRoute from "@/components/AppRoute/PrivateRoute";
+
 export default function AppRoute() {
     return (
         <Routes>
@@ -19,9 +21,12 @@ export default function AppRoute() {
 
             <Route path="/" element={<DefaultLayout />}>
                 <Route index element={<Home />} />
-                <Route path="/activity" element={<Activity />} />
-                <Route path="/profile" element={<Profile />} />
                 <Route path="/search" element={<Search />} />
+                
+                <Route element={<PrivateRoute />}>
+                    <Route path="/activity" element={<Activity />} />
+                    <Route path="/profile" element={<Profile />} />
+                </Route>
             </Route>
 
             <Route path="/auth" element={<AuthLayout />}>

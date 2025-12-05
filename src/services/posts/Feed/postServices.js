@@ -1,6 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {http} from "@/utils/http.js";
 
+
+
 const getFeed = createAsyncThunk(
     'posts/getFeed',
     async ({ page = 1, feedType = 'for_you' } = {}) => {
@@ -21,6 +23,20 @@ const postServices = {
     getFeed,
     getSinglePost: async (id) => {
         return await http.get(`/posts/${id}`)
+    },
+    getReplies: async (id) => {
+        return await http.get(`/posts/${id}/replies`)
+    },
+    createPost: async (data) => {
+        const formData = new FormData();
+        formData.append('content', data.content);
+        if (data.media) {
+            data.media.forEach((file) => {
+                formData.append('media[]', file);
+            });
+        }
+        const response = await http.post('posts', formData);
+        return response.data;
     }
 }
 

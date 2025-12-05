@@ -3,5 +3,19 @@
     "postContent": "Post content",
     "userAvatar": "User avatar"
   },
-  "CopyLink": "Copy link"
+  "CopyLink": "Copy link",
+  "validation": {
+    "contentRequired": "Content is required.",
+    "contentMin": "Content must be at least 1 character.",
+    "contentMax": "Content must not exceed 500 characters."
+  },
+  "reply": {
+    "placeholder": "Reply to {{name}}...",
+    "button": "Reply",
+    "success": "Sent!",
+    "error": "There is an error, please try again later!",
+    "loading": "Sending"
+  },
+  "repost": "Repost",
+  "quote": "Quote"
 }

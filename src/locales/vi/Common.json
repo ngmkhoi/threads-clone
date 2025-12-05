@@ -4,12 +4,26 @@
     "cancel": "Hủy",
     "delete": "Xóa",
     "edit": "Sửa",
-    "close": "Đóng"
+    "close": "Đóng",
+    "post": "Đăng"
   },
   "messages": {
     "loading": "Đang tải...",
     "error": "Đã xảy ra lỗi",
-    "success": "Thành công!"
+    "success": "Thành công!",
+    "something": "Có gì mới?"
+  },
+  "createPost": {
+    "title": "Thread mới",
+    "placeholder": "Có gì mới?",
+    "addToThread": "Thêm vào thread",
+    "anyoneCanReply": "Bất kỳ ai cũng có thể trả lời",
+    "post": "Đăng",
+    "posting": "Đang đăng...",
+    "success": "Đã đăng thread!",
+    "error": "Không thể đăng thread. Vui lòng thử lại.",
+    "maxFiles": "Chỉ có thể tải lên tối đa {{max}} file",
+    "searchEmoji": "Tìm emoji..."
   }
 }
 

@@ -4,11 +4,27 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
-    "close": "Close"
+    "close": "Close",
+    "post": "Post"
   },
   "messages": {
     "loading": "Loading...",
     "error": "An error occurred",
-    "success": "Success!"
+    "success": "Success!",
+    "something": "Something new?"
+  },
+  "createPost": {
+    "title": "New thread",
+    "placeholder": "What's new?",
+    "addToThread": "Add to thread",
+    "anyoneCanReply": "Anyone can reply",
+    "post": "Post",
+    "posting": "Posting...",
+    "success": "Thread posted!",
+    "error": "Failed to post. Please try again.",
+    "maxFiles": "You can only upload up to {{max}} files",
+    "searchEmoji": "Search emoji..."
   }
 }
+
+

@@ -8,6 +8,10 @@
       "title": "Sign up to comment",
       "description": "Join Threads to comment"
     },
+    "Create": {
+      "title": "Sign up to post",
+      "description": "Join Threads to share your thoughts, photos, and more."
+    },
     "Repost": {
       "title": "Sign up to repost",
       "description": "Share this content with everyone"
@@ -15,6 +19,14 @@
     "Share": {
       "title": "Share more on Threads",
       "description": "Join Threads to share your thoughts, stay up-to-date on what's happening, follow your loved ones, and more."
+    },
+    "Profile": {
+      "title": "Sign up to view profile",
+      "description": "Join Threads to view profiles, follow users, and interact with the community."
+    },
+    "Activity": {
+      "title": "Sign up to view activity",
+      "description": "Join Threads to see who liked, commented, and interacted with your posts."
     }
   }
 }

@@ -1,5 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import postServices from "@/services/posts/Feed/postServices.js";
+import authService from "@/services/auth/authService.js";
+import { logout } from "@/features/auth/authSlice.js";
 
 const initialState = {
     posts: [],
@@ -24,20 +26,43 @@ export const postsSlice = createSlice({
         addPostToFeed: (state, action) => {
             state.posts.unshift(action.payload)
         },
-        updatePostInteractions: (state, action) => {
-            const { postId, is_liked_by_auth, likes_count } = action.payload;
-            state.posts = state.posts.map(
-                post => {
-                    if(post.id === postId) {
-                        return {
-                            ...post,
-                            is_liked_by_auth: is_liked_by_auth,
-                            likes_count: likes_count
-                        }
-                    }
-                    return post;
+        updatePostLike: (state, action) => {
+            const { postId, is_liked_by_auth,  likes_count } = action.payload;
+            state.posts = state.posts.map(post => {
+                if (post.id === postId) {
+                    return {
+                        ...post,
+                        is_liked_by_auth,
+                        likes_count
+                    };
                 }
-            )
+                return post;
+            });
+        },
+        updatePostReplies: (state, action) => {
+            const { postId, replies_count } = action.payload;
+            state.posts = state.posts.map(post => {
+                if (post.id === postId) {
+                    return {
+                        ...post,
+                        replies_count
+                    };
+                }
+                return post;
+            });
+        },
+        updatePostRepostsAndQuotes: (state, action) => {
+            const { postId, reposts_and_quotes_count, is_reposted_by_auth } = action.payload;
+            state.posts = state.posts.map(post => {
+                if (post.id === postId) {
+                    return {
+                        ...post,
+                        is_reposted_by_auth,
+                        reposts_and_quotes_count
+                    };
+                }
+                return post;
+            });
         }
     },
     extraReducers: (builder) => {
@@ -62,9 +87,23 @@ export const postsSlice = createSlice({
             }).addCase(postServices.getFeed.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
+            }) 
+            .addCase(logout, (state) => {
+                state.posts = [];
+                state.pagination = initialState.pagination;
+            })
+            .addCase(authService.login.fulfilled, (state) => {
+                state.posts = [];
+                state.pagination = initialState.pagination;
             })
     }
 })
 
-export const { resetFeed, addPostToFeed, updatePostInteractions } = postsSlice.actions
+export const {
+    resetFeed,
+    addPostToFeed,
+    updatePostLike,
+    updatePostReplies,
+    updatePostRepostsAndQuotes
+} = postsSlice.actions
 export default postsSlice

@@ -16,6 +16,7 @@
     --color-button-background: oklch(3.9% 0 0);
     --color-hover-background: oklch(95% 0 0);
     --color-dropdown-background: oklch(98% 0 0);
+    --color-reply-line: oklch(85% 0 0);
 
     /* ============================================ */
     /* 2. NHÓM MÀU CHỮ (Foreground Colors)        */
@@ -52,6 +53,7 @@
     /* 5. NHÓM VIỀN & INPUT (Border & Input)       */
     /* ============================================ */
     --color-border: oklch(89.8% 0 0);
+    --color-card-border: oklch(85% 0 0);
     --color-border-btn-dialog: oklch(80% 0 0);
     --color-input: oklch(89.8% 0 0);
     --color-border-input: oklch(80% 0 0);
@@ -78,6 +80,8 @@
     --color-button-background: oklch(90% 0 0);
     --color-hover-background: oklch(15% 0 0);
     --color-dropdown-background: oklch(23% 0 0);
+    --color-reply-line: oklch(35% 0 0);
+
 
     /* ============================================ */
     /* 2. NHÓM MÀU CHỮ (Foreground Colors)        */
@@ -114,6 +118,7 @@
     /* 5. NHÓM VIỀN & INPUT (Border & Input)       */
     /* ============================================ */
     --color-border: oklch(14.9% 0 0);
+    --color-card-border: oklch(35% 0 0);
     --color-border-btn-dialog: oklch(28% 0 0);
     --color-input: oklch(14.9% 0 0);
     --color-border-input: oklch(40% 0 0);
