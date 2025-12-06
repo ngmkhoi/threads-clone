@@ -10,6 +10,7 @@ import DialogMessage from './DialogMessage.json'
 import VerifyEmail from './VerifyEmail.json'
 import ForgotPassword from './ForgotPassword.json'
 import ResetPassword from './ResetPassword.json'
+import PostDetail from './PostDetail.json'
 import utils from './utils.json'
 
 export default {
@@ -25,5 +26,6 @@ export default {
     DialogMessage,
     ForgotPassword,
     ResetPassword,
+    PostDetail,
     utils
 }

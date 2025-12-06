@@ -7,15 +7,42 @@ import QuoteCard from "@/components/Post/components/QuoteCard/index.jsx";
 import {formatTimeAgo} from "@/utils/timeFormat.js";
 import {useState} from "react";
 import ReplyForm from "@/pages/Home/components/ReplyForm/index.jsx";
+import { useNavigate } from "react-router-dom";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, isDetailView = false }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);
+  const navigate = useNavigate();
+
   const handleToggleReplyForm = () => {
     setShowReplyForm(!showReplyForm);
   }
+
+  const handleClick = (e) => {
+    // Don't navigate if in detail view or clicking interactive elements
+    if (isDetailView) return;
+    
+    // Check for interactive elements: buttons, links, textareas, and dropdown menu items
+    const interactiveSelectors = [
+      'button',
+      'a',
+      'textarea',
+      '[role="menuitem"]',
+      '[role="menu"]',
+      '[data-radix-collection-item]'
+    ];
+    
+    if (interactiveSelectors.some(selector => e.target.closest(selector))) {
+      return;
+    }
+    
+    navigate(`/post/${post.id}`);
+  };
       
   return (
-    <Card className="bg-content-background !border-card-border py-2 transition-colors shadow-none rounded-none cursor-pointer border-0 border-b">
+    <Card 
+      className={`bg-content-background !border-card-border py-2 transition-colors shadow-none rounded-none cursor-pointer border-0 border-b ${!isDetailView ? 'hover:none' : ''}`}
+      onClick={handleClick}
+    >
       <CardContent className="p-2">
         <div className="flex gap-3">
           {/* Avatar Column - chứa avatar và line */}
@@ -61,7 +88,7 @@ const PostCard = ({ post }) => {
 
             {/* Quote Card - hiển thị khi post có original_post */}
             {post?.original_post && (
-              <QuoteCard originalPost={post.original_post} />
+              <QuoteCard originalPost={post.original_post} showInteractions />
             )}
 
             {/* Interaction Bar */}
@@ -84,3 +111,4 @@ const PostCard = ({ post }) => {
 };
 
 export default PostCard;
+

@@ -23,3 +23,4 @@ export default function InteractionBar({ likes, comments, repost, shares, onTogg
         </div>
     )
 }
+

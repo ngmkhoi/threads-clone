@@ -6,6 +6,7 @@ import EmojiPicker from "emoji-picker-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.jsx";
 import { Textarea } from "@/components/ui/textarea.jsx";
 import MediaPreview from "../MediaPreview";
+import QuoteCard from "@/components/Post/components/QuoteCard";
 
 function PostForm({ 
     currentUser, 
@@ -15,7 +16,9 @@ function PostForm({
     mediaPreviews,
     onMediaSelect,
     onRemoveMedia,
-    formId 
+    formId,
+    quotedPost,
+    mode 
 }) {
     const { t } = useTranslation("Common");
     const textareaRef = useRef(null);
@@ -26,7 +29,7 @@ function PostForm({
     const [pickerPosition, setPickerPosition] = useState({ top: 0, left: 0 });
 
     // Auto-resize textarea
-    useEffect(() => {
+    useEffect(() => { 
         if (textareaRef.current) {
             textareaRef.current.style.height = "auto";
             textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
@@ -117,6 +120,11 @@ function PostForm({
                     rows={1}
                     form={formId}
                 />
+
+                {/* Only show QuoteCard when mode is 'quote', not 'reply' */}
+                {quotedPost && mode === 'quote' && (
+                    <QuoteCard originalPost={quotedPost} />
+                )}
 
                 {/* Media Previews */}
                 <MediaPreview 

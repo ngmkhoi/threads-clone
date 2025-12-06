@@ -15,12 +15,14 @@
   },
   "createPost": {
     "title": "Thread mới",
+    "replyTitle": "Trả lời",
     "placeholder": "Có gì mới?",
     "addToThread": "Thêm vào thread",
     "anyoneCanReply": "Bất kỳ ai cũng có thể trả lời",
     "post": "Đăng",
     "posting": "Đang đăng...",
     "success": "Đã đăng thread!",
+    "replySuccess": "Đã đăng trả lời!",
     "error": "Không thể đăng thread. Vui lòng thử lại.",
     "maxFiles": "Chỉ có thể tải lên tối đa {{max}} file",
     "searchEmoji": "Tìm emoji..."

@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.jsx";
 import { formatTimeAgo } from "@/utils/timeFormat.js";
+import { Heart, MessageCircle, Repeat } from "lucide-react";
 
 function QuoteCard({ originalPost }) {
   if (!originalPost) return null;

@@ -7,23 +7,30 @@ import {
     RepostDropdown
 } from "@/components/Post/components/InteractionBar/components/Repost/components/RepostDropdown/index.jsx";
 import {interactionsService} from "@/services/posts/Interactions/interactionsService.js";
-import {updatePostRepostsAndQuotes} from "@/features/posts/postsSlice.js";
+import {updatePostReposts} from "@/features/posts/postsSlice.js";
+import {updatePostDetailRepost, updateReplyRepost} from "@/features/postDetail/postDetailSlice.js";
+import CreatePostDialog from "@/components/Common/CreatePostDialog";
 
 export default function Repost({ count, post }) {
     const dispatch = useDispatch();
     const [isDialogOpen, setIsDialogOpen] = useState(false)
     const isAuthenticated = useSelector(selectIsAuthenticated)
+    const [quoteDialogData, setQuoteDialogData] = useState(null)
     const handleRepost = async () => {
         const response = await interactionsService.repost(post.id)
-        dispatch(updatePostRepostsAndQuotes({
+        const payload = {
             postId: post.id,
             reposts_and_quotes_count: response.reposts_and_quotes_count,
             is_reposted_by_auth: response.is_reposted
-        }))
+        };
+        // Update both postsSlice (for Home page) and postDetailSlice (for PostDetail page)
+        dispatch(updatePostReposts(payload));
+        dispatch(updatePostDetailRepost(payload));
+        dispatch(updateReplyRepost(payload));
     }
 
     const handleQuote = () => {
-        console.log("Đã quotes v:")
+        setQuoteDialogData(post)
     }
 
     return (
@@ -43,6 +50,13 @@ export default function Repost({ count, post }) {
                 icon={Repeat}
                 title="DialogMessage:dialogMessages.Repost.title"
                 description="DialogMessage:dialogMessages.Repost.description"
+            />
+
+            <CreatePostDialog
+                open={!!quoteDialogData}
+                onOpenChange={(open) => !open && setQuoteDialogData(null)}
+                quotedPost={quoteDialogData}
+                mode="quote"
             />
         </>
     )

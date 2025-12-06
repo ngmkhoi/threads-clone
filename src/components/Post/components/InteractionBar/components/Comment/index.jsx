@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 import {selectIsAuthenticated} from "@/features/auth/authSelector.js";
 import AnimatedCounter from "@/components/Common/AnimatedCounter/index.jsx";
 
-export default function Comment({ count, onToggleReply}) {
+export default function Comment({ count, onToggleReply }) {
     const [isOpen, setIsOpen] = useState(false)
     const isAuthenticated = useSelector(selectIsAuthenticated)
 
@@ -40,3 +40,4 @@ export default function Comment({ count, onToggleReply}) {
         </>
     )
 }
+

@@ -10,15 +10,17 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog.jsx";
 import { selectCurrentUser } from "@/features/auth/authSelector.js";
-import { addPostToFeed } from "@/features/posts/postsSlice.js";
+import { addPostToFeed, updatePostQuotes, updatePostReplies } from "@/features/posts/postsSlice.js";
 import postServices from "@/services/posts/Feed/postServices.js";
 import PostForm from "./components/PostForm";
 import ThreadHint from "./components/ThreadHint";
 import DialogFooter from "./components/DialogFooter";
+import QuoteCard from "@/components/Post/components/QuoteCard";
+import { interactionsService } from "@/services/posts/Interactions/interactionsService";
 
 const FORM_ID = "create-post-form";
 
-const CreatePostDialog = ({ open, onOpenChange }) => {
+const CreatePostDialog = ({ open, onOpenChange, quotedPost, mode, onReplySuccess }) => {
     const { t } = useTranslation("Common");
     const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser);
@@ -32,6 +34,7 @@ const CreatePostDialog = ({ open, onOpenChange }) => {
         },
     });
 
+    
     const content = watch("content");
     const isFormValid = content?.trim().length > 0 || mediaFiles.length > 0;
 
@@ -79,6 +82,31 @@ const CreatePostDialog = ({ open, onOpenChange }) => {
                 media: mediaFiles,
             };
 
+            if (mode === "quote") {
+                const response = await interactionsService.quote(quotedPost.id, postData);
+                dispatch(addPostToFeed(response));
+                dispatch(updatePostQuotes({ original_post_id: quotedPost.id }));
+                toast.success(t("createPost.success"));
+                handleClose();
+                return
+            }
+
+            if (mode === "reply") {
+                const response = await interactionsService.reply(quotedPost.id, postData);
+                // Update reply count in postsSlice (for Home feed)
+                dispatch(updatePostReplies({
+                    postId: quotedPost.id,
+                    replies_count: (quotedPost.replies_count || 0) + 1
+                }));
+                toast.success(t("createPost.replySuccess"));
+                handleClose();
+                // Return response so parent can handle it (e.g., add to replies list)
+                if (onReplySuccess && response) {
+                    onReplySuccess(response);
+                }
+                return;
+            }
+
             const response = await postServices.createPost(postData);
             dispatch(addPostToFeed(response));
             toast.success(t("createPost.success"));
@@ -98,7 +126,7 @@ const CreatePostDialog = ({ open, onOpenChange }) => {
                 {/* Header */}
                 <DialogHeader className="border-b !border-card-border p-4">
                     <DialogTitle className="text-center font-bold text-[15px]">
-                        {t("createPost.title")}
+                        {mode === "reply" ? t("createPost.replyTitle") : t("createPost.title")}
                     </DialogTitle>
                 </DialogHeader>
 
@@ -114,6 +142,8 @@ const CreatePostDialog = ({ open, onOpenChange }) => {
                             onMediaSelect={handleMediaSelect}
                             onRemoveMedia={removeMedia}
                             formId={FORM_ID}
+                            quotedPost={quotedPost}
+                            mode={mode}
                         />
                         <ThreadHint currentUser={currentUser} />
                     </div>

@@ -51,7 +51,7 @@ export const postsSlice = createSlice({
                 return post;
             });
         },
-        updatePostRepostsAndQuotes: (state, action) => {
+        updatePostReposts: (state, action) => {
             const { postId, reposts_and_quotes_count, is_reposted_by_auth } = action.payload;
             state.posts = state.posts.map(post => {
                 if (post.id === postId) {
@@ -63,7 +63,30 @@ export const postsSlice = createSlice({
                 }
                 return post;
             });
-        }
+        },
+       updatePostQuotes: (state, action) => {
+         const { original_post_id } = action.payload;
+         state.posts = state.posts.map(post => {
+             if (post.id === original_post_id) {
+                 return {
+                     ...post,
+                     reposts_and_quotes_count: post.reposts_and_quotes_count + 1
+                 };
+             }
+             
+             if (post.original_post?.id === original_post_id) {
+                 return {
+                     ...post,
+                     original_post: {
+                         ...post.original_post,
+                         reposts_and_quotes_count: post.original_post.reposts_and_quotes_count
+    + 1
+                     }
+                 };
+             }
+             return post;
+         });
+     }
     },
     extraReducers: (builder) => {
         builder
@@ -104,6 +127,7 @@ export const {
     addPostToFeed,
     updatePostLike,
     updatePostReplies,
-    updatePostRepostsAndQuotes
+    updatePostReposts,
+    updatePostQuotes
 } = postsSlice.actions
 export default postsSlice

@@ -12,13 +12,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectCurrentUser} from "@/features/auth/authSelector.js";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.jsx";
 import {updatePostReplies} from "@/features/posts/postsSlice.js";
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Maximize2 } from 'lucide-react';
 import postServices from "@/services/posts/Feed/postServices.js";
+import CreatePostDialog from "@/components/Common/CreatePostDialog";
 
-function ReplyForm({ post, onClose }) {
+function ReplyForm({ post, onClose, onReplySuccess }) {
     const { t } = useTranslation('PostCard');
     const [loading, setLoading] = useState(false);
     const [showButton, setShowButton] = useState(false);
+    const [isExpandedOpen, setIsExpandedOpen] = useState(false);
     const currentUser = useSelector(selectCurrentUser)
     const dispatch = useDispatch();
 
@@ -47,13 +49,17 @@ function ReplyForm({ post, onClose }) {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            await interactionsService.reply(post.id, data);
+            const replyResponse = await interactionsService.reply(post.id, data);
             const response = await postServices.getReplies(post.id)
             const updateRepliesCount = response.data.length;
             dispatch(updatePostReplies({
                 postId: post.id,
                 replies_count: updateRepliesCount
             }))
+            // Call onReplySuccess callback if provided (for PostDetail page)
+            if (onReplySuccess && replyResponse) {
+                onReplySuccess(replyResponse);
+            }
             toast(t('reply.success'))
             onClose()
         } catch (error) {
@@ -64,57 +70,79 @@ function ReplyForm({ post, onClose }) {
         }
     };
 
+    const handleExpandedReplySuccess = (reply) => {
+        if (onReplySuccess) {
+            onReplySuccess(reply);
+        }
+        onClose();
+    };
+
     return (
-        <div className="pt-3 mt-2">
-            <div className="flex gap-3">
-                {/* Avatar của user hiện tại */}
-                <Avatar className="h-10 w-10">
-                    <AvatarImage
-                        src={currentUser?.avatar}
-                        alt={currentUser?.username || "User"}
-                    />
-                    <AvatarFallback className="bg-gray-200 text-muted-foreground font-semibold">
-                        {currentUser?.username?.[0]?.toUpperCase() || 'U'}
-                    </AvatarFallback>
-                </Avatar>
-
-                {/* Form */}
-                <form onSubmit={handleSubmit(onSubmit)} className="flex-1">
-                    <div className="flex gap-2 items-end">
-                        <Textarea
-                            placeholder={t('reply.placeholder', { name: post?.user?.name })}
-                            className="min-h-[15px] h-10 resize-none bg-transparent !border-none w-full flex-1 focus:!ring-0 focus:!ring-offset-0"
-                            {...register('content')}
+        <>
+            <div className="pt-3 mt-2">
+                <div className="flex gap-3">
+                    {/* Avatar của user hiện tại */}
+                    <Avatar className="h-10 w-10">
+                        <AvatarImage
+                            src={currentUser?.avatar}
+                            alt={currentUser?.username || "User"}
                         />
+                        <AvatarFallback className="bg-gray-200 text-muted-foreground font-semibold">
+                            {currentUser?.username?.[0]?.toUpperCase() || 'U'}
+                        </AvatarFallback>
+                    </Avatar>
 
-                        {showButton && (
+                    {/* Form */}
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex-1">
+                        <div className="flex gap-2 items-end">
+                            <Textarea
+                                placeholder={t('reply.placeholder', { name: post?.user?.name })}
+                                className="min-h-[15px] h-10 resize-none bg-transparent !border-none w-full flex-1 focus:!ring-0 focus:!ring-offset-0"
+                                {...register('content')}
+                            />
+
+                            {showButton && (
+                                <Button
+                                    type="submit"
+                                    size="sm"
+                                    disabled={loading}
+                                    className="rounded-full"
+                                >
+                                    {loading ? (
+                                        <>
+                                            <Spinner className="mr-2" />
+                                            {t('reply.loading')}
+                                        </>
+                                    ) : (
+                                        <ArrowUp className="w-4 h-4" />
+                                    )}
+                                </Button>
+                            )}
+
+                            {/* Expand button */}
                             <Button
-                                type="submit"
+                                type="button"
+                                variant="ghost"
                                 size="sm"
-                                disabled={loading}
-                                className="rounded-full"
+                                className="rounded-full p-2"
+                                onClick={() => setIsExpandedOpen(true)}
                             >
-                                {loading ? (
-                                    <>
-                                        <Spinner className="mr-2" />
-                                        {t('reply.loading')}
-                                    </>
-                                ) : (
-                                    <ArrowUp className="w-4 h-4" />
-                                )}
+                                <Maximize2 className="w-4 h-4" />
                             </Button>
-                        )}
-                    </div>
-
-                    {/* Error message */}
-                    {errors.content && (
-                        <p className="text-sm text-red-500 mt-1">
-                            {errors.content.message}
-                        </p>
-                    )}
-                </form>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+
+            {/* Expanded Reply Dialog */}
+            <CreatePostDialog
+                open={isExpandedOpen}
+                onOpenChange={setIsExpandedOpen}
+                quotedPost={post}
+                mode="reply"
+                onReplySuccess={handleExpandedReplySuccess}
+            />
+        </>
     );
 }
 

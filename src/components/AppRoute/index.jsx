@@ -13,6 +13,7 @@ import VerifyEmail from "@/pages/Auth/VerifyEmail/index.jsx";
 import ForgotPassword from "@/pages/Auth/ForgotPassword";
 import ResetPassword from "@/pages/Auth/ResetPassword";
 import PrivateRoute from "@/components/AppRoute/PrivateRoute";
+import PostDetail from "@/pages/PostDetail";
 
 export default function AppRoute() {
     return (
@@ -22,6 +23,7 @@ export default function AppRoute() {
             <Route path="/" element={<DefaultLayout />}>
                 <Route index element={<Home />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/post/:id" element={<PostDetail />} />
                 
                 <Route element={<PrivateRoute />}>
                     <Route path="/activity" element={<Activity />} />

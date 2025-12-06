@@ -17,7 +17,7 @@ function CreatePostCard() {
 
     return (
         <>
-            <Card className="bg-content-background border-border py-4 transition-colors shadow-none rounded-none cursor-pointer border-0 border-b">
+            <Card className="bg-content-background !border-card-border py-4 transition-colors shadow-none rounded-none cursor-pointer border-0 border-b">
                 <CardContent className="flex items-center p-2 gap-3">
                     {/* Avatar */}
                     <Avatar className="h-10 w-10">
