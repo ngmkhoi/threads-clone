@@ -4,7 +4,8 @@ import {
     faVolumeMute, 
     faUserSlash, 
     faBan, 
-    faFlag 
+    faFlag,
+    faBookmark as faBookmarkSolid
 } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark as faBookmarkOutline } from "@fortawesome/free-regular-svg-icons";
 import { useTranslation } from "react-i18next";
@@ -16,6 +17,7 @@ import {
 function OthersPostMenuItems({ 
     postUsername,
     isLoading,
+    isSaved,
     onSave,
     onNotInterested,
     onMute,
@@ -29,14 +31,14 @@ function OthersPostMenuItems({
         <>
             <DropdownMenuSeparator />
             
-            {/* Save */}
+            {/* Save / Unsave */}
             <DropdownMenuItem 
                 className="flex items-center justify-between hover:bg-secondary gap-2 cursor-pointer px-3 py-2.5"
                 onClick={onSave}
                 disabled={isLoading}
             >
-                <span>{t('menu.save')}</span>
-                <FontAwesomeIcon icon={faBookmarkOutline} className="text-base"/>
+                <span>{isSaved ? t('menu.unsave') : t('menu.save')}</span>
+                <FontAwesomeIcon icon={isSaved ? faBookmarkSolid : faBookmarkOutline} className="text-base"/>
             </DropdownMenuItem>
 
             {/* Not interested */}

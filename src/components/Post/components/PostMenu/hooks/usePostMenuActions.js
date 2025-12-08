@@ -29,6 +29,7 @@ export function usePostMenuActions(post) {
     const [reportDialogOpen, setReportDialogOpen] = useState(false);
     const [editDialogOpen, setEditDialogOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isSaved, setIsSaved] = useState(post?.is_saved_by_auth || false);
     
     // Computed values
     const isOwnPost = currentUser?.id === post?.user?.id;
@@ -48,9 +49,9 @@ export function usePostMenuActions(post) {
         closeDropdown();
     };
 
-    // Save/Unsave handler
+    // Save/Unsave handler (API is toggle - same POST endpoint)
     const handleSave = async () => {
-        console.log('handleSave called', { isAuthenticated, postId: post.id });
+        console.log('handleSave called', { isAuthenticated, postId: post.id, isSaved });
         if (!isAuthenticated) {
             openLoginDialog();
             return;
@@ -58,7 +59,9 @@ export function usePostMenuActions(post) {
         try {
             setIsLoading(true);
             await postServices.save(post.id);
-            toast.success(t('menu.saved'));
+            const newSavedState = !isSaved;
+            setIsSaved(newSavedState);
+            toast.success(newSavedState ? t('menu.saved') : t('menu.unsave'));
         } catch (error) {
             console.error('Save error:', error);
             toast.error(error.response?.data?.message || t('menu.error'));
@@ -221,6 +224,7 @@ export function usePostMenuActions(post) {
         isOwnPost,
         postUsername,
         isEditable,
+        isSaved,
         
         // Handlers
         handleCopyLink,

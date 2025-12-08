@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectIsAuthenticated} from "@/features/auth/authSelector.js";
 import {interactionsService} from "@/services/posts/Interactions/interactionsService.js";
 import {updatePostLike} from "@/features/posts/postsSlice.js";
+import {updatePostDetailLike, updateReplyLike} from "@/features/postDetail/postDetailSlice.js";
 import {cn} from "@/lib/utils.js";
 import AnimatedCounter from "@/components/Common/AnimatedCounter/index.jsx";
 
@@ -16,11 +17,15 @@ export default function Like({ count, post }) {
     const handleClick = async () => {
         if(isAuthenticated) {
             const response = await interactionsService.like(post.id)
-            dispatch(updatePostLike({
+            const payload = {
                 postId: post.id,
                 is_liked_by_auth: response.is_liked,
                 likes_count: response.likes_count
-            }))
+            };
+            // Update both postsSlice (for Home page) and postDetailSlice (for PostDetail page)
+            dispatch(updatePostLike(payload));
+            dispatch(updatePostDetailLike(payload));
+            dispatch(updateReplyLike(payload));
         }else {
             setIsOpen(true)
         }

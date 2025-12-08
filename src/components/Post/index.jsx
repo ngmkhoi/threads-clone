@@ -9,7 +9,7 @@ import {useState} from "react";
 import ReplyForm from "@/pages/Home/components/ReplyForm/index.jsx";
 import { useNavigate } from "react-router-dom";
 
-const PostCard = ({ post, isDetailView = false }) => {
+const PostCard = ({ post, isDetailView = false, onReplySuccess }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const navigate = useNavigate();
 
@@ -107,7 +107,7 @@ const PostCard = ({ post, isDetailView = false }) => {
           </div>
         </div>
           {showReplyForm && (
-              <ReplyForm post={post} onClose={handleToggleReplyForm}/>
+              <ReplyForm post={post} onClose={handleToggleReplyForm} onReplySuccess={onReplySuccess}/>
           )}
       </CardContent>
     </Card>

@@ -1,21 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentContainer from '@/components/Common/ContentContainer';
 import PostCard from '@/components/Post';
 import PostCardSkeleton from '@/components/Post/components/PostCardSkeleton';
-import ReplyForm from '@/pages/Home/components/ReplyForm';
 import { getPost, getPostReplies, clearPostDetail, addReply } from '@/features/postDetail/postDetailSlice';
-import { selectIsAuthenticated } from '@/features/auth/authSelector';
 import InfiniteScrollLoader from '@/components/Common/InfiniteScrollLoader';
 import { useTranslation } from 'react-i18next';
 import ReplyCard from './components/ReplyCard';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+import { ChevronDown } from 'lucide-react';
 
 const PostDetail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { t } = useTranslation('PostDetail');
-    const isAuthenticated = useSelector(selectIsAuthenticated);
+    const [sortBy, setSortBy] = useState('newest'); // 'newest' or 'most_liked'
     
     const { 
         post, 
@@ -33,23 +38,33 @@ const PostDetail = () => {
         
         if (id) {
             dispatch(getPost(id));
-            dispatch(getPostReplies({ id, page: 1 }));
+            dispatch(getPostReplies({ id, page: 1, sort: sortBy }));
         }
 
         return () => {
             dispatch(clearPostDetail());
         };
-    }, [dispatch, id]);
+    }, [dispatch, id, sortBy]);
 
     const handleLoadMoreReplies = () => {
         if (!repliesLoading && hasMoreReplies) {
             const nextPage = repliesPagination.current_page + 1;
-            dispatch(getPostReplies({ id, page: nextPage }));
+            dispatch(getPostReplies({ id, page: nextPage, sort: sortBy }));
         }
     };
 
     const handleReplySuccess = (newReply) => {
         dispatch(addReply(newReply));
+    };
+
+    const handleSortChange = (newSort) => {
+        if (newSort !== sortBy) {
+            setSortBy(newSort);
+        }
+    };
+
+    const getSortLabel = () => {
+        return sortBy === 'newest' ? t('filter.newest') : t('filter.mostLiked');
     };
 
     return (
@@ -60,20 +75,38 @@ const PostDetail = () => {
                     <PostCardSkeleton />
                 ) : post ? (
                     <div className="pt-2">
-                        <PostCard post={post} isDetailView />
-                        
-                        {/* Reply Form */}
-                        {isAuthenticated && (
-                            <div className="border-b !border-card-border px-4 py-3">
-                                <ReplyForm 
-                                    post={post} 
-                                    onClose={() => {}}
-                                    onReplySuccess={handleReplySuccess}
-                                />
-                            </div>
-                        )}
+                        <PostCard post={post} isDetailView onReplySuccess={handleReplySuccess} />
                     </div>
                 ) : null}
+
+                {/* Filter Bar - Divider between Post and Replies */}
+                {!loading && post && (
+                    <div className="flex items-center justify-between px-4 py-3 border-b !border-card-border bg-content-background">
+                        <span className="font-semibold text-foreground">{t('replies')}</span>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <button className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors outline-none">
+                                    <span>{getSortLabel()}</span>
+                                    <ChevronDown className="w-4 h-4" />
+                                </button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="!rounded-xl bg-content-background">
+                                <DropdownMenuItem 
+                                    className={`cursor-pointer ${sortBy === 'newest' ? 'font-semibold' : ''}`}
+                                    onClick={() => handleSortChange('newest')}
+                                >
+                                    {t('filter.newest')}
+                                </DropdownMenuItem>
+                                <DropdownMenuItem 
+                                    className={`cursor-pointer ${sortBy === 'most_liked' ? 'font-semibold' : ''}`}
+                                    onClick={() => handleSortChange('most_liked')}
+                                >
+                                    {t('filter.mostLiked')}
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+                )}
 
                 {/* Replies Section */}
                 <div className="mt-2">
@@ -103,4 +136,3 @@ const PostDetail = () => {
 };
 
 export default PostDetail;
-

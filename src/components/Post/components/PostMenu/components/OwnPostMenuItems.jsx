@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash, faBookmark as faBookmarkSolid } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import {
     DropdownMenuItem,
@@ -11,6 +11,7 @@ import { faBookmark as faBookmarkOutline } from "@fortawesome/free-regular-svg-i
 function OwnPostMenuItems({ 
     isLoading,
     isEditable,
+    isSaved,
     onEdit,
     onDelete,
     onSave
@@ -26,8 +27,8 @@ function OwnPostMenuItems({
                 onClick={onSave}
                 disabled={isLoading}
             >
-                <span>{t('menu.save')}</span>
-                <FontAwesomeIcon icon={faBookmarkOutline} className="text-base"/>
+                <span>{isSaved ? t('menu.unsave') : t('menu.save')}</span>
+                <FontAwesomeIcon icon={isSaved ? faBookmarkSolid : faBookmarkOutline} className="text-base"/>
             </DropdownMenuItem>
             
             {/* Edit - Only show if editable (within 15 min) */}

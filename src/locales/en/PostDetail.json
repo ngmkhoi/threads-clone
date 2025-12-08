@@ -1,4 +1,9 @@
 {
   "title": "Thread",
-  "noMoreReplies": "No more replies"
+  "noMoreReplies": "No more replies",
+  "replies": "Replies",
+  "filter": {
+    "newest": "Newest",
+    "mostLiked": "Most liked"
+  }
 }

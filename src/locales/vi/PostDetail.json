@@ -1,4 +1,9 @@
 {
   "title": "Thread",
-  "noMoreReplies": "Không còn bình luận nào"
+  "noMoreReplies": "Không còn bình luận nào",
+  "replies": "Trả lời",
+  "filter": {
+    "newest": "Mới nhất",
+    "mostLiked": "Hàng đầu"
+  }
 }

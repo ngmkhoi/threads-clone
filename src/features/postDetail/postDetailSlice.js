@@ -11,9 +11,9 @@ export const getPost = createAsyncThunk(
 
 export const getPostReplies = createAsyncThunk(
     'postDetail/getReplies',
-    async ({ id, page = 1, per_page = 15 }) => {
+    async ({ id, page = 1, per_page = 15, sort = 'newest' }) => {
         return await http.get(`/posts/${id}/replies`, {
-            params: { page, per_page }
+            params: { page, per_page, sort }
         });
     }
 );

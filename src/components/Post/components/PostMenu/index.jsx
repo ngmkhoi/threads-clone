@@ -42,6 +42,7 @@ function PostMenuComponent({ post }) {
         isOwnPost,
         postUsername,
         isEditable,
+        isSaved,
         
         // Handlers
         handleCopyLink,
@@ -62,11 +63,11 @@ function PostMenuComponent({ post }) {
         <>
             <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
                 <DropdownMenuTrigger asChild>
-                    <button className="rounded-xl p-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors outline-none ring-0 focus:ring-0">
+                    <button className="rounded-xl p-2 hover:bg-secondary transition-colors outline-none ring-0 focus:ring-0">
                         <MoreHorizontal className="w-5 h-5 cursor-pointer"/>
                     </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="rounded-xl min-w-[200px] bg-content-background py-2">
+                <DropdownMenuContent className="!rounded-xl min-w-[200px] bg-content-background py-2">
                     {/* Copy Link - Available for everyone */}
                     <DropdownMenuItem 
                         className="flex items-center justify-between hover:bg-secondary gap-2 cursor-pointer px-3 py-2.5"
@@ -81,6 +82,7 @@ function PostMenuComponent({ post }) {
                         <OthersPostMenuItems
                             postUsername={postUsername}
                             isLoading={isLoading}
+                            isSaved={isSaved}
                             onSave={handleSave}
                             onNotInterested={handleNotInterested}
                             onMute={handleMute}
@@ -95,6 +97,7 @@ function PostMenuComponent({ post }) {
                         <OwnPostMenuItems
                             isLoading={isLoading}
                             isEditable={isEditable}
+                            isSaved={isSaved}
                             onEdit={handleEditClick}
                             onDelete={handleDeleteClick}
                             onSave={handleSave}
