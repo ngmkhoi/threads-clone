@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ContentContainer from '@/components/Common/ContentContainer';
-import PostCard from '@/components/Post';
+import PostCard from '@/components/Post/PostCard.jsx';
 import PostCardSkeleton from '@/components/Post/components/PostCardSkeleton';
 import { getPost, getPostReplies, clearPostDetail, addReply } from '@/features/postDetail/postDetailSlice';
 import InfiniteScrollLoader from '@/components/Common/InfiniteScrollLoader';

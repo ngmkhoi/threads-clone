@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog.jsx";
 import { selectCurrentUser } from "@/features/auth/authSelector.js";
 import { addPostToFeed, updatePostQuotes, updatePostReplies, updatePostContent } from "@/features/posts/postsSlice.js";
-import postServices from "@/services/posts/Feed/postServices.js";
+import postServices from "@/services/postServices.js";
 import PostForm from "./components/PostForm";
 import ThreadHint from "./components/ThreadHint";
 import DialogFooter from "./components/DialogFooter";

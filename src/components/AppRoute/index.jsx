@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-import Login from "@/pages/Auth/Login";
+import Login from "@/pages/Auth/Login.jsx";
 import DefaultLayout from "@/layouts/DefaultLayout";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
@@ -8,12 +8,14 @@ import Profile from "@/pages/Profile";
 import Search from "@/pages/Search";
 import Activity from "@/pages/Activity";
 import AuthLayout from "@/layouts/AuthLayout/";
-import Register from "@/pages/Auth/Register";
-import VerifyEmail from "@/pages/Auth/VerifyEmail/index.jsx";
-import ForgotPassword from "@/pages/Auth/ForgotPassword";
-import ResetPassword from "@/pages/Auth/ResetPassword";
+import Register from "@/pages/Auth/Register.jsx";
+import VerifyEmail from "@/pages/Auth/VerifyEmail.jsx";
+import ForgotPassword from "@/pages/Auth/ForgotPassword.jsx";
+import ResetPassword from "@/pages/Auth/ResetPassword.jsx";
 import PrivateRoute from "@/components/AppRoute/PrivateRoute";
 import PostDetail from "@/pages/PostDetail";
+import EmbedLayout from "@/layouts/EmbedLayout";
+import Embed from "@/pages/Embed";
 
 export default function AppRoute() {
     return (
@@ -37,6 +39,11 @@ export default function AppRoute() {
                 <Route path="verify-email" element={<VerifyEmail />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="reset-password" element={<ResetPassword />} />
+            </Route>
+
+            {/* Embed Route - for iframe embedding */}
+            <Route path="/:username/post/:postId/embed" element={<EmbedLayout />}>
+                <Route index element={<Embed />} />
             </Route>
 
             {/*NotFound*/}
