@@ -16,6 +16,7 @@
   "createPost": {
     "title": "Thread mới",
     "replyTitle": "Trả lời",
+    "editTitle": "Chỉnh sửa thread",
     "placeholder": "Có gì mới?",
     "addToThread": "Thêm vào thread",
     "anyoneCanReply": "Bất kỳ ai cũng có thể trả lời",
@@ -23,6 +24,7 @@
     "posting": "Đang đăng...",
     "success": "Đã đăng thread!",
     "replySuccess": "Đã đăng trả lời!",
+    "editSuccess": "Đã cập nhật thread!",
     "error": "Không thể đăng thread. Vui lòng thử lại.",
     "maxFiles": "Chỉ có thể tải lên tối đa {{max}} file",
     "searchEmoji": "Tìm emoji..."

@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import AvatarComponent from "@/components/Post/components/Avatar";
-import MoreDropdownMenuComponent from "@/components/Post/components/MoreDropdown";
+import MoreDropdownMenuComponent from "@/components/Post/components/PostMenu";
 import PostImage from "@/components/Post/components/PostImage";
 import InteractionBar from "@/components/Post/components/InteractionBar";
 import { formatTimeAgo } from "@/utils/timeFormat";

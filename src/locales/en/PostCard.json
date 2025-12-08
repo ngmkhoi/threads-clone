@@ -16,6 +16,60 @@
     "error": "There is an error, please try again later!",
     "loading": "Sending"
   },
+  "share": {
+    "linkCopied": "Link copied!",
+    "copyLink": "Copy link",
+    "shareAsImage": "Share as image",
+    "shareTitle": "Post from Threads",
+    "imageDownloaded": "Image downloaded!",
+    "imageError": "Cannot create image, please try again!"
+  },
   "repost": "Repost",
-  "quote": "Quote"
+  "quote": "Quote",
+  "menu": {
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied!",
+    "save": "Save",
+    "unsave": "Unsave",
+    "saved": "Saved!",
+    "notInterested": "Not interested",
+    "hidden": "Post hidden",
+    "mute": "Mute @{{username}}",
+    "muted": "Muted @{{username}}",
+    "restrict": "Restrict @{{username}}",
+    "restricted": "Restricted @{{username}}",
+    "block": "Block @{{username}}",
+    "blocked": "Blocked @{{username}}",
+    "report": "Report",
+    "reported": "Thanks for letting us know",
+    "edit": "Edit",
+    "editExpired": "You can only edit posts within 15 minutes of posting",
+    "delete": "Delete",
+    "deleted": "Thread deleted",
+    "error": "Something went wrong. Please try again."
+  },
+  "confirm": {
+    "blockTitle": "Block @{{username}}?",
+    "blockDescription": "They won't be able to find your profile, posts or threads. Threads won't let them know you blocked them.",
+    "blockConfirm": "Block",
+    "deleteTitle": "Delete thread?",
+    "deleteDescription": "If you delete this thread, you won't be able to restore it.",
+    "deleteConfirm": "Delete",
+    "cancel": "Cancel"
+  },
+  "report": {
+    "title": "Report",
+    "description": "Why are you reporting this thread?",
+    "reasons": {
+      "spam": "It's spam",
+      "nudity": "Nudity or sexual activity",
+      "hate_speech": "Hate speech or symbols",
+      "violence": "Violence or dangerous organizations",
+      "harassment": "Bullying or harassment",
+      "false_info": "False information",
+      "scam": "Scam or fraud",
+      "other": "Something else"
+    },
+    "submit": "Submit"
+  }
 }

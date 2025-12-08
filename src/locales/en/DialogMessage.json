@@ -27,6 +27,10 @@
     "Activity": {
       "title": "Sign up to view activity",
       "description": "Join Threads to see who liked, commented, and interacted with your posts."
+    },
+    "More": {
+      "title": "Sign up for more options",
+      "description": "Join Threads to save posts, manage your interactions, and more."
     }
   }
 }

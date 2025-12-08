@@ -1,7 +1,7 @@
 import InteractionBar from '@/components/Post/components/InteractionBar';
 import { Card, CardContent } from "@/components/ui/card.jsx";
 import PostImage from "@/components/Post/components/PostImage/index.jsx";
-import MoreDropdownMenuComponent from "@/components/Post/components/MoreDropdown/index.jsx";
+import PostMenuComponent from "@/components/Post/components/PostMenu/index.jsx";
 import AvatarComponent from "@/components/Post/components/Avatar/index.jsx";
 import QuoteCard from "@/components/Post/components/QuoteCard/index.jsx";
 import {formatTimeAgo} from "@/utils/timeFormat.js";
@@ -28,7 +28,10 @@ const PostCard = ({ post, isDetailView = false }) => {
       'textarea',
       '[role="menuitem"]',
       '[role="menu"]',
-      '[data-radix-collection-item]'
+      '[data-radix-collection-item]',
+      '[data-radix-dialog-overlay]',
+      '[role="dialog"]',
+      '[data-radix-dialog-content]'
     ];
     
     if (interactiveSelectors.some(selector => e.target.closest(selector))) {
@@ -40,6 +43,7 @@ const PostCard = ({ post, isDetailView = false }) => {
       
   return (
     <Card 
+      id={`post-${post.id}`}
       className={`bg-content-background !border-card-border py-2 transition-colors shadow-none rounded-none cursor-pointer border-0 border-b ${!isDetailView ? 'hover:none' : ''}`}
       onClick={handleClick}
     >
@@ -76,7 +80,7 @@ const PostCard = ({ post, isDetailView = false }) => {
                     {formatTimeAgo(post?.created_at)}
                   </span>
               </div>
-              <MoreDropdownMenuComponent />
+              <PostMenuComponent post={post} />
             </div>
 
             {/* Post Text */}

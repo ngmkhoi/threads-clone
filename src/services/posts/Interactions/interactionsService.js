@@ -34,16 +34,4 @@ export const interactionsService = {
         const response = await http.post(`posts/${id}/reply`, formData);
         return response.data;
     },
-    save: async (id) => {
-        const response = await http.post(`posts/${id}/save`)
-        return response.data
-    },
-    hide: async (id) => {
-        const response = await http.post(`posts/${id}/hide`)
-        return response.data
-    },
-    report: async ({ reason, description, id}) => {
-        const response = await http.post(`posts/${id}/report`, {reason, description})
-        return response.data
-    }
 }

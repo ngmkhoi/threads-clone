@@ -26,6 +26,23 @@ export const postsSlice = createSlice({
         addPostToFeed: (state, action) => {
             state.posts.unshift(action.payload)
         },
+        removePostFromFeed: (state, action) => {
+            const postId = action.payload;
+            state.posts = state.posts.filter(post => post.id !== postId);
+        },
+        removePostsByUserId: (state, action) => {
+            const userId = action.payload;
+            state.posts = state.posts.filter(post => post.user?.id !== userId);
+        },
+        updatePostContent: (state, action) => {
+            const updatedPost = action.payload;
+            state.posts = state.posts.map(post => {
+                if (post.id === updatedPost.id) {
+                    return { ...post, ...updatedPost };
+                }
+                return post;
+            });
+        },
         updatePostLike: (state, action) => {
             const { postId, is_liked_by_auth,  likes_count } = action.payload;
             state.posts = state.posts.map(post => {
@@ -125,6 +142,9 @@ export const postsSlice = createSlice({
 export const {
     resetFeed,
     addPostToFeed,
+    removePostFromFeed,
+    removePostsByUserId,
+    updatePostContent,
     updatePostLike,
     updatePostReplies,
     updatePostReposts,

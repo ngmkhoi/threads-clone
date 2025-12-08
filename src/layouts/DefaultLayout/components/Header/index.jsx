@@ -13,7 +13,9 @@ const Header = () => {
     const isPostDetailPage = location.pathname.startsWith('/post/');
 
     const handleBack = () => {
-        navigate(-1);
+        // Always navigate to home to avoid going to external sites
+        // This is safer than navigate(-1) which could go to Google or other external pages
+        navigate('/');
     };
 
     if (isPostDetailPage) {

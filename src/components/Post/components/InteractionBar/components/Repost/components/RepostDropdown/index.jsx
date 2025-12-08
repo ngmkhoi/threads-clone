@@ -14,20 +14,19 @@ import { useState } from "react";
 export function RepostDropdown({ post, count, isAuthenticated, onRepost, onQuote, onShowLoginDialog }) {
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const { t } = useTranslation('PostCard');
+    
     const handleOpenChange = (open) => {
-        if(open) {
-            if(!isAuthenticated) {
-                onShowLoginDialog()
-                return;
-            }
-            setDropdownOpen(!dropdownOpen)
-        } else {
-            setDropdownOpen(!dropdownOpen)
+        // If trying to open and not authenticated, show login dialog instead
+        if (open && !isAuthenticated) {
+            onShowLoginDialog()
+            return;
         }
+        // Otherwise, just set the dropdown state directly
+        setDropdownOpen(open)
     }
 
     return (
-        <DropdownMenu onOpenChange={handleOpenChange}>
+        <DropdownMenu open={dropdownOpen} onOpenChange={handleOpenChange}>
             <DropdownMenuTrigger asChild className="p-0">
                 <button
                     className={cn(

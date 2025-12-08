@@ -19,7 +19,7 @@ export default function InteractionBar({ likes, comments, repost, shares, onTogg
                 count={repost}
                 {...prop}
             />
-            <Share count={shares} />
+            <Share count={shares} post={prop.post}/>
         </div>
     )
 }

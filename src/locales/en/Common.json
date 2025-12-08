@@ -16,6 +16,7 @@
   "createPost": {
     "title": "New thread",
     "replyTitle": "Reply",
+    "editTitle": "Edit thread",
     "placeholder": "What's new?",
     "addToThread": "Add to thread",
     "anyoneCanReply": "Anyone can reply",
@@ -23,6 +24,7 @@
     "posting": "Posting...",
     "success": "Thread posted!",
     "replySuccess": "Reply posted!",
+    "editSuccess": "Thread updated!",
     "error": "Failed to post. Please try again.",
     "maxFiles": "You can only upload up to {{max}} files",
     "searchEmoji": "Search emoji..."

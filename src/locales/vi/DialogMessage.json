@@ -27,6 +27,10 @@
     "Activity": {
       "title": "Đăng ký để xem hoạt động",
       "description": "Tham gia Threads để xem ai đã thích, bình luận và tương tác với bài viết của bạn."
+    },
+    "More": {
+      "title": "Đăng ký để có thêm tùy chọn",
+      "description": "Tham gia Threads để lưu bài viết, quản lý tương tác và hơn thế nữa."
     }
   }
 }

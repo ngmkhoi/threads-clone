@@ -28,7 +28,8 @@ function ReplyForm({ post, onClose, onReplySuccess }) {
         register,
         handleSubmit,
         formState: { errors },
-        watch
+        watch,
+        resetField,
     } = useForm({
         resolver: yupResolver(createReplySchema(t)),
         defaultValues: {
@@ -62,6 +63,7 @@ function ReplyForm({ post, onClose, onReplySuccess }) {
             }
             toast(t('reply.success'))
             onClose()
+            resetField('content')
         } catch (error) {
             const errorMessage = error.response?.data?.message || t('reply.error');
             toast.error(errorMessage);
@@ -79,7 +81,7 @@ function ReplyForm({ post, onClose, onReplySuccess }) {
 
     return (
         <>
-            <div className="pt-3 mt-2">
+            <div className="pt-3 mt-2" onClick={(e) => e.stopPropagation()}>
                 <div className="flex gap-3">
                     {/* Avatar của user hiện tại */}
                     <Avatar className="h-10 w-10">
@@ -135,13 +137,15 @@ function ReplyForm({ post, onClose, onReplySuccess }) {
             </div>
 
             {/* Expanded Reply Dialog */}
-            <CreatePostDialog
-                open={isExpandedOpen}
-                onOpenChange={setIsExpandedOpen}
-                quotedPost={post}
-                mode="reply"
-                onReplySuccess={handleExpandedReplySuccess}
-            />
+            <div onClick={(e) => e.stopPropagation()}>
+                <CreatePostDialog
+                    open={isExpandedOpen}
+                    onOpenChange={setIsExpandedOpen}
+                    quotedPost={post}
+                    mode="reply"
+                    onReplySuccess={handleExpandedReplySuccess}
+                />
+            </div>
         </>
     );
 }

@@ -16,6 +16,60 @@
     "error": "Không thể trả lời, vui lòng thử lại sau!",
     "loading": "Đang gửi"
   },
+  "share": {
+    "linkCopied": "Đã sao chép liên kết!",
+    "copyLink": "Sao chép liên kết",
+    "shareAsImage": "Chia sẻ dưới dạng ảnh",
+    "shareTitle": "Bài viết từ Threads",
+    "imageDownloaded": "Đã tải ảnh!",
+    "imageError": "Không thể tạo ảnh, vui lòng thử lại!"
+  },
   "repost": "Đăng lại",
-  "quote": "Trích dẫn"
+  "quote": "Trích dẫn",
+  "menu": {
+    "copyLink": "Sao chép liên kết",
+    "linkCopied": "Đã sao chép liên kết!",
+    "save": "Lưu",
+    "unsave": "Bỏ lưu",
+    "saved": "Đã lưu!",
+    "notInterested": "Không quan tâm",
+    "hidden": "Đã ẩn bài viết",
+    "mute": "Tắt tiếng @{{username}}",
+    "muted": "Đã tắt tiếng @{{username}}",
+    "restrict": "Hạn chế @{{username}}",
+    "restricted": "Đã hạn chế @{{username}}",
+    "block": "Chặn @{{username}}",
+    "blocked": "Đã chặn @{{username}}",
+    "report": "Báo cáo",
+    "reported": "Cảm ơn bạn đã cho chúng tôi biết",
+    "edit": "Chỉnh sửa",
+    "editExpired": "Bạn chỉ có thể chỉnh sửa bài viết trong vòng 15 phút sau khi đăng",
+    "delete": "Xóa",
+    "deleted": "Đã xóa bài viết",
+    "error": "Đã xảy ra lỗi. Vui lòng thử lại."
+  },
+  "confirm": {
+    "blockTitle": "Chặn @{{username}}?",
+    "blockDescription": "Họ sẽ không thể tìm thấy hồ sơ, bài viết hoặc threads của bạn. Threads sẽ không cho họ biết bạn đã chặn họ.",
+    "blockConfirm": "Chặn",
+    "deleteTitle": "Xóa thread?",
+    "deleteDescription": "Nếu bạn xóa thread này, bạn sẽ không thể khôi phục lại.",
+    "deleteConfirm": "Xóa",
+    "cancel": "Hủy"
+  },
+  "report": {
+    "title": "Báo cáo",
+    "description": "Tại sao bạn báo cáo thread này?",
+    "reasons": {
+      "spam": "Đây là spam",
+      "nudity": "Khỏa thân hoặc hoạt động tình dục",
+      "hate_speech": "Phát ngôn thù địch hoặc biểu tượng",
+      "violence": "Bạo lực hoặc tổ chức nguy hiểm",
+      "harassment": "Bắt nạt hoặc quấy rối",
+      "false_info": "Thông tin sai lệch",
+      "scam": "Lừa đảo hoặc gian lận",
+      "other": "Lý do khác"
+    },
+    "submit": "Gửi"
+  }
 }
