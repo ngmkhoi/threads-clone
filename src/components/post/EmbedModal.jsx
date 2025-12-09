@@ -14,21 +14,22 @@
  * @see /src/layouts/EmbedLayout/index.jsx - Layout for embed view
  */
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.jsx";
+import { Dialog, DialogContent } from "@/components/ui/dialog.jsx";
 import { useTranslation } from "react-i18next";
-import { Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button.jsx";
 import { toast } from "sonner";
+import PostCard from "@/components/post/PostCard.jsx";
+import { ExternalLink } from "lucide-react";
 
 const EmbedModal = ({ open, onOpenChange, post }) => {
     const { t } = useTranslation("PostCard");
     const [copied, setCopied] = useState(false);
 
     const baseUrl = window.location.origin;
-    const embedUrl = `${baseUrl}/#/${post?.user?.username}/post/${post?.id}/embed`;
+    const postUrl = `${baseUrl}/#/post/${post?.id}`;
     
-    const embedCode = `<iframe src="${embedUrl}" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>`;
+    const embedCode = `<blockquote class="threads-post" data-post-id="${post?.id}"><a href="${postUrl}">${t("embed.viewOnThreads")}</a></blockquote><script async src="${baseUrl}/embed.js"></script>`;
 
     const handleCopy = async () => {
         try {
@@ -43,48 +44,44 @@ const EmbedModal = ({ open, onOpenChange, post }) => {
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="sm:max-w-[500px] bg-content-background text-foreground !border-card-border">
-                <DialogHeader>
-                    <DialogTitle className="text-center font-bold">
-                        {t("embed.title") || "Embed Post"}
-                    </DialogTitle>
-                </DialogHeader>
-                
-                <div className="space-y-4 p-4">
-                    <p className="text-sm text-muted-foreground">
-                        {t("embed.description") || "Copy the code below to embed this post on your website."}
-                    </p>
+            <DialogContent className="sm:max-w-[550px] p-0 gap-0 bg-content-background text-foreground !border-card-border overflow-hidden">
+                {/* Post Preview */}
+                <div className="bg-white dark:bg-zinc-900 rounded-t-xl border-b border-gray-200 dark:border-zinc-700">
+                    <div className="max-h-[400px] overflow-y-auto">
+                        <PostCard post={post} isDetailView isEmbedView />
+                    </div>
                     
-                    <div className="relative">
-                        <pre className="p-3 bg-muted rounded-lg text-xs overflow-x-auto">
-                            <code>{embedCode}</code>
-                        </pre>
-                        
-                        <Button
-                            size="sm"
-                            variant="ghost"
-                            className="absolute top-2 right-2"
-                            onClick={handleCopy}
-                        >
-                            {copied ? (
-                                <Check className="w-4 h-4 text-green-500" />
-                            ) : (
-                                <Copy className="w-4 h-4" />
-                            )}
+                    {/* View on Threads link */}
+                    <div className="px-4 py-3 bg-content-background flex justify-end">
+                        <Button className="bg-button-iframe-background hover:bg-button-iframe-background">
+                            <a 
+                                href={postUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                                {t("embed.viewOnThreads")}
+                                <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
                         </Button>
                     </div>
-                    
-                    <div className="text-sm text-muted-foreground">
-                        <p>{t("embed.preview") || "Preview:"}</p>
-                        <a 
-                            href={embedUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-500 hover:underline break-all"
-                        >
-                            {embedUrl}
-                        </a>
-                    </div>
+                </div>
+
+                {/* Embed Code Section */}
+                <div className="flex items-center gap-2 p-4">
+                    <input
+                        type="text"
+                        readOnly
+                        value={embedCode}
+                        className="flex-1 px-3 py-2 text-sm bg-muted border border-border rounded-lg text-muted-foreground truncate focus:outline-none"
+                        onClick={(e) => e.target.select()}
+                    />
+                    <Button
+                        onClick={handleCopy}
+                        className="px-4 py-2 bg-foreground text-background hover:bg-foreground/90 font-medium"
+                    >
+                        {copied ? t("embed.copiedButton") : t("embed.copyButton")}
+                    </Button>
                 </div>
             </DialogContent>
         </Dialog>
@@ -92,3 +89,4 @@ const EmbedModal = ({ open, onOpenChange, post }) => {
 };
 
 export default EmbedModal;
+

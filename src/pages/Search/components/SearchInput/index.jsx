@@ -1,25 +1,31 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Search, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useTranslation } from 'react-i18next';
+import useDebounce from '@/hooks/useDebounce';
 
 function SearchInput({ value, onChange, onSearch }) {
     const { t } = useTranslation('search');
     const [inputValue, setInputValue] = useState(value || '');
 
     // Debounce search
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            if (inputValue !== value) {
-                onChange?.(inputValue);
-                if (inputValue.trim()) {
-                    onSearch?.(inputValue.trim());
-                }
-            }
-        }, 300);
+    const debouncedValue = useDebounce(inputValue, 500);
+    const isClearing = useRef(false);
 
-        return () => clearTimeout(timer);
-    }, [inputValue, value, onChange, onSearch]);
+    useEffect(() => {
+        // Skip debounce effect if we're clearing
+        if (isClearing.current) {
+            isClearing.current = false;
+            return;
+        }
+        
+        if (debouncedValue !== value) {
+            onChange?.(debouncedValue);
+            if (debouncedValue.trim()) {
+                onSearch?.(debouncedValue.trim());
+            }
+        }
+    }, [debouncedValue, value, onChange, onSearch]);
 
     // Sync with external value
     useEffect(() => {
@@ -27,6 +33,7 @@ function SearchInput({ value, onChange, onSearch }) {
     }, [value]);
 
     const handleClear = useCallback(() => {
+        isClearing.current = true;  // Flag to skip debounce
         setInputValue('');
         onChange?.('');
     }, [onChange]);

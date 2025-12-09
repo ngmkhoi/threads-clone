@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import PostCard from '@/components/Post/PostCard.jsx';
-import PostCardSkeleton from '@/components/Post/components/PostCardSkeleton';
+import PostCard from '@/components/post/PostCard.jsx';
+import PostCardSkeleton from '@/components/post/components/PostCardSkeleton';
 import { getPost, clearPostDetail } from '@/features/postDetail/postDetailSlice';
 import { useTranslation } from 'react-i18next';
 

@@ -21,7 +21,7 @@ export default function AppRoute() {
     return (
         <Routes>
 
-
+            {/* Default Layout */}
             <Route path="/" element={<DefaultLayout />}>
                 <Route index element={<Home />} />
                 <Route path="/search" element={<Search />} />
@@ -33,6 +33,7 @@ export default function AppRoute() {
                 </Route>
             </Route>
 
+            {/* Auth Layout */}
             <Route path="/auth" element={<AuthLayout />}>
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />

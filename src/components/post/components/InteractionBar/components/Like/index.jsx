@@ -9,12 +9,14 @@ import {updatePostDetailLike, updateReplyLike} from "@/features/postDetail/postD
 import {cn} from "@/lib/utils.js";
 import AnimatedCounter from "@/components/Common/AnimatedCounter/index.jsx";
 
-export default function Like({ count, post }) {
+export default function Like({ count, post, isEmbedView = false }) {
     const [isOpen, setIsOpen] = useState(false)
     const isAuthenticated = useSelector(selectIsAuthenticated)
     const dispatch = useDispatch();
 
     const handleClick = async () => {
+        if (isEmbedView) return;
+        
         if(isAuthenticated) {
             const response = await interactionsService.like(post.id)
             const payload = {
@@ -35,12 +37,16 @@ export default function Like({ count, post }) {
         <>
             <button
                 className={cn(
-                    "flex items-center gap-1 transition-colors cursor-pointer p-1.5 w-[50px] justify-start",
+                    "flex items-center gap-1 transition-colors p-1.5 w-[50px] justify-start",
+                    isEmbedView 
+                        ? "pointer-events-none cursor-default"
+                        : "cursor-pointer",
                     post.is_liked_by_auth
-                        ? "text-red-500 hover:text-red-400"
-                        : "text-muted-foreground hover:text-foreground"
+                        ? isEmbedView ? "text-red-500" : "text-red-500 hover:text-red-400"
+                        : isEmbedView ? "text-muted-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
                 onClick={handleClick}
+                disabled={isEmbedView}
             >
                 <Heart
                     className="w-5 h-5"

@@ -5,13 +5,13 @@ import {selectIsAuthenticated} from "@/features/auth/authSelector.js";
 import {useDispatch, useSelector} from "react-redux";
 import {
     RepostDropdown
-} from "@/components/Post/components/InteractionBar/components/Repost/components/RepostDropdown/index.jsx";
+} from "@/components/post/components/InteractionBar/components/Repost/components/RepostDropdown/index.jsx";
 import {interactionsService} from "@/services/posts/Interactions/interactionsService.js";
 import {updatePostReposts} from "@/features/posts/postsSlice.js";
 import {updatePostDetailRepost, updateReplyRepost} from "@/features/postDetail/postDetailSlice.js";
 import CreatePostDialog from "@/components/Common/CreatePostDialog";
 
-export default function Repost({ count, post }) {
+export default function Repost({ count, post, isEmbedView = false }) {
     const dispatch = useDispatch();
     const [isDialogOpen, setIsDialogOpen] = useState(false)
     const isAuthenticated = useSelector(selectIsAuthenticated)
@@ -42,6 +42,7 @@ export default function Repost({ count, post }) {
                 onRepost={handleRepost}
                 onQuote={handleQuote}
                 post={post}
+                isEmbedView={isEmbedView}
             />
 
             <LoginDialog

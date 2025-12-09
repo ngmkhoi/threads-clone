@@ -27,7 +27,6 @@ function ReplyForm({ post, onClose, onReplySuccess }) {
     const {
         register,
         handleSubmit,
-        formState: { errors },
         watch,
         resetField,
     } = useForm({

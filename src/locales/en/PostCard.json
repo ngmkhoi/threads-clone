@@ -19,6 +19,7 @@
   "share": {
     "linkCopied": "Link copied!",
     "copyLink": "Copy link",
+    "embed": "Embed post",
     "shareAsImage": "Share as image",
     "shareTitle": "Post from Threads",
     "imageDownloaded": "Image downloaded!",
@@ -71,5 +72,15 @@
       "other": "Something else"
     },
     "submit": "Submit"
+  },
+  "embed": {
+    "title": "Embed Post",
+    "description": "Copy the code below to embed this post on your website.",
+    "preview": "Preview:",
+    "copied": "Embed code copied!",
+    "copyError": "Failed to copy",
+    "viewOnThreads": "View on Threads",
+    "copyButton": "Copy",
+    "copiedButton": "Copied"
   }
 }

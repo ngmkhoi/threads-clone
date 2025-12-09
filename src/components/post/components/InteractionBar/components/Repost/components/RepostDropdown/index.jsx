@@ -11,11 +11,13 @@ import {useTranslation} from "react-i18next";
 import {cn} from "@/lib/utils.js";
 import { useState } from "react";
 
-export function RepostDropdown({ post, count, isAuthenticated, onRepost, onQuote, onShowLoginDialog }) {
+export function RepostDropdown({ post, count, isAuthenticated, onRepost, onQuote, onShowLoginDialog, isEmbedView = false }) {
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const { t } = useTranslation('PostCard');
     
     const handleOpenChange = (open) => {
+        if (isEmbedView) return;
+        
         // If trying to open and not authenticated, show login dialog instead
         if (open && !isAuthenticated) {
             onShowLoginDialog()
@@ -27,14 +29,18 @@ export function RepostDropdown({ post, count, isAuthenticated, onRepost, onQuote
 
     return (
         <DropdownMenu open={dropdownOpen} onOpenChange={handleOpenChange}>
-            <DropdownMenuTrigger asChild className="p-0">
+            <DropdownMenuTrigger asChild className="p-0" disabled={isEmbedView}>
                 <button
                     className={cn(
-                        "flex items-center gap-1 p-1.5 w-[50px] justify-start transition-colors cursor-pointer",
+                        "flex items-center gap-1 p-1.5 w-[50px] justify-start transition-colors",
+                        isEmbedView 
+                            ? "pointer-events-none cursor-default"
+                            : "cursor-pointer",
                         post.is_reposted_by_auth
-                            ? "text-blue-500 hover:text-blue-400"
-                            : "text-muted-foreground hover:text-foreground"
+                            ? isEmbedView ? "text-blue-500" : "text-blue-500 hover:text-blue-400"
+                            : isEmbedView ? "text-muted-foreground" : "text-muted-foreground hover:text-foreground"
                     )}
+                    disabled={isEmbedView}
                 >
                     <Repeat className="w-5 h-5" />
                     <AnimatedCounter value={count} className="text-sm" />

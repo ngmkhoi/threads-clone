@@ -10,7 +10,7 @@ import ReplyForm from "@/pages/Home/components/ReplyForm/index.jsx";
 import { useNavigate } from "react-router-dom";
 import { BadgeCheck } from 'lucide-react'
 
-const PostCard = ({ post, isDetailView = false, onReplySuccess }) => {
+const PostCard = ({ post, isDetailView = false, onReplySuccess, isEmbedView = false }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const navigate = useNavigate();
 
@@ -75,7 +75,7 @@ const PostCard = ({ post, isDetailView = false, onReplySuccess }) => {
                     {formatTimeAgo(post?.created_at)}
                   </span>
               </div>
-              <PostMenuComponent post={post} />
+              {isEmbedView ? null : <PostMenuComponent post={post} />}
             </div>
 
             {/* Post Text */}
@@ -91,13 +91,14 @@ const PostCard = ({ post, isDetailView = false, onReplySuccess }) => {
             )}
 
             {/* Interaction Bar */}
-              <InteractionBar
+            <InteractionBar
                   likes={post?.likes_count || 0}
                   comments={post?.replies_count || 0}
                   repost={post?.reposts_and_quotes_count || 0}
                   shares={0}
                   post={post}
                   onToggleReply={handleToggleReplyForm}
+                  isEmbedView={isEmbedView}
               />
           </div>
         </div>

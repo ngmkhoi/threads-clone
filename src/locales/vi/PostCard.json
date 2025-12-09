@@ -19,6 +19,7 @@
   "share": {
     "linkCopied": "Đã sao chép liên kết!",
     "copyLink": "Sao chép liên kết",
+    "embed": "Nhúng bài viết",
     "shareAsImage": "Chia sẻ dưới dạng ảnh",
     "shareTitle": "Bài viết từ Threads",
     "imageDownloaded": "Đã tải ảnh!",
@@ -71,5 +72,15 @@
       "other": "Lý do khác"
     },
     "submit": "Gửi"
+  },
+  "embed": {
+    "title": "Nhúng bài viết",
+    "description": "Sao chép mã bên dưới để nhúng bài viết này vào trang web của bạn.",
+    "preview": "Xem trước:",
+    "copied": "Đã sao chép mã nhúng!",
+    "copyError": "Không thể sao chép",
+    "viewOnThreads": "Xem trên Threads",
+    "copyButton": "Sao chép",
+    "copiedButton": "Đã sao chép"
   }
 }
