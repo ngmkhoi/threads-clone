@@ -1,8 +1,8 @@
-import InteractionBar from '@/components/Post/components/InteractionBar';
+import InteractionBar from '@/components/post/components/InteractionBar';
 import { Card, CardContent } from "@/components/ui/card.jsx";
-import PostImage from "@/components/Post/components/PostImage/index.jsx";
-import PostMenuComponent from "@/components/Post/components/PostMenu/index.jsx";
-import AvatarComponent from "@/components/Post/components/Avatar/index.jsx";
+import PostImage from "@/components/post/components/PostImage/index.jsx";
+import PostMenuComponent from "@/components/post/components/PostMenu/index.jsx";
+import AvatarComponent from "@/components/post/components/Avatar/index.jsx";
 import QuoteCard from "@/components/Post/components/QuoteCard/index.jsx";
 import {formatTimeAgo} from "@/utils/timeFormat.js";
 import {useState} from "react";
