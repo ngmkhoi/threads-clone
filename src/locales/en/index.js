@@ -13,6 +13,7 @@ import ResetPassword from './ResetPassword.json'
 import PostDetail from './PostDetail.json'
 import utils from './utils.json'
 import Embed from './Embed.json'
+import search from './search.json'
 
 export default {
     LoginPanel,
@@ -29,5 +30,6 @@ export default {
     DialogMessage,
     PostDetail,
     utils,
-    Embed
+    Embed,
+    search
 }

@@ -8,6 +8,7 @@ import {formatTimeAgo} from "@/utils/timeFormat.js";
 import {useState} from "react";
 import ReplyForm from "@/pages/Home/components/ReplyForm/index.jsx";
 import { useNavigate } from "react-router-dom";
+import { BadgeCheck } from 'lucide-react'
 
 const PostCard = ({ post, isDetailView = false, onReplySuccess }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);
@@ -68,14 +69,8 @@ const PostCard = ({ post, isDetailView = false, onReplySuccess }) => {
                     {post?.user?.username || 'username'}
                   </span>
                   {post?.user?.verified && (
-                      <svg
-                        className="w-3.5 h-3.5 text-blue-500"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                      </svg>
-                    )}
+                    <BadgeCheck className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                  )}
                   <span className="text-muted-foreground text-[15px]">
                     {formatTimeAgo(post?.created_at)}
                   </span>

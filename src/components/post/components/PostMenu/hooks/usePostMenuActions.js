@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { selectIsAuthenticated, selectCurrentUser } from '@/features/auth/authSelector.js';
 import { removePostFromFeed, removePostsByUserId } from '@/features/posts/postsSlice.js';
-import postServices from '@/services/postServices.js';
+import postServices from '@/services/postService.js';
 import userService from '@/services/users/userService.js';
 
 // Check if post is editable (within 15 minutes of creation)

@@ -1,0 +1,17 @@
+{
+  "placeholder": "Search",
+  "tabs": {
+    "all": "All",
+    "topics": "Topics",
+    "users": "Suggestions"
+  },
+  "follow": "Follow",
+  "following": "Following",
+  "followers": "{{count}} followers",
+  "posts": "{{count}} posts",
+  "noResults": "No results found",
+  "loginRequired": {
+    "title": "Log in to follow",
+    "description": "You need to log in to follow this user."
+  }
+}

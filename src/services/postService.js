@@ -1,8 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {http} from "@/utils/http.js";
 
-
-
 const getFeed = createAsyncThunk(
     'posts/getFeed',
     async ({ page = 1, feedType = 'for_you' } = {}) => {

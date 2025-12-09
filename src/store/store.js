@@ -13,12 +13,13 @@ import { themeSlice } from '@/features/theme/themeSlice.js';
 import authSlice from "@/features/auth/authSlice.js";
 import postsSlice from "@/features/posts/postsSlice.js";
 import postDetailSlice from "@/features/postDetail/postDetailSlice.js";
+import searchSlice from "@/features/search/searchSlice.js";
 
 const persistConfig = {
     key: 'root',
     storage,
     whitelist: [themeSlice.name, authSlice.name],
-    blacklist: [postsSlice.name, postDetailSlice.name]
+    blacklist: [postsSlice.name, postDetailSlice.name, searchSlice.name]
 };
 
 const rootReducer = combineReducers({
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
     [authSlice.name]: authSlice.reducer,
     [postsSlice.name]: postsSlice.reducer,
     [postDetailSlice.name]: postDetailSlice.reducer,
+    [searchSlice.name]: searchSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

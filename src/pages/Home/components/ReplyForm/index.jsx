@@ -13,7 +13,7 @@ import {selectCurrentUser} from "@/features/auth/authSelector.js";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.jsx";
 import {updatePostReplies} from "@/features/posts/postsSlice.js";
 import { ArrowUp, Maximize2 } from 'lucide-react';
-import postServices from "@/services/postServices.js";
+import postServices from "@/services/postService.js";
 import CreatePostDialog from "@/components/Common/CreatePostDialog";
 
 function ReplyForm({ post, onClose, onReplySuccess }) {

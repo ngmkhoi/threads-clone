@@ -1,9 +1,9 @@
-import PostCard from '@/components/Post/PostCard.jsx';
+import PostCard from '@/components/post/PostCard.jsx';
 import ContentContainer from "@/components/Common/ContentContainer/index.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import postServices from "@/services/postServices.js";
-import PostCardSkeleton from "@/components/Post/components/PostCardSkeleton/index.jsx";
+import postServices from "@/services/postService.js";
+import PostCardSkeleton from "@/components/post/components/PostCardSkeleton/index.jsx";
 import {useTranslation} from "react-i18next";
 import InfiniteScrollLoader from "@/components/Common/InfiniteScrollLoader/index.jsx";
 import CreatePostCard from "@/pages/Home/components/CreatePostCard/index.jsx";

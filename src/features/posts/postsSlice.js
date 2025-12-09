@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import postServices from "@/services/postServices.js";
+import postServices from "@/services/postService.js";
 import authService from "@/services/auth/authService.js";
 import { logout } from "@/features/auth/authSlice.js";
 

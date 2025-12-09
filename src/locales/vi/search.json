@@ -1,0 +1,17 @@
+{
+  "placeholder": "Tìm kiếm",
+  "tabs": {
+    "all": "Tất cả",
+    "topics": "Chủ đề",
+    "users": "Gợi ý"
+  },
+  "follow": "Theo dõi",
+  "following": "Đang theo dõi",
+  "followers": "{{count}} người theo dõi",
+  "posts": "{{count}} bài viết",
+  "noResults": "Không tìm thấy kết quả",
+  "loginRequired": {
+    "title": "Đăng nhập để theo dõi",
+    "description": "Bạn cần đăng nhập để theo dõi người dùng này."
+  }
+}
