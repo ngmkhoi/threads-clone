@@ -1,0 +1,1 @@
+import{j as e,O as s}from"./index-UoobwgKF.js";const a=()=>e.jsx("div",{className:"min-h-screen bg-white",children:e.jsx("div",{className:"flex justify-center",children:e.jsx("div",{className:"w-full max-w-[640px] p-2",children:e.jsx(s,{})})})});export{a as default};
